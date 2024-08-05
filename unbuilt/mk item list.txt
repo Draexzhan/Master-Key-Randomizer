@@ -1,0 +1,56 @@
+Progressive Weapon         x6
+Progressive Balloon        x2
+Progressive Boomerang      x2
+Progressive Grappling Hook x2
+Progressive Claws          x2
+Progressive Magnet         x2
+Progressive Lantern        x2
+Progressive Vitamins       x2
+Progressive Luck           x2
+Progressive Armor          x2
+Progressive Snorkel        x2
+Progressive Lens           x2
+Progressive Boots          x2
+Progressive KeySW          x2
+Progressive KeySE          x2
+Progressive KeyNW          x2
+Progressive KeyNE          x2
+Progressive Wallet         x3
+Gear Piece 1               x1
+Gear Piece 2               x1
+Gear Piece 3               x1
+Meat                       x?
+Super Meat                 x?
+Cheese                     x1
+Nut                        x0
+Triple Crystal             x1
+Crystal                    x57
+Health Piece               x42
+Health Upgrade             x4
+1-Coin                     x?
+5-Coin                     x?
+10-Coin                    x?
+20 Dollars                 x?
+Gold Bars                  x?
+Diamond                    x?
+Records                    1 of each, 40 in all
+Woods Potion               x1
+Snow Potion                x1
+Ruins Warp                 x1
+Cave Warp                  x1
+Overworld Map              x1
+SE Dungeon Map             x1
+SE Dungeon Key             x9
+SW Dungeon Map             x1
+SW Dungeon Key             x3
+NW Dungeon Map             x1
+NW Dungeon Key             x3
+NE Dungeon Map             x1
+NE Dungeon Key             x9
+Secret Dungeon Map         x1
+Secret Dungeon Key         x2
+Forge Dungeon Map          x1
+Forge Dungeon Key          x11
+Ruins Map                  x1
+Final Dungeon Map          x1
+Dark Ore                   xN

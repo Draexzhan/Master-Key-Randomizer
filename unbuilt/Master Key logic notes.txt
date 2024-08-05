@@ -1,0 +1,399 @@
+Master Key Treasure Logic:
+
+OWAccess - Sword or Boomerang or (RuinsWarpBackdoor and Balloon)
+Weapon = Sword or Boomerang or GrapplingHook
+Charge1 = Sword and Vitamins
+Charge2 = Sword and Vitamins2
+ShortRange = GrapplingHook or Boomerang
+LongRange = GrapplingHook2 or Boomerang
+EasyFlight = GrapplingHook or Balloon
+LongFlight = GrapplingHook2 or Balloon
+BasicBurn = Sword and Lantern
+BigBurn = Sword and Lantern2
+NorthOfLakeAccess = OWAccess and (LongFlight or BasicBurn or swim) 
+RuinsWarpBackdoor = RuinsWarp and Balloon
+MountainAccess = OWAccess and Swim
+NWDungeonAccess = MountainAccess and Swim and Boots
+SEDungeonAccess = OWAccess and Gloves and Swim and EasyFlight
+SecretDungeonAccess = (EasyFlight and BasicBurn) or Balloon
+EightRoomMazeAccess = (BigBurn or (EasyFlight and BasicBurn)) or (Balloon and OWAccess)
+LakeCaveAccess = ((Boomerang and BigBurn and GrapplingHook) or Balloon or GrapplingHook2) and Swim 
+ForgeAccess = Gear1 and Gear2 and Gear3 and NorthOfLakeAccess and Balloon
+FinalDungeonAccess = RuinsWarpBackdoor or ((Balloon and Boomerang and Charge1) or (NorthOfLakeAccess and Charge2))
+
+Master Key (ItemQuete(0.50, -89.50, -1.00)) - Always Free
+Big Boulder Pit South Salvage (lingot50(Clone)(31.94, -99.66, 10.00)) - Swim and Charge1 (lens optional)
+Big Boulder Pit South Lens Chest (CoffreCachéDebut(24.50, -98.50, 0.00)) - Charge1 and Lens
+Lens Chest Near Starting Cave (CoffreCachéCheminIntro(-3.50, -57.50, 0.00)) - Lens and Weapon
+Stump Chest Near Starting Cave (CoffreLanterne2Debut(-33.00, -49.00, 0.00)) - BigBurn
+Flower Circle outside Starting Cave (lingot50(Clone)(-42.78, -52.18, 10.00)) - Glove and Weapon
+Bush Farmer's Cave Chest (CoffreGrotteChamp(641.50, -10.50, 0.00)) - Weapon
+Village Basement Chest past Knight (CoffreArgentCaveVillage(624.50, -13.50, 0.00)) - OWAccess
+Village Basement Leak Chest (CoffreCaveVillageFricCristal(629.50, -8.50, 0.00)) - OWAccess and Gloves
+Village Rooftop Record (CoffreDisqueVille(5.00, -16.50, 0.00)) - OWAccess and Balloon
+Burn Tree near Starting Cave (CoffreSecretClairiereDepartCristal(13.50, -57.50, 0.00)) - BigBurn
+Caerbannog's Chest (CoffreDerrièreLapin(-9.50, -49.50, 0.00)) - Swim and OWAccess
+Big Slime Flower Circle (lingot50(Clone)(17.54, -28.61, 10.00)) - OWAccess and Glove
+Gym Vitamins (Altères(-614.50, 2.50, 0.00)) - Weapon
+Gym Treadmill (GrossePiece10(Clone)(-616.43, -2.97, 10.00)) - OWAccess
+Village Hidden Cave Chest (CoffreGGCPuzzleBlocVillage(621.50, 1.50, 0.00)) - Charge1 (lens optional)
+Village Duplex Chest (CoffreMaisonOignon(-635.50, -21.50, 0.00)) - Charge1 (lens optional)
+Village Roof Chest (CoffreLongGrappinVille(24.96, -6.60, -2.00)) - OWAccess and LongFlight
+Simple Shop bottom right (MapOW (-599.50, -0.50, -1.00)) - Charge1
+Simple Shop Bottom middle (MoyenneBourse(-601.50, -0.50, -1.00)) - Charge1
+Simple Shop Bottom Left (smallSword(-603.50, -0.50, -1.00)) - Wallet1 and Charge1
+Simple Shop Top Middle (CoeurDeVie(-601.50, 2.50, -1.00)) - Charge1
+Fancy Shop Bottom Right (GrandeBourse999(-628.47, 0.50, -1.00)) - Wallet1 and Weapon
+Fancy Shop Bottom Left (Bottes(-630.50, 0.50, -1.00)) - Wallet2 and Weapon
+Fancy Shop Top Left (CoeurDeVieCher(-634.50, 3.50, -1.00) - Wallet2 and Weapon
+Fancy Shop Top Second from Left (DemiCoeurDeVieCher(-632.50, 3.50, -1.00)) - Wallet2 and Weapon
+Fancy Shop Top Third from Left (morgenStern(-630.50, 3.50, -1.00)) - Wallet2 and Weapon
+Fancy Shop Top Third from Right (cristal(-628.50, 3.50, -1.00)) - Wallet2 and Weapon
+Fancy Shop Top Second From Right (triCristal(-626.50, 3.50, -1.00)) - Wallet3 and Weapon
+Fancy Shop Top Right (FragmentGearShop(-624.50, 3.50, -1.00)) - Wallet3 and Weapon
+West of Village behind rocks (CoffrePresqueCache(-25.50, -17.50, 0.00)) - Charge1 or Balloon
+West of Village Lens Chest (CoffreCachéDeLOuestDuVillage(-11.50, -7.50, 0.00)) -Lens and Weapon
+East of Village South gate behind bushes (CoffrePresqueCache(-25.50, -17.50, 0.00)) - Weapon
+Giant Boulder Chest near Village (CoffreGrosCaillouIleCristal(34.00, -33.00, 0.00)) - Charge2 and (Swim or LongFlight)
+East of Village North gate behind bushes (CoffreTrivialClairièreNordVille(33.50, 1.50, 0.00)) - OWAccess
+Crow Country Southwest of Village (CoffreDesCorbeaux(-10.50, -40.50, 0.00)) - (Swim or Balloon) and Weapon
+Breakout Cave Top Chest (CoffreBrickBreak3(666.50, 3.50, 0.00)) - Weapon
+Breakout Cave Middle Chest (CoffreBrickBreak2(666.50, 1.50, 0.00)) - Weapon
+Breakout Cave Bottom Chest (CoffreBrickBreak1(666.50, -0.50, 0.00)) - Weapon
+Chest southeast of forest behind reaper (CoffreTrivialDesBois(71.50, 16.50, 0.00)) - OWAccess
+Warp Chest near starting Cave (CoffreLeyndell(555.50, -48.50, 0.00)) - Charge1 (lens optional) or Start Warp
+Warp Chest endgame (CoffreRetour(-8.50, 242.50, 0.00)) - Ruins Warp or TODO
+Behind fire guys west of village(CoffreSteamVillage1(600.50, -6.50, 0.00)) - Weapon
+Behind Steam Leak West of Village(CoffreSteamVillage2Cristal(599.51, -19.50, 0.00)) - Glove and Weapon
+Abandoned House (CoffreMaisonDeserte(-632.50, 11.50, 0.00)) - Scuba and OWAccess
+Bunny Cave (CoffreTerrierLapinCristal(540.50, -6.50, 0.00)) - BasicBurn and Vitamins
+Across river from SW Dungeon (CoffrePresDeLaRiviereAuSud(-23.50, -42.50, 0.00)) - Charge1 and LongFlight
+South of Abandoned House (CoffreDeLaClairiereDeLouest(-39.50, -7.50, 0.00)) - Charge1 or (OWAccess and Swim)
+Western Pong Chest (CoffreDelaGrotteEnflamméeDeLaClairière(545.50, 2.50, 0.00)) - Weapon
+Spike Maze Chest (CoffreDeLaGrotteAuxPics(554.50, -17.50, 0.00)) - Charge1 or Balloon
+Behind Reaper near SW Dungeon (CoffreGaucheDuDJ1(-45.00, -28.00, 0.00)) - Charge1 or Balloon
+Chest in Hidden Cave at SW Warp (CoffreGrotteSousDonjonSO(555.50, -38.50, 0.00)) - Charge1 (lens optional)
+Cave under bush east of SW Dungeon North Chest (CoffreGrotteNextDJSO1(565.50, -26.50, 0.00)) - (Charge1) or (Balloon and Weapon)
+Cave under bush east of SW Dungeon Central Chest (CoffreGrotteNextDJSOCristal(570.50, -28.50, 0.00)) - Weapon and (Balloon or (Boomerang and GrapplingHook)
+Cave under bush east of SW Dungeon East Chest (CoffreGrotteNextDJSO3(591.50, -29.50, 0.00)) - ((Charge1) or (Balloon and Weapon)) and (lamp optional)
+Wind Cave (CoffreGrotteVentsCristal(535.50, -29.50, 0.00)) - Charge1 and Boots and EasyFlight
+Wind Cave Secret Room (CoffreCoeurGrotteVents(560.50, -26.50, 0.00)) - Charge1 and Boots and Easyflight and (Lens Optional)
+Burn Tree West of SW Dungeon (CoffreSudOuestCristal(-74.50, -26.50, 0.00)) - Charge1 and BigBurn
+Lens Chest Above Starting Cave (CoffreCachéDuDebutCristal(-62.50, -46.50, 0.00)) - Charge1 and BigBurn and Lens
+Sparkling Buried Treasure Above Starting Cave (diam100(Clone)(-61.42, -50.60, 10.00)) - Charge1 and BigBurn and Balloon and (Lens Optional)
+Unmarked Buried Treasure Above Starting Cave (Disque(Clone)(-53.08, -48.11, 10.00)) - Charge1 and BigBurn and Balloon and SuperSecretLogic
+Ledge Chest West of SW Dungeon (CoffreIsoleDuSO(-65.00, -27.00, 0.00)) - (Charge1 and ShortRange) or Balloon
+Central Lone Island Chest (CoffreIleGrappinLac(-15.50, 0.50, 0.00)) - OWAccess and EasyFlight 
+Central Seven Island Chest (CoffreLacGrappin(-14.50, 10.50, 0.00)) - OWAccess and (Balloon or (BigBurn and GrapplingHook)
+Four Pillars Salvage (cristal(Clone)(-18.69, 20.25, 10.00)) - OWAccess and Swim (lens optional)
+Salvage Between Waterfalls (lingot50(Clone)(-19.88, 29.74, 10.00)) -OWAccess and Swim (lens optional)
+Chest Near Scuba Shop (CoffreSurLileDevantLaCascade(-25.50, 28.50, 0.00)) - OWAccess and (EasyFlight or Scuba)
+Scuba Shop (ItemAchetableCher(-614.50, 29.50, -1.00)) - Wallet1 and NorthofLakeAccess
+West of Scuba Shop (CoffrePetitRavinDeLaMontagne(-41.50, 30.50, 0.00)) - NorthOfLakeAccess and (Charge1 or (EasyFlight and Scuba)
+Dragon Cave near SW Dungeon (CoffreGrotteColinesCristal(565.50, -7.50, 0.00)) - Charge1 (Lens and lantern optional)
+Dragon Cave near SW Dungeon Salvage (GrossePiece10(Clone)(571.50, -13.60, 10.00)) - Charge1 and Swim and (Lens optional)
+Square block puzzle near SW Dungeon (CoffreGrotteColinesCoeur(583.50, -19.50, 0.00)) - Charge1 (Lens and lantern optional)
+West on Map by Waterfall (CoffreTrivialDeLouest(-65.50, 12.50, 0.00)) - OWAccess and (Charge1 or TODO or Swim)
+South of West Waterfall (CoffreBrindilleD(-64.50, -10.50, 0.00)) - BasicBurn or RuinsWarpBackdoor
+West Lens Chest (CoffreCachéDeLetang(-55.50, -6.50, 0.00)) - OWAccess and (Balloon or Scuba) and Lens
+Across River North of Village (CoffreDeLaRiveALouestDeLile(30.50, 12.50, 0.00))) - OWAccess and EasyFlight 
+Lantern Shop (lanterne1shopForet(77.50, 51.50, -1.00)) - OWAccess and Weapon
+Ravine Chest (CoffreRavin(71.00, 31.00, 0.00)) - OWAccess
+Alligator Hills River Chest (CoffreSurMicroCollineCristal(-3.00, 13.00, 0.00)) - OWAccess and (LongFlight or BasicBurn)
+Chest by Abandoned House (CoffreTasDeBoisEtang(-39.50, 3.50, 0.00)) - RuinsWarpBackdoor or BasicBurn
+East Reaper Flower Circle (lingot50(Clone)(79.06, 9.14, 10.00)) - OWAccess and Gloves 
+East Over the River (CoffreTrivialDeLest(79.50, 1.50, 0.00)) - OWAccess and (EasyFlight? TODO)
+Woods north of warning sign (CoffreForêtSombreDerrièreSouchot(58.50, 53.50, 0.00)) - BasicBurn
+Woods Mushroom Nook (CoffreForêtSombre(47.50, 48.50, 0.00)) - BasicBurn
+Woods Grotto (CoffreGrotteForet(634.50, 32.50, 0.00)) - BasicBurn
+Woods Grotto Miniboss Chest (CoffreGrotteForetCoeur(630.50, 50.50, 0.00)) - BasicBurn
+Woods Next to Dungeon (CoffreForêtSombreDerrièreSouche(40.50, 42.50, 0.00)) - BigBurn
+Woods Behind Lantern Shop (CoffreForêtSombreSecretShop(77.50, 63.50, 0.00)) - BigBurn and Charge1
+Woods North of Ravine (CoffreForêtSombreDerrièreSouches(72.50, 43.50, 0.00)) - BigBurn
+Woods Tree Circle (CoffreForêtSombreCercleArbre(90.50, 10.50, 0.00)) - BigBurn and Charge1
+Woods Dead End North of Swamp (CoffreForêtSombreCouloir(85.50, 33.50, 0.00)) - BigBurn and Charge1
+Woods Burn Tree Nook (CoffreForêtSombreMiniClairiere(64.50, 57.50, 0.00)) - BigBurn and Charge1
+Woods Across Valley South (CoffreForêtSombreGrappinCristal(95.50, 38.50, 0.00)) - BigBurn and LongFlight
+Woods Across Valley North (CoffreForêtSombreBallon(102.50, 48.50, 0.00)) - BigBurn and Balloon
+Woods Dwarf (CoffreNainForetCristal(57.50, 61.50, 0.00)) - BigBurn and Charge1
+Woods Burn Tree East of Dwarf (CoffreDisqueForet(80.50, 73.50, 0.00)) - BigBurn and Charge1
+Deep Woods Boulder (CoffreDisqueForetPiano(59.00, 71.00, 0.00)) - Charge2 and Balloon and SuperSecretLogic
+Flower Circle near Potion Warp (lingot50(Clone)(48.27, 70.29, 10.00)) - Glove and Charge1 and Balloon
+Zombie Flower Circle (lingot50(Clone)(5.12, 30.73, 10.00)) - NorthOfLakeAccess and Glove
+Chest by Dragon Cave (CoffreBoomerang2Dragon(21.00, 41.00, 0.00)) - Boomerang and LongFlight
+Dragon Cave Free Sample (CoffreTrivialCristalDragonRoom(620.50, 47.50, 0.00)) - NorthOfLakeAccess
+Dragon Reward 1 Crystal - NorthOfLakeAccess and Crystal(1)
+Dragon Reward 3 Crystals - NorthOfLakeAccess and Crystal(3)
+Dragon Reward 5 Crystals - NorthOfLakeAccess and Crystal(5)
+Dragon Reward 10 Crystals - NorthOfLakeAccess and Crystals(10)
+Dragon Reward 15 Crystals - NorthOfLakeAccess and Crystals(15)
+Dragon Reward 20 Crystals - NorthOfLakeAccess and Crystals(20)
+Dragon Reward 25 Crystals - NorthOfLakeAccess and Crystals(25)
+Dragon Reward 30 Crystals - NorthOfLakeAccess and Crystals(30)
+Dragon Reward 40 Crystals - NorthOfLakeAccess and Crystals(40)
+Dragon Reward 50 Crystals - NorthOfLakeAccess and Crystals(50)
+Dragon Reward 60 Crystals - NorthOfLakeAccess and Crystals(60)
+Dragon Waterfall Chest (CoffreDisqueNonogram1(615.50, 63.50, 0.00)) - NorthOfLakeAccess and Swim2
+Ice Spike Maze (CoffreGrotteGlaceCoeur(540.50, 53.50, 0.00)) - MountainAccess and Charge1 (Boots2 or Lamp or Balloon or Lens optional)
+Flower Circle Lake West (lingot50(Clone)(-31.73, 18.94, 10.00)) - MountainAccess and Gloves
+Flower Circle Lake SouthWest (lingot50(Clone)(-30.13, 0.13, 10.00)) - OWAccess and Gloves
+Chest South of Smiths (CoffreLancierMontagneCristal(-64.50, 43.50, 0.00)) - MountainAccess and EasyFlight
+Flower Circle South of Smiths (lingot50(Clone)(-59.76, 41.95, 10.00)) - MountainAccess and Gloves
+Smith Shop Left (DemiCoeurDeVieForge(-631.50, 39.50, -1.00) - MountainAccess and Weapon and Wallet1
+Smith Shop Middle (grappin2(-629.50, 39.50, -1.00) - MountainAccess and Weapon and Wallet2
+Smith Shop Right (épée2(-627.50, 39.50, -1.00) - MountainAccess and Weapon and Wallet3
+Above Mountain Rubble (CoffreParDelaLeRavin(-53.49, 27.49, 0.00)) - MountainAccess and LongFlight
+Super Secret Above Mountain Rubble (Disque(Clone)(-64.81, 25.88, 10.00)) - MountainAccess and Balloon and Gloves and SuperSecretLogic
+Mega Crab Flower Circle (lingot50(Clone)(-45.73, 18.03, 10.00)) - MountainAccess and Glove and EasyFlight
+Mountain Rubble Lens Chest (CoffreCachéParmiLesRochers(-64.00, 31.00, 0.00)) - MountainAccess and Charge1 and Lens
+Above Western Waterfall (CoffreCascadeDeLouest(-63.50, 23.52, 0.00)) - (MountainAccess or Swim2) and (Balloon or (Charge1 (lens optional))
+Mountain Zigzag Ice Cave (CoffreGrotteGlaceZIgZagSimple(550.50, 47.50, 0.00)) - MountainAccess and (Boots2 or lamp optional)
+Mountain Cave Giant Rock (CoffreRocGeantGlace(560.00, 50.00, 0.00)) - MountainAccess and Charge2
+Mountain Ice Floe Atop Big Waterfall (CoffreDevantDonjonGlace(-16.50, 42.50, 0.00)) - MountainAccess and (Swim2 or Balloon or (BigBurn and Charge1))
+Mountain Lens Chest West of Warp Point (CoffreCachéDeLaFallaiseEnneigée(-42.00, 50.00, 0.00)) - MountainAccess and Lens
+Mountain Wall north of Warp Point (CoffreDisqueMont(-33.50, 63.50, 0.00)) - MountainAccess and Balloon and (lens optional)
+Mountain On Cliff over Dungeon (CoffreBallonMontagneCristal(-9.50, 57.50, 0.00)) - MountainAccess and Balloon
+Mountain Dwarf Rock Chest (CoffreNainSommetCoeur(-45.00, 59.00, 0.00)) - MountainAccess and (Boots or lens)
+Mountain Cliff Above Penguins (CoffreLongGrappinRiviereGlace(-9.00, 72.00, 0.00)) - MountainAccess and LongFlight
+Forge Ultimate Sword (UltimaSword(Clone)(-629.88, 49.86, 10.00)) - Weapon5 and (TODO: ALL DWARF LOGIC)
+Cliff Below NW Warp (CoffreBordFalaiseGrappin2(-26.00, 36.00, 0.00)) - MountainAccess and LongFlight
+Cave West of NW Warp Spike Chest (CoffreGrotteGlaceZIgZagDur(561.50, 43.50, 0.00)) - MountainAccess (Boots2 or lamp optional)
+Swamp Bramble Island Across Deep Water (CoffreOuestDuTrouDuMarais(43.50, -30.50, 0.00)) - OWAccess and LongFlight
+Warp Hub Chest (CoffreDisquePortails(-659.50, 42.50, 0.00)) - Lens and OWAccess and Balloon
+Sewer Arena reward (demiReceptacle(Clone)(-88.19, 29.38, 10.00)) - Swim and EasyFlight and OWAccess
+Swamp Dwarf Chest (CoffreMineurMaraisCristal(111.50, -36.50, 0.00)) - TODO
+Swamp Cavern Donut Salvage (lingot50(Clone)(675.31, -38.91, 10.00)) - swim and OWAccess
+Swamp Cavern Lens Chest (CoffreCachéGGM(656.50, -32.50, 0.00)) - Swim and Lens and OWAccess
+Swamp Cavern Arena (CoffreCBTGGM(645.50, -20.50, 0.00)) - Swim and Lens and Weapon
+Swamp Cavern Boomerang Challenge (CoffreGrotteMaraisCoeur(614.50, -38.50, 0.00)) - Swim and Boomerang and EasyFlight
+Swamp Cavern Block Puzzle (CoffrePuzzleGGM(649.50, -43.50, 0.00)) - Swim and EasyFlight and OWAccess
+Swamp Power Plant Chest (CoffreMiniIleAccesCentrale(72.50, -16.50, 0.00)) - OWAccess and (BasicBurn or Swim or EasyFlight)
+Swamp Past Shallow Maze Lever (CoffrePassageChaintMarais(69.50, -9.50, 0.00)) - OWAccess
+Swamp Shallow Maze Island (CoffeLongGrappinPresCascadeMarais(54.50, -23.50, 0.00)) - OWAccess and LongFlight
+Swamp Boomerang Grotto (CoffreGrotteBoomerangIleCristal(680.50, 2.50, 0.00)) - OWAccess and (Balloon or (GrapplingHook and Boomerang))
+Swamp Double Cyclops Reward (CoffreMaraisDoubleCyclo(95.00, -38.00, 0.00)) - OWAccess and LongFlight and (Boomerang or Weapon3?TODO)
+Swamp Flower Circle by Hotspring (lingot50(Clone)(87.37, -8.70, 10.00) - Glove and OWAccess and (balloon or Swim)
+Swamp Two Crab Brambles Chest (CoffreSudDuTrouDuMarais(60.50, -36.50, 0.00)) - Swim and OWAccess
+Swamp Unmarked Secret Cave (CoffreDisqueMarais(690.50, -28.50, 0.00)) - Swim and OWAccess and SuperSecretLogic
+Swamp Five Rock Lens Chest (CoffreCachéDu marais(45.50, -39.50, 0.00)) - Swim and OWAccess and Lens
+Swamp Broken Road Flowers (lingot50(Clone)(18.26, -40.28, 10.00)) - Swim and OWAccess and Gloves
+Swamp Potion Shop Right (potionRoute(-521.50, -18.50, 0.00) - Swim and OWAccess and BigBurn and Charge1
+Swamp Potion Shop Left (potionForet(-523.50, -18.50, 0.00)) - OWAccess and BigBurn
+Swamp Buried Among Trees (Disque(Clone)(109.75, -29.71, 10.00)) - Balloon and Weapon and SuperSecretLogic
+Snow Potion Buried Treasure (CoffreSouterreNeige4(-88.00, 27.00, 0.00) - SnowPotion and Glove and OWAccess
+Nightclub Brawl Chest (CoffreArgentBarCache(-125.50, 106.50, 0.00)) - MountainAccess and LongFlight (lens optional) 
+Nightclub Meal (Fromage(-118.00, 101.94, -1.00)) - MountainAccess and LongFlight (lens optional)
+Far West Ravine Chest (CoffreCachéRavinCyclo(-88.00, -1.00, 0.00)) - Lens and BigBurn
+Far West Fox Bushes (demiReceptacle(Clone)(-74.73, 0.51, 10.00)) - Balloon and Charge1 and BigBurn
+Waterfall Chest near Broken Sword (CoffreDesCascades(-76.00, 13.00, 0.00)) - OWAccess and Swim2
+Broken Sword (brokenSword(-74.00, 39.13, 0.11)) - OWAccess and Swim2
+West of Broken Sword (CoffreDesCascadesSecret(-93.50, 40.50, 0.00)) - OWAccess and Swim2 and EasyFlight
+Eight Room Lens Path (LUULDRUR) (CoffreCoeurBPfleche(45.50, 130.50, 0.00)) - EightRoomMazeAccess and Lens
+Eight Room Secret Dungeon Path (ULURRDLU) - EightRoomMazeAccess and Lens and Charge1
+Eight Room Unknown Path (LRDLLDUU) (CoffredisqueNonogram2(60.50, 130.50, 0.00)) - EightRoomMazeAccess and SuperSecretLogic
+Eight Room Kickstarter Path (RURDLDLU) (CoffreBPDisqueTrailer(90.50, 130.50, 0.00)) - EightRoomMazeAccess and SuperSecretLogic
+Eight Room Dwarf Path (RDLURULL) (CoffredisqueCafe(60.50, 142.00, 0.00)) - EightRoomMazeAccess and Lens and BigBurn and Charge1 and Balloon and Boots1
+Eight Room Banner Path Left Chest (URDLLURU) (CoffreCoeurBPsteles(74.50, 130.50, 0.00)) - EightRoomMazeAccess and Lens and BasicBurn
+Eight Room Banner Path Right Chest (URDLLURU) (CoffreDisqueHall(76.50, 130.50, 0.00)) - EightRoomMazeAccess and Lens and BasicBurn
+Chest near Forest Potion Warp (CoffreSecretChampiForet(16.50, 73.50, 0.00)) - ((Charge1 and Balloon) or ForestPotion) and OWAccess
+Chest in lake near Forest Potion Warp (CoffreCaverneSubCristal(135.50, 153.50, 0.00)) - ((Charge1 and Balloon) or (ForestPotion and Swim)) and OWAccess
+Pull the Legendary Sword (Coordinates TODO) - BigBurn and EasyFlight and 50 health
+Path to Ruined City Right Chest (CoffreSteamHallDesNains(15.50, 88.50, 0.00)) - NorthOfLakeAccess and Gloves
+Path to Ruined City Left Chest (CoffreCoeurHallDesNains(-13.50, 89.50, 0.00)) - Balloon and Weapon
+Collosseum Prize 1 (CoffreGauntlet1(-44.50, 109.00, 0.00)) - MountainAccess and LongFlight
+Collosseum Prize 2 (CoffreGauntlet2(-44.50, 109.00, 0.00)) - MountainAccess and LongFlight
+Collosseum Prize 3 (CoffreGauntlet3(-44.50, 109.00, 0.00)) - MountainAccess and LongFlight
+Collosseum Prize 4 (CoffreGauntlet4(-44.50, 109.00, 0.00)) - MountainAccess and LongFlight
+Collosseum Grand Prize Left (CoffreGauntletArmor(-76.00, 91.50, 0.00)) - MountainAccess and LongFlight
+Collosseum Grand Prize Right (CoffredisqueGauntlet(-73.00, 91.50, 0.00)) - MountainAccess and LongFlight
+Lake Cave West Chest (CoffreLacBallonCristal(552.00, 11.50, 0.00)) - LakeCaveAccess and Balloon
+Lake Cave Southeast Salvage (lingot50(Clone)(586.31, 1.15, 10.00)) - LakeCaveAccess
+Lake Cave Northeast Chest (CoffreGGFric6(586.50, 19.50, 0.00)) - LakeCaveAccess and Boomerang and Balloon
+Lake Cave Lever Prize (CoffreGrotteLacCoeur(570.50, 23.50, 0.00)) - LakeCaveAccess and Boomerang2
+Chest Beneath Zombie Houses (CoffreGGRaccourciCristal(597.50, 38.50, 0.00)) - (LakeCaveAccess or Glove or (Charge1 and (lens optional))) and Balloon 
+Cave Gloves Chest (CoffreGGBattleDig(600.50, 53.50, 0.00)) - (Balloon or (Charge1 and (Lens Optional))) and Gloves and Weapon
+Sprawling Caves Island Chest (billet20(Clone)(643.75, 40.95, 10.00)) - ShortFlight and Swim and OWAccess
+Sprawling Caves SingleGrapple Chest (CoffreGGFric2(673.50, 46.50, 0.00)) - ShortFlight and Swim and OWAccess
+Sprawling Caves MultiGrapple Chest (CoffreGGFric3(655.50, 48.50, 0.00)) - (Balloon or (Boomerang and GrapplingHook)) and Swim and OWAccess
+Sprawling Cave Boulder Chest (CoffreRocGeantGGM(649.00, 43.00, 0.00)) - Balloon and Swim and Charge2
+Sprawling Cave Knight Corridor (CoffreGGFric5(620.50, 8.50, 0.00)) - Glove and Swim and Charge1
+Sprawling Cave NorthWest of Block Room (CoffreDisqueUW(620.50, 28.50, 0.00)) - Balloon and OWAccess and (Gloves or Swim)
+
+==========SW Dungeon===========
+SW Dungeon Entry Salvage (PetitePiece(Clone)(5.44, 583.53, 10.00)) -Charge1 and Swim and (lens optional)
+SW Dungeon Mushroom Chest (CoffreAArgent4(12.50, 589.50, 0.00)) - Charge1
+SW Dungeon Mushroom Salvage (Piece5(Clone)(-18.94, 582.34, 10.00)) - Charge1 and Swim and (lens optional)
+SW Dungeon Map Chest (20.50, 577.50, 0.00) - Charge1
+SW Dungeon Box Yourself In Chest (Coffreclé3(-14.50, 610.50, 0.00)) - Charge1
+SW Dungeon Grappling Hook Chest (CoffreDuGrappin(-29.50, 600.50, 0.00)) - Charge1 and SWKey(3)
+SW Dungeon Grapple Island near Treasure (CoffreAArgent3(-8.50, 597.50, 0.00)) - Charge1 and EasyFlight
+SW Dungeon Chest West of Entrance (CoffreAArgent2(-8.50, 583.50, 0.00)) - Charge1 and (ShortRange or Swim or Balloon)
+SW Dungeon Spike Room Salvage (Piece5(Clone)(16.00, 599.96, 10.00)) - Charge1 and Swim and (lens optional)
+SW Dungeon Northeast Room Salvage (Piece5(Clone)(18.56, 607.28, 10.00)) -Charge1 and Swim and (lens optional)
+SW Dungeon Grapple Chest Hard version (CoffreAArgent1(-18.50, 593.50, 0.00)) - Charge1 and EasyFlight
+SW Dungeon Spinning Trap Room (Coffreclé2(-28.50, 587.50, 0.00)) - Charge1 and EasyFlight
+SW Dungeon Spinning Trap Room North Salvage (Piece5(Clone)(-31.94, 593.43, 10.00)) - Charge1 and Swim and (lens optional)
+SW Dungeon Spinning Trap Room West Salvage (Piece5(Clone)(-34.23, 590.40, 10.00)) - Charge1 and Swim and (lens optional)
+SW Dungeon Spinning Trap Room South Salvage (Piece5(Clone)(-31.75, 587.74, 10.00)) - Charge1 and Swim and (lens optional)
+SW Dungeon Waterfall Room (CoffreDuQuartDeCoeur(35.50, 602.50, 0.00)) - Charge1 and EasyFlight (lens optional)
+SW Dungeon Cluttered Box Room (Coffreclé1(36.50, 593.50, 0.00)) - Charge1
+SW Dungeon Boss Chest (CoffreDuBoss(0.50, 620.00, -2.00)) - Charge1 and ShortRange and SWKey(3)
+SW Dungeon Atop Waterfall (CoffresuperSecretCascadeCristal(30.50, 610.50, 0.00)) - Charge1 and Swim2 and (lens optional)
+
+==========NE Dungeon============
+NE Dungeon Dining Room Ghost (bulb(Clone)(26.35, 593.00, 10.00)) - BasicBurn
+NE Dungeon 1F Lounge Ghost (bulb(Clone)(1.02, 581.25, 10.00)) - BasicBurn
+NE Dungeon 1f Livingroom (bulb(Clone)(-2.80, 591.03, 10.00)) - BasicBurn
+NE Dungeon Basement Ghost (bulb(Clone)(11.12, 563.27, 10.00)) - BasicBurn
+NE Dungeon Basement Middle Chest (CoffreManoirCristal(6.50, 558.50, 0.00)) - BasicBurn
+NE Dungeon Basement Furnace Chest (CoffreArgent2(0.50, 563.50, 0.00))) - BasicBurn
+NE Dungeon Basement Hidden Room (Coffredisque(31.50, 560.50, 0.00)) - BasicBurn and Vitamins (lens optional)
+NE Dungeon Kitchen Ghost (bulb(Clone)(27.61, 582.00, 10.00)) - BasicBurn and NEKey(4)
+NE Dungeon Map Chest (CoffreMap(35.50, 611.50, 0.00)) - BasicBurn and NEKey(3)
+NE Dungeon Bedroom Ghost (bulb(Clone)(32.88, 611.43, 10.00)) - BasicBurn and NEKey(3)
+NE Dungeon Balcony Ghost (bulb(Clone)(1.13, 611.56, 10.00)) - BasicBurn and NEKey(6)
+NE Dungeon Treadmill (GrossePiece10(Clone)(5.54, 607.66, 10.00)) - BasicBurn and NEKey(6)
+NE Dungeon Lantern Chest (CoffreLanterne2(0.50, 620.50, 0.00)) - BasicBurn and NEKey(6)
+NE Dungeon Stump Chest (CoffreArgent3(-5.50, 622.50, 0.00)) - BigBurn and NEKey(6)
+NE Dungeon Block Table Chest (CoffreArgent1(9.50, 613.50, 0.00)) - BasicBurn
+NE Dungeon Sick Room Ghost (bulb(Clone)(10.78, 622.75, 10.00)) - BasicBurn
+NE Dungeon Block Bedroom Ghost (bulb(Clone)(34.19, 622.27, 10.00)) - BasicBurn and NEKey(5)
+NE Dungeon 9 Ghost Door (CoffreCoeur(26.50, 639.50, 0.00)) - BasicBurn and NEKey(9)
+NE Dungeon Boss Chest (CoffreDuBoss(0.50, 640.00, 0.00)) - BasicBurn and NEKey(7) (Lantern2 optional)
+NE Dungeon Atop Waterfall (CoffreSuperSecretCascade(0.50, 630.50, 0.00)) - BasicBurn and NEKey(6) and Swim2
+
+===========NW Dungeon============
+NW Dungeon Map Chest (CoffreMap(-29.50, 582.50, 0.00)) - NWDungeonAccess and Weapon and Gloves
+NW Dungeon Ice Puzzle East of Entrance (CoffreClé1(21.50, 583.50, 0.00))) - NWDungeonAccess
+NW Dungeon Meat Mesa (CoffreArgent2(33.50, 578.50, 0.00)) - NWDungeonAccess and Weapon and NWKey(1)
+NW Dungeon Boots Chest (CoffreBottes(30.50, 603.50, 0.00)) - NWDungeonAccess and Weapon and NWKey(1)
+NW Dungeon Ice Puzzle North of Meat Mesa (CoffreClé2(45.50, 590.50, 0.00)) - NWDungeonAccess and NWKey(1)
+NW Dungeon Glove Chest (CoffreGants(30.50, 619.50, 0.00)) - NWDungeonAccess and NWKey(2) and Weapon
+NW Dungeon Buried near Furnace (GrossePiece10(Clone)(50.24, 622.83, 10.00)) - NWDungeonAccess and Weapon and Gloves and NWKey(2)(lens optional)
+NW Dungeon Buried far East (GrossePiece10(Clone)(51.33, 589.68, 10.00)) - NWDungeonAccess and NWKey(1) and Gloves (lens optional)
+NW Dungeon Buried Nine Squares (cléNeige(Clone)(18.81, 592.21, 10.00)) - NWDungeonAccess and NWKey(1) and Gloves
+NW Dungeon SW Frozen Chest (Coffredisque(-29.50, 571.50, 0.00)) - NWDungeonAccess and NWKey(2) and Gloves
+NW Dungeon Hidden Room Lens Chest (CoffreCachéCoeur(-29.50, 620.50, 0.00)) - NWDungeonAccess and NWKey(3) and Gloves and Charge1 and Lens
+NW Dungeon Ice Floe Salvage (billet20(Clone)(-27.99, 607.51, 10.00)) - NWDungeonAccess and NWKey(3) and Weapon and Gloves (lens optional)
+NW Dungeon Buried East of White Birds (cristal(Clone)(21.02, 601.56, 10.00)) - NWDungeonAccess and NWKey(3) and Weapon and Gloves (lens optional)
+NW Dungeon Buried East of Ascension (billet20(Clone)(20.81, 611.30, 10.00)) - NWDungeonAccess and NWKey(3) and Weapon and Gloves (lens optional)
+NW Dungeon Across Ravine (CoffreArgent3(15.00, 597.00, 0.00)) - NWDungeonAccess and NWKey(3) and Weapon and Gloves and EasyFlight
+NW Dungeon Boss Chest (CoffreDuBoss(0.50, 639.50, -1.00)) - NWDungeonAccess and NWKey(3) and Weapon and Gloves
+
+===========SE Dungeon=============
+SE Dungeon SouthWest Nine Puzzle (Coffreclé2(-35.50, 576.50, 0.00)) - SEDungeonAccess and Weapon
+SE Dungeon Map Chest (CoffreCarte(-14.50, 593.50, 0.00)) - SEDungeonAccess and Weapon and SEKey(9)
+SE Dungeon East Nine Puzzle (Coffreclé3(36.50, 593.50, 0.00)) - SEDungeonAccess and Weapon
+SE Dungeon Twin Laser Four Block Puzzle (Coffreclé4(15.50, 603.50, 0.00)) - SEDungeonAccess
+SE Dungeon Center Room Right Chest (Coffreclé5(4.50, 601.50, 0.00)) - SEDungeonAccess and Charge1 (lens optional)
+SE Dungeon Center Room Left Chest (CoffreDisque(-3.50, 601.50, 0.00)) - SEDungeonAccess and Charge1 and Boomerang2 and SEKey(9) (lens optional)
+SE Dungeon NorthWest Nine Puzzle (Coffreclé6(-8.50, 606.50, 0.00)) - SEDungeonAccess and SEKey(8) and ShortRange
+SE Dungeon Flying Spike and Electricity Room Chest (CoffreCristal1(-18.50, 603.50, 0.00)) - SEDungeonAccess and SEKey(9) and ShortRange
+SE Dungeon Flying Spike and Electricity Room Inner Salvage (lingot50(Clone)(-11.94, 600.30, 10.00)) - SEDungeonAccess and SEKey(9) and Swim and (GrapplingHook2 or Boomerang2)
+SE Dungeon Flying Spike and Electricity Room Outer Salvage (lingot50(Clone)(-8.75, 597.30, 10.00)) - SEDungeonAccess and SEKey(9) and Swim and Boomerang2
+SE Dungeon Bat Room (CoffreArgent1(-9.50, 622.50, 0.00)) SEDungeonAccess and SEKey(9) and ShortRange
+SE Dungeon Buried Under Block (pass(Clone)(-14.56, 581.13, 10.00)) - SEDungeonAccess
+SE Dungeon Laser Dig Maze South (CoffreArgent2(21.50, 609.50, 0.00)) - SEDungeonAccess and SEKey(8)
+SE Dungeon Laser Dig Maze North (CoffreArgent3(21.50, 623.50, 0.00)) - SEDungeonAccess and SEKey(8)
+SE Dungeon Laser Obstruction Room (Coffreclé7(25.50, 612.50, 0.00)) - SEDungeonAccess and SEKey(8) and Weapon
+SE Dungeon East Boomerang Chest (CoffreDuBoomerang1(30.50, 602.50, 0.00)) - SEDungeonAccess and SEKey(9) and Weapon
+SE Dungeon NW Knight (demiReceptacle(Clone)(-23.33, 618.51, 10.00)) - SEDungeonAccess and ((GrapplingHook2 and Boomerang1) or Boomerang2) and Charge1 (lens optional)
+SE Dungeon NW Chest (CoffreDuQuartDeCoeurFaux(-34.50, 622.50, 0.00)) - SEDungeonAccess and ((GrapplingHook2 and Boomerang1) or Boomerang2) and Charge1 (lens optional)
+SE Dungeon SE Chest (Coffreclé9(36.50, 580.50, 0.00)) - SEDungeonAccess and Boomerang
+SE Dungeon West Boomerang Chest (CoffreDuBoomerang2(-34.50, 607.50, 0.00)) - SEDungeonAccess and ((SEKey(9) and Boomerang1 and Boots) or (SEKey(8) and Boomerang2))
+SE Dungeon North of West Boomerang Chest (Coffreclé8(-34.50, 613.50, 0.00)) - SEDungeonAccess and SEKey(8) and Boomerang2
+SE Dungeon Boss Chest (CoffreDuBoss(0.50, 620.50, -2.00)) - SEDungeonAccess and SEKey(9) and Boomerang2
+SE Dungeon Gamer Room (CoffreDisqueHydra1(95.50, 617.50, 0.00)) - SEDungeonAccess and SEKey(9) and Boomerang2 and Balloon
+
+===========Giant Enemies===========
+Giant Slime (cristal(Clone)(14.92, -28.38, 10.00)) - Weapon
+Giant Enemy Crab (cristal(Clone)(-46.67, 18.68, 10.00)) - Weapon and MountainAccess
+Giant Penguin (cristal(Clone)(-61.62, 70.55, 10.00)) - Weapon and MountainAccess
+Giant Reaper (cristal(Clone)(106.25, 36.43, 10.00)) - BigBurn and Vitamins
+Giant Crocodile (cristal(Clone)(47.55, -51.43, 10.00)) - Weapon and Swim
+Giant Dark Slime (cristal(Clone)(90.77, 229.62, 10.00)) - NorthOfLakeAccess and Balloon and Weapon
+Caerbannog (cristal(Clone)(-17.07, -49.88, 10.00)) - Weapon and Swim
+
+===========Secret Dungeon============
+Secret Dungeon Pillar Chest (CoffreArgent1(25.50, 573.50, 0.00)) - SecredDungeonAccess
+Secret Dungeon Lower Lens Chest (CoffreLoupe1(30.50, 580.50, 0.00)) - SecretDungeonAccess
+Secret Dungeon West of Entrance (CoffreClé1(3.50, 572.50, 0.00)) - (SecretDungeonAccess and (lens optional)) or Balloon
+Secret Dungeon Maze Southwest Chest (CoffreArgent2(-5.50, 578.50, 0.00)) - SecretDungeonAccess and (lens optional)
+Secret Dungeon Map Chest (CoffreMapTempleSecret(15.50, 593.50, 0.00)) - SecretDungeonAccess and (lens optional)
+Secret Dungeon Maze Hidden Room Left Chest (CoffreSymeDJSecret(25.50, 592.50, 0.00)) - SecretDungeonAccess and Charge1 (lens optional)
+Secret Dungeon Maze Hidden Room Right Chest (CoffreDemiCoeurDJSecret(35.50, 592.50, 0.00)) - SecretDungeonAccess and Charge1 (lens optional)
+Secret Dungeon Very Bottom (CoffreSecretSecret(36.50, 521.50, 0.00)) - SecretDungeonAccess and Charge1 (lens optional)
+Secret Dungeon Second Floor Rubble Northeast (CoffreCachéArgent1(-5.50, 612.50, 0.00)) - SecretDungeonAccess and Charge1 and Lens
+Secret Dungeon Second Floor Rubble Southeast (CoffreCachéArgent2(-5.50, 606.50, 0.00)) - SecretDungeonAccess and Charge1 and Lens
+Secret Dungeon Button Code (CoffreClé2(15.50, 623.50, 0.00)) - SecretDungeonAccess and Charge1 and SecretKey(1) (Lens Optional)
+Secret Dungeon Upper Lens Chest (CoffreLoupe2(-5.50, 623.50, 0.00)) - SecretDungeonAccess and Weapon and SecretKey(2) (lens optional)
+Secret Dungeon Top Floor Left (CoffreDisqueFight(-3.50, 643.50, 0.00)) - SecretDungeonAccess and Weapon and SecretKey(1)
+Secret Dungeon Top Floor Right (CoffreCoeur(4.50, 643.50, 0.00)) - SecretDungeonAccess and Weapon and SecretKey(1)
+Secret Dungeon Warp Secret (CoffreArgent4(24.50, 553.50, 0.00)) - SecretDungeonAccess and Charge1 and (lens optional)
+Secret Dungeon Warp Wall Secret (CoffredisqueDJsecret(18.50, 537.50, 0.00)) - SecretDungeonAccess and Charge1 and (lens optional)
+
+===========Ruined City==============
+Ruined City Balloon Table (Ballon1(-31.50, 221.50, -1.00)) - OWAccess and Balloon or BasicBurn
+Ruined City TreadMill (ingot50(Clone)(171.05, 220.63, 10.00) - (Weapon and Balloon) or (OWAccess and Swim)
+Ruined City Roofless Hut East (CoffreArgentCiteMaisonEffondre(35.50, 197.50, 0.00)) - OWAccess and Balloon
+Ruined City Roofless Hut South (CoffreArgentCiteMaisonSentinelle(12.50, 180.50, 0.00)) - NorthOfLakeAccess
+Ruined City Rooftop Bar (CoffreGigotRooftopBar(144.50, 242.50, 0.00)) - (Balloon and Boomerang) or (NorthOfLakeAccess and Charge2)
+Ruined City Vitamins Table (Force2(165.50, 229.50, -1.00)) - (Balloon and Boomerang and Charge1) or (NorthOfLakeAccess and Charge2)
+Ruined City Hidden East Island (CoffreCristalCiteIleSecrete(63.50, 212.50, 0.00)) - NorthOfLakeAccess and Balloon (Lens Optional)
+Ruined City Southeast cliffside (CoffreArgentCiteConfinsCreuse(56.50, 203.50, 0.00)) - NorthOfLakeAccess and Gloves
+Ruined City Hidden Southeast Island (CoffreDisqueCitePiano(66.50, 199.50, 0.00)) - NorthOfLakeAccess and Balloon and Gloves and SuperSecretLogic
+Ruined City Supermarket Block Puzzle (CoffreCristalCiteSupermarcheBlocs(150.50, 217.50, 0.00)) - (NorthOfLakeAccess and Charge2) or (Balloon and Boomerang)
+Ruined City Boulder House (CoffreArgentCiteInterieurEffondreOuest(108.50, 202.50, 0.00)) - NorthOfLakeAccess
+Ruined City West Catacombs (CoffreCristalEgoutsOuest(114.50, 163.50, 0.00)) - NorthOfLakeAccess and Balloon
+Ruined City West Island Near (CoffreCristalCiteIleFromEgouts(-29.50, 179.50, 0.00)) - NorthOfLakeAccess and Balloon
+Ruined City Drop Through Roof (CoffreCristalCiteInterieurEffondreEst(178.50, 213.50, 0.00)) - (Boomerang or Charge2) and Balloon
+Ruined City Tallest Building (CoffredisqueCite(9.50, 243.00, 0.00)) - (Boomerang or Charge2) and Balloon
+Ruined City Library (CoffreArgentCiteBiblio(95.50, 223.50, 0.00)) - NorthOfLakeAccess and Balloon
+Ruined City Gear Piece Chest (CoffreEngrenageCite(105.50, 233.50, 0.00)) - NorthOfLakeAccess and Balloon and Weapon
+Ruined City Library Battle Chest (CoffreCoeurCiteBiblio(90.50, 206.50, 0.00)) - NorthOfLakeAccess and Balloon and Weapon
+Ruined City West Island Lens Chest (CoffreCachéCitéIleVisible(-48.50, 197.50, 0.00)) - NorthOfLakeAccess and Balloon and Lens
+Ruined City Fox Island (demiReceptacle(Clone)(-46.63, 169.81, 10.00)! (freestanding item) - NorthOfLakeAccess and Balloon and Boomerang
+Ruined City House with Lens Chest (CoffreCachéMaisonNain(136.50, 188.50, 0.00)) - NorthOfLakeAccess and Lens
+Ruined City Map Chest (CoffreMapEW(27.50, 182.50, 0.00)) - NorthOfLakeAccess and Balloon
+Ruined City Behind rubble in house through Sewers (CoffreCristalCiteMaisonSepare(151.50, 192.50, 0.00)) - NorthOfLakeAccess and Balloon
+
+============Forge===================
+Forge Blocks and Steam (CoffreClef2(-8.50, 613.50, 0.00)) - ForgeAccess and Glove
+Forge MagmaFrog Arena (CoffreClef1(66.50, 560.50, 0.00)) - ForgeAccess and Weapon
+Forge Four Boulders (CoffreTresor11Cristal(-14.50, 640.00, 0.00)) - ForgeAccess and Weapon and ForgeKey(2)
+Forge Fan Zigzag South Chest (CoffreTresor10Cristal(36.50, 557.50, 0.00)) - ForgeAccess and Balloon2
+Forge Fan Zigzag North Chest (CoffreClef10(27.50, 570.50, 0.00)) - ForgeAccess and Balloon2
+Forge Bottom Floor NorthEast (CoffreClef3(-24.50, 582.50, 0.00)) - ForgeAccess and Boomerang2 and Glove and ForgeKey(2)
+Forge Bottom Floor South Right Side (CoffreTresor9(-38.50, 560.50, 0.00)) - ForgeAccess and Boomerang2 and Glove and ForgeKey(2)
+Forge Bottom Floor South Left Side (CoffreObjet(-50.50, 560.50, 0.00)) ForgeAccess and Boomerang2 and ((Glove and Balloon2 and ForgeKey(2)) or (ForgeKey(All)
+Forge Around the Hollow Tower (CoffreTresor8(-5.50, 620.50, 0.00)) - ForgeAccess and Balloon2 and Boomerang2 and ForgeKey(2)
+Forge Bottom Floor SouthEast (CoffreClef6(-32.50, 557.50, 0.00)) - ForgeAccess and Balloon and Glove and ForgeKey(2)
+Forge Beneath the Centurion Blueprints (CoffreDisqueDJBonus(81.50, 593.50, 0.00)) - ForgeAccess and Charge1 and (lens optional)
+Forge Piston Trove Upper Chest (CoffreTresor4(80.50, 572.50, 0.00)) - ForgeAccess and Balloon2 and ForgeKey(All)
+Forge Piston Trove Middle Chest (CoffreTresor5Heart(80.50, 570.50, 0.00)) - ForgeAccess and Balloon2 and ForgeKey(All)
+Forge Piston Trove Lower Chest (CoffreTresor6(80.50, 568.50, 0.00)) - ForgeAccess and Balloon2 and ForgeKey(All)
+Forge Run Against the Fans (CoffreClef4(9.50, 593.50, 0.00)) - ForgeAccess and Boots and ForgeKey(All-4*)
+Forge Button and Boomerang (CoffreClef8(-35.50, 653.50, 0.00)) - ForgeAccess and Boomerang2 and ForgeKey(All-3*)
+Forge 2 Block Drop Down (CoffreClef7(60.50, 601.50, 0.00)) - ForgeAccess and ForgeKey(All-6*)
+Forge 4 Block Drop Down (CoffreClef5(36.50, 593.50, 0.00)) - ForgeAccess and Balloon2 and ForgeKey(All-1)
+Forge NorthWest Piston Gauntlet (CoffreClef11(25.50, 603.50, 0.00)) - ForgeAccess and Balloon2 and ForgeKey(All-1*)
+Forge Double Drop North (CoffreMap(-44.50, 580.50, 0.00)) - ForgeAccess and ForgeKey(All-1)
+Forge Multikey Trove Upper Chest (CoffreTresor1(-40.50, 622.50, 0.00)) - ForgeAccess and ForgeKey (All*)
+Forge Multikey Trove Middle Chest (CoffreTresor2Cristal(-40.50, 620.50, 0.00)) - ForgeAccess and ForgeKey (All*)
+Forge Multikey Trove Lower Chest (CoffreTresor3(-40.50, 618.50, 0.00)) - ForgeAccess and ForgeKey (All*)
+Forge Block Sentry's Buttons (CoffreClef9(18.00, 573.50, 0.00)) - ForgeAccess and ForgeKey(All)
+Forge Boss Left Chest (CoffreDuBossBonusArmure(-47.50, 570.50, 0.00)) - ForgeAccess and Balloon2 and ForgeKey(All) and Weapon
+Forge Boss Right Chest (CoffreDuBossBonusVie(-41.50, 570.50, 0.00)) - ForgeAccess and Balloon2 and ForgeKey(All) and Weapon
+
+============Final Dungeon===========
+Final Dungeon Jail Crystal (CoffreCristalDJF2(1.50, 533.50, 0.00)) - FinalDungeonAccess
+Final Dungeon Rubble Path (CoffredisqueDJF(15.50, 573.50, 0.00)) - FinalDungeonAccess and Charge1 and (Lens Optional)
+Final Dungeon SouthWest Chest (CoffreKey1DJF(-25.00, 570.88, 0.00)) - FinalDungeonAccess and Weapon and WaterKey
+Final Dungeon NorthEast Chest (CoffreKey2DJF(26.00, 600.88, 0.00)) - FinalDungeonAccess and Weapon and HouseKey
+Final Dungeon NorthWest Chest (CoffreKey3DJF(-25.00, 600.88, 0.00)) - FinalDungeonAccess and Weapon and IceKey
+Final Dungeon SouthEast Chest (CoffreKey4DJF(26.00, 570.88, 0.00)) - FinalDungeonAccess and Weapon and LightningKey
+Final Dungeon Library (CoffreArgentDJF1(11.50, 621.50, 0.00)) - FinalDungeonAccess and Weapon
+Final Dungeon Swimming Pool (lingot50(Clone)(-12.44, 639.41, 10.00)) - FinalDungeonAccess and Weapon and Swim
+Final Dungeon Map Chest (CoffreMapDJF(-11.00, 581.00, 0.00)) - FinalDungeonAccess and Weapon
+Final Dungeon Library Dropdown Chest (CoffreCristalDJF1(12.00, 581.00, 0.00)) FinalDungeonAccess and Weapon and (Lens Optional)
+Final Boss Reward (PierreFinal(Clone)(2.06, 648.18, 10.00)) - FinalDungeonAccess and Weapon and Gloves and Boots
