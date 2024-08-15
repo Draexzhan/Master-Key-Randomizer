@@ -26,7 +26,7 @@ class GhostPatch1
             __instance.activateOnDeath.SetActive(value: true);
             if (!__instance.reset && UnityEngine.Object.Instantiate(__instance.lootOnDeath, __instance.player.transform.position, UnityEngine.Quaternion.identity).TryGetComponent<pieceScript>(out var component))
             {
-                AddToInventory(ItemCheatSheet.GetData(__instance.mainCamera.transform.position.ToString()));
+                AddToInventory(CheckClass.GetData(__instance.mainCamera.transform.position.ToString()).CheckItem);
             }
         }
     }

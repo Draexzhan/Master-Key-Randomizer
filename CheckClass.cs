@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using static ItemCheatSheet;
+using static Seed;
+using static MasterKeyRandomizer.MKLogger;
+using static CheckIndex;
 
 public class CheckClass
 {
@@ -32,23 +35,25 @@ public class CheckClass
     public class CheckData
     {
         public string LocationName
-            { get; set; }
+        { get; set; }
         public int LocationID
-            { get; set; }
+        { get; set; }
         public string UniqueIdentifier
-            { get; set; }
+        { get; set; }
         public bool Reusable
-            { get; set; }
-
+        { get; set; }
+        public string Requirements
+        { get; set; }
         public ItemData CheckItem
-            { get; set; }
+        { get; set; }
 
-        public CheckData(string locationName, int locationID, string uniqueIdentifier)
+        public CheckData(string locationName, int locationID, string uniqueIdentifier)//, string requirements)
         {
             LocationName = locationName;
             LocationID = locationID;
             UniqueIdentifier = uniqueIdentifier;
             Reusable = false;
+            //Requirements = requirements;
         }
     }
     public class CheckLookup
@@ -89,9 +94,9 @@ public class CheckClass
             { "cristal(-628.50, 3.50, -1.00)", new CheckData("Fancy Shop - Top Third From Right", 32, "cristal(-628.50, 3.50, -1.00)" ) },
             { "triCristal(-626.50, 3.50, -1.00)", new CheckData("Fancy Shop - Top Second From Right", 33, "triCristal(-626.50, 3.50, -1.00)" ) },
             { "FragmentGearShop(-624.50, 3.50, -1.00)", new CheckData("Fancy Shop - Top Right", 34, "FragmentGearShop(-624.50, 3.50, -1.00)" ) },
-            { "CoffrePresqueCache(-25.50, -17.50, 0.00)", new CheckData("West of Village - Behind Rocks", 35, "CoffrePresqueCache(-25.50, -17.50, 0.00)" ) }, //reevaluate
+            { "CoffrePresqueCache(-25.50, -17.50, 0.00)", new CheckData("West of Village - Behind Rocks", 35, "CoffrePresqueCache(-25.50, -17.50, 0.00)" ) },
             { "CoffreCachéDeLOuestDuVillage(-11.50, -7.50, 0.00)", new CheckData("West of Village - Lens Chest", 36, "CoffreCachéDeLOuestDuVillage(-11.50, -7.50, 0.00)" ) },
-            { "CoffreTrivialBordDuMarais(32.50, -26.50, 0.00)", new CheckData("South of Village - Chest Past Giant Slime", 37, "CoffreTrivialBordDuMarais(32.50, -26.50, 0.00)" ) }, //reevaluate
+            { "CoffreTrivialBordDuMarais(32.50, -26.50, 0.00)", new CheckData("South of Village - Chest Past Giant Slime", 37, "CoffreTrivialBordDuMarais(32.50, -26.50, 0.00)" ) },
             { "CoffreGrosCaillouIleCristal(34.00, -33.00, 0.00)", new CheckData("South of Village - Giant Boulder", 38, "CoffreGrosCaillouIleCristal(34.00, -33.00, 0.00)" ) },
             { "CoffreTrivialClairièreNordVille(33.50, 1.50, 0.00)", new CheckData("North of Village - East of Gate", 39, "CoffreTrivialClairièreNordVille(33.50, 1.50, 0.00)" ) },
             { "CoffreDesCorbeaux(-10.50, -40.50, 0.00)", new CheckData("Southwest of Village - Crows", 40, "CoffreDesCorbeaux(-10.50, -40.50, 0.00)" ) },
@@ -110,7 +115,7 @@ public class CheckClass
             { "CoffreDelaGrotteEnflamméeDeLaClairière(545.50, 2.50, 0.00)", new CheckData("West Overworld - Pong Cave", 53, "CoffreDelaGrotteEnflamméeDeLaClairière(545.50, 2.50, 0.00)" ) },
             { "CoffreDeLaGrotteAuxPics(554.50, -17.50, 0.00)", new CheckData("West Overworld - Spike Maze Chest", 54, "CoffreDeLaGrotteAuxPics(554.50, -17.50, 0.00)" ) },
             { "CoffreGaucheDuDJ1(-45.00, -28.00, 0.00)", new CheckData("Southwest Overworld - Behind Reaper", 55, "CoffreGaucheDuDJ1(-45.00, -28.00, 0.00)" ) },
-            { "CoffreGrotteSousDonjonSO(555.50, -38.50, 0.00)", new CheckData("Southwest Overworld - Hidden Cave Waypoint", 56, "CoffreGrotteSousDonjonSO(555.50, -38.50, 0.00)" ) },
+            { "CoffreGrotteSousDonjonSO(555.50, -38.50, 0.00)", new CheckData("Southwest Overworld - Hidden Cave Under Waypoint", 56, "CoffreGrotteSousDonjonSO(555.50, -38.50, 0.00)" ) },
             { "CoffreGrotteNextDJSO1(565.50, -26.50, 0.00)", new CheckData("Southwest Overworld - Cave East of Dungeon North Chest", 57, "CoffreGrotteNextDJSO1(565.50, -26.50, 0.00)" ) },
             { "CoffreGrotteNextDJSO3(591.50, -29.50, 0.00)", new CheckData("Southwest Overworld - Cave East of Dungeon East Chest", 58, "CoffreGrotteNextDJSO3(591.50, -29.50, 0.00)" ) },
             { "CoffreGrotteNextDJSOCristal(570.50, -28.50, 0.00)", new CheckData("Southwest Overworld - Cave East of Dungeon Center Chest", 59, "CoffreGrotteNextDJSOCristal(570.50, -28.50, 0.00)" ) },
@@ -207,7 +212,7 @@ public class CheckClass
             { "CoffrePuzzleGGM(649.50, -43.50, 0.00)", new CheckData("Swamp - Cavern Block Puzzle", 150, "CoffrePuzzleGGM(649.50, -43.50, 0.00)" ) },
             { "CoffreMiniIleAccesCentrale(72.50, -16.50, 0.00)", new CheckData("Swamp - Chest Outside Power Plant", 151, "CoffreMiniIleAccesCentrale(72.50, -16.50, 0.00)" ) },
             { "CoffrePassageChaintMarais(69.50, -9.50, 0.00)", new CheckData("Swamp - Past Shallow Maze Lever", 152, "CoffrePassageChaintMarais(69.50, -9.50, 0.00)" ) },
-            { "CoffreGrotteBoomerangIleCristal(680.50, 2.50, 0.00)", new CheckData("Swamp - Boomerang Grotto", 153, "CoffreGrotteBoomerangIleCristal(680.50, 2.50, 0.00)" ) },
+            { "CoffreGrotteBoomerangIleCristal(680.50, 2.50, 0.00)", new CheckData("Swamp - Zombie Grotto", 153, "CoffreGrotteBoomerangIleCristal(680.50, 2.50, 0.00)" ) },
             { "CoffreMaraisDoubleCyclo(95.00, -38.00, 0.00)", new CheckData("Swamp - Double Cyclops Reward", 154, "CoffreMaraisDoubleCyclo(95.00, -38.00, 0.00)" ) },
             { "CoffreFleursMaraisForet(87.50, -8.50, 0.00)", new CheckData("Swamp - Flower Circle by Hot Spring", 155, "CoffreFleursMaraisForet(87.50, -8.50, 0.00)" ) },
             { "CoffreSudDuTrouDuMarais(60.50, -36.50, 0.00)", new CheckData("Swamp - Two Crabs Bramble Chest", 156, "CoffreSudDuTrouDuMarais(60.50, -36.50, 0.00)" ) },
@@ -228,7 +233,7 @@ public class CheckClass
             { "CoffreDesCascades(-76.00, 13.00, 0.00)", new CheckData("Far West Overworld - Waterfall Chest", 171, "CoffreDesCascades(-76.00, 13.00, 0.00)" ) },
             { "CoffreCoeurBPfleche(45.50, 130.50, 0.00)", new CheckData("Eight Room Maze - Lens Path (LUULDRUR)", 172, "CoffreCoeurBPfleche(45.50, 130.50, 0.00)" ) },
             { "CoffreEngrenageBP(45.50, 141.50, 0.00)", new CheckData("Eight Room Maze - Ziggurat Path (ULURRDLU)", 173, "CoffreEngrenageBP(45.50, 141.50, 0.00)" ) },
-            { "CoffredisqueNonogram2(60.50, 130.50, 0.00)", new CheckData("Eight Room Maze - Unknown Path (LRDLLDUU)", 174, "CoffredisqueNonogram2(60.50, 130.50, 0.00)" ) }, // **Super Secret Logic Only** <<< Might exclude from all settings until someone finds the code legitimately.
+            { "CoffredisqueNonogram2(60.50, 130.50, 0.00)", new CheckData("Eight Room Maze - Unknown Path (Currently not in logic)", 174, "CoffredisqueNonogram2(60.50, 130.50, 0.00)" ) }, // **Super Secret Logic Only** <<< Might exclude from all settings until someone finds the code legitimately.(LRDLLDUU)
             { "CoffreBPDisqueTrailer(90.50, 130.50, 0.00)", new CheckData("Eight Room Maze - Kickstarter Path (RURDLDLU)", 175, "CoffreBPDisqueTrailer(90.50, 130.50, 0.00)" ) }, // **Super Secret Logic Only**
             { "CoffredisqueCafe(60.50, 142.00, 0.00)", new CheckData("Eight Room Maze - Dwarf Path (RDLURULL)", 176, "CoffredisqueCafe(60.50, 142.00, 0.00)" ) },
             { "CoffreCoeurBPsteles(74.50, 130.50, 0.00)", new CheckData("Eight Room Maze - Banner Path Left Chest (URDLLURU)", 177, "CoffreCoeurBPsteles(74.50, 130.50, 0.00)" ) },
@@ -283,7 +288,7 @@ public class CheckClass
             { "CoffreArgent2(0.50, 563.50, 0.00)", new CheckData("Haunted House - Basement Furnace", 226, "CoffreArgent2(0.50, 563.50, 0.00)" ) },
             { "Coffredisque(31.50, 560.50, 0.00)", new CheckData("Haunted House - Basement Hidden Room", 227, "Coffredisque(31.50, 560.50, 0.00)" ) },
             { "(30.50, 580.00, -10.00)", new CheckData("Haunted House - Kitchen Ghost", 228, "(30.50, 580.00, -10.00)" ) },
-            { "CoffreMap(35.50, 611.50, 0.00)", new CheckData("Haunted House - Map Chest", 229, "CoffreMap(35.50, 611.50, 0.00)" ) },
+            { "CoffreMap(35.50, 611.50, 0.00)", new CheckData("Haunted House - Bedroom Chest", 229, "CoffreMap(35.50, 611.50, 0.00)" ) },
             { "(30.50, 610.00, -10.00)", new CheckData("Haunted House - Bedroom Ghost", 230, "(30.50, 610.00, -10.00)" ) },
             { "(0.50, 610.00, -10.00)", new CheckData("Haunted House - Balcony Ghost", 231, "(0.50, 610.00, -10.00)" ) },
             { "TreadmillHaunt", new CheckData("Haunted House - Treadmill", 232, "TreadmillHaunt" ) },
@@ -295,10 +300,10 @@ public class CheckClass
             { "CoffreCoeur(26.50, 639.50, 0.00)", new CheckData("Haunted House - 9 Ghost Door", 238, "CoffreCoeur(26.50, 639.50, 0.00)" ) },
             { "CoffreDuBoss(0.50, 640.00, 0.00)", new CheckData("Haunted House - Boss Chest", 239, "CoffreDuBoss(0.50, 640.00, 0.00)" ) },
             { "CoffreSuperSecretCascade(0.50, 630.50, 0.00)", new CheckData("Haunted House - Atop Waterfall", 240, "CoffreSuperSecretCascade(0.50, 630.50, 0.00)" ) },
-            { "CoffreMap(-29.50, 582.50, 0.00)", new CheckData("Snowy Peaks - Map Chest", 241, "CoffreMap(-29.50, 582.50, 0.00)" ) },
+            { "CoffreMap(-29.50, 582.50, 0.00)", new CheckData("Snowy Peaks - Map Arena Chest", 241, "CoffreMap(-29.50, 582.50, 0.00)" ) },
             { "CoffreClé1(21.50, 583.50, 0.00)", new CheckData("Snowy Peaks - Ice Puzzle East of Entrance", 242, "CoffreClé1(21.50, 583.50, 0.00)" ) },
             { "CoffreArgent2(33.50, 578.50, 0.00)", new CheckData("Snowy Peaks - Ice Moat Island", 243, "CoffreArgent2(33.50, 578.50, 0.00)" ) },
-            { "CoffreBottes(30.50, 603.50, 0.00)", new CheckData("Snowy Peaks - Boots Chest", 244, "CoffreBottes(30.50, 603.50, 0.00)" ) },
+            { "CoffreBottes(30.50, 603.50, 0.00)", new CheckData("Snowy Peaks - Boots Arena Chest", 244, "CoffreBottes(30.50, 603.50, 0.00)" ) },
             { "CoffreClé2(45.50, 590.50, 0.00)", new CheckData("Snowy Peaks - Ice Puzzle north of Ice Moat", 245, "CoffreClé2(45.50, 590.50, 0.00)" ) },
             { "CoffreGants(30.50, 619.50, 0.00)", new CheckData("Snowy Peaks - Glove Chest", 246, "CoffreGants(30.50, 619.50, 0.00)" ) },
             { "CoffreSouloArgent4(50.50, 622.50, 0.00)", new CheckData("Snowy Peaks - Buried Near Furnace", 247, "CoffreSouloArgent4(50.50, 622.50, 0.00)" ) },
@@ -320,7 +325,7 @@ public class CheckClass
             { "Coffreclé6(-8.50, 606.50, 0.00)", new CheckData("Factory - Northwest Nine Bulb Puzzle", 263, "Coffreclé6(-8.50, 606.50, 0.00)" ) },
             { "CoffreCristal1(-18.50, 603.50, 0.00)", new CheckData("Factory - Flying Spike and Electricity Room Chest", 264, "CoffreCristal1(-18.50, 603.50, 0.00)" ) },
             { "CoffreSouloArgent1(-12.00, 600.00, 0.00)", new CheckData("Factory - Flying Spike and Electricity Room Inner Salvage", 265, "CoffreSouloArgent1(-12.00, 600.00, 0.00)" ) },
-            { "BAD DATA - FIX THIS", new CheckData("Factory - Flying Spike and Electricity Room Outer Salvage", 266, "CoffreSouloClé1(-14.50, 580.50, 0.00)" ) }, // TODO: FIX THIS ONE
+            { "CoffreSouloArgent2(-9.00, 597.00, 0.00)", new CheckData("Factory - Flying Spike and Electricity Room Outer Salvage", 266, "CoffreSouloArgent2(-9.00, 597.00, 0.00)" ) }, // TODO: FIX THIS ONE
             { "CoffreArgent1(-9.50, 622.50, 0.00)", new CheckData("Factory - Bat Room", 267, "CoffreArgent1(-9.50, 622.50, 0.00)" ) },
             { "CoffreSouloClé1(-14.50, 580.50, 0.00)", new CheckData("Factory - Buried Under a Block", 268, "CoffreSouloClé1(-14.50, 580.50, 0.00)" ) },
             { "CoffreArgent2(21.50, 609.50, 0.00)", new CheckData("Factory - Laser Dig Maze South Chest", 269, "CoffreArgent2(21.50, 609.50, 0.00)" ) },
@@ -420,6 +425,8 @@ public class CheckClass
             { "CoffeLongGrappinPresCascadeMarais(54.50, -23.50, 0.00)", new CheckData("Swamp - Shallow Maze Island", 363, "CoffeLongGrappinPresCascadeMarais(54.50, -23.50, 0.00)" ) },
             { "CoffreSouloEntreIle1(-1.00, 598.00, 0.00)", new CheckData("Water Dungeon - Double Salvage 1", 364, "CoffreSouloEntreIle1(-1.00, 598.00, 0.00)" ) },
             { "CoffreSouloEntreIle2(-1.00, 597.00, 0.00)", new CheckData("Water Dungeon - Double Salvage 2", 365, "CoffreSouloEntreIle2(-1.00, 597.00, 0.00)" ) },
+            { "CoffreGGFric1(609.50, 6.50, 0.00)", new CheckData("Sprawling Cave - Chest near Village Cave", 366, "CoffreGGFric1(609.50, 6.50, 0.00)") },
+            { "CoffreSouloGrotteForetCoeur(571.00, -14.00, 0.00)", new CheckData("Dark Woods - Grotto Salvage", 367, "CoffreSouloGrotteForetCoeur(571.00, -14.00, 0.00)") }
         };
     }
     public static CheckData GetData(string id)
@@ -427,5 +434,4 @@ public class CheckClass
         CheckLookup.Locations.TryGetValue(id, out CheckData value);
         return value;
     }
-
 }

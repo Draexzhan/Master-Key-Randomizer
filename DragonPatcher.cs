@@ -7,17 +7,20 @@ using System.Collections.Generic;
 using System.IO;
 using System.Numerics;
 using System.Text.RegularExpressions;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
+using static MasterKeyRandomizer.MKLogger;
 using UnityStandardAssets.Utility;
 using static ItemCheatSheet;
 using static UpdateInventory;
 
-public class DragonPatcher
+public class DragonPatcher : MonoBehaviour
 {
-    [HarmonyPrefix]
+	private static readonly SynchronizationContext context = SynchronizationContext.Current;
+	[HarmonyPrefix]
     [HarmonyPatch(typeof(dragonCristal), nameof(dragonCristal.OnTriggerEnter2D))]
     public static bool DragonPatcherCollide(dragonCristal __instance, ref Collider2D collision)
     {
@@ -29,12 +32,12 @@ public class DragonPatcher
             if (__instance.toGive != 0)
             {
                 __instance.playerS.setDesactiveMoveCinematics(val: true);
-                __instance.StartCoroutine("RandoExchange", __instance);
-            }
+			    __instance.StartCoroutine(RandoExchange(__instance));
+			}
         }
         return false;
     }
-    private IEnumerator RandoExchange(dragonCristal __instance)
+    private static IEnumerator RandoExchange(dragonCristal __instance)
     {
         __instance.playerS.directionFacing = 2;
         yield return new WaitForSeconds(0.5f);
@@ -90,16 +93,18 @@ public class DragonPatcher
             obj.transform.Rotate(90f * UnityEngine.Vector3.forward);
             obj.GetComponent<ATKScript>().degats = 0;
             yield return new WaitForSeconds(1.5f);
-            Transform transform = UnityEngine.Object.Instantiate(__instance.rewards[__instance.nextPalier].rew, __instance.player.transform.position, UnityEngine.Quaternion.identity);
-            AddToInventory(ItemCheatSheet.GetData("Dragon" + __instance.nextPalier));
+            //Transform transform = UnityEngine.Object.Instantiate(__instance.rewards[__instance.nextPalier].rew, __instance.player.transform.position, UnityEngine.Quaternion.identity);
+            AddToInventory(CheckClass.GetData("Dragon" + (__instance.nextPalier + 1)).CheckItem);
             __instance.anim.enabled = true;
+            LogInfo("Dagron");
         }
         foreach (Transform cristinstance in __instance.cristinstances)
         {
             UnityEngine.Object.Destroy(cristinstance.gameObject);
         }
         yield return new WaitForSeconds(0.5f);
-        __instance.dragon.sprite = __instance.neutre;
+		LogInfo("Dargon");
+		__instance.dragon.sprite = __instance.neutre;
         __instance.playerS.cristalsGiven += __instance.toGive;
         __instance.toGive = 0;
         __instance.playerS.setDesactiveMoveCinematics(val: false);

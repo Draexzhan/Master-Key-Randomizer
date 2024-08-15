@@ -9,7 +9,8 @@ using static UnityEngine.UIElements.UxmlAttributeDescription;
 using UnityEngine.SceneManagement;
 using Steamworks;
 using UnityEngine.UIElements.UIR;
-using static Seed;
+using static MasterKeyRandomizer.MKLogger;
+using System.Threading.Tasks;
 
 namespace SaveData.patches;
 
@@ -97,7 +98,8 @@ class SaveDataPatch1
         PlayerPrefs.SetInt(__instance.saveslot + "cycloKilled", __instance.cycloKilled);
         PlayerPrefs.SetInt(__instance.saveslot + "crossbKilled", __instance.crossbKilled);
         PlayerPrefs.SetInt(__instance.saveslot + "robotKilled", __instance.robotKilled);
-        string[] array = new string[79]
+        PlayerPrefs.SetInt(__instance.saveslot + "No Data", 0);
+        string[] array = new string[80]
         {
                 "argent", "maxArgent", "PDVActuels", "PDVMax", "demiReceptacle", "bottes", "palmes", "muscle", "distance", "lanterne",
                 "vision", "boomerang", "creuse", "ballon", "rez", "clover", "magnet", "armor", "bourse", "picLVL",
@@ -106,7 +108,7 @@ class SaveDataPatch1
                 "cristalsGiven", "cafe", "keys", "bulbs", "keyIce", "pass", "passForge", "keySecret", "discs", "respawn",
                 "nouvellePhoto", "deathCount", "slimeKilled", "lapinKilled", "axoKilled", "corbKilled", "crocKilled", "batKilled", "shellKilled", "moaiKilled",
                 "souchotKilled", "skelKilled", "mageKilled", "hopKilled", "snowKilled", "pinguKilled", "lanceKilled", "jellyKilled", "ghoulKilled", "bjellyKilled",
-                "bslimeKilled", "harpyKilled", "oilKilled", "lfrogKilled", "firesnKilled", "cycloKilled", "crossbKilled", "robotKilled", "deathCount"
+                "bslimeKilled", "harpyKilled", "oilKilled", "lfrogKilled", "firesnKilled", "cycloKilled", "crossbKilled", "robotKilled", "deathCount", "No Data"
         };
         for (int i = 0; i < array.Length; i++)
         {
@@ -130,6 +132,6 @@ class SaveDataPatch1
     [HarmonyPatch(typeof(WorldHolderScript), nameof(WorldHolderScript.Start))]
     public static void RANDOMIZE(WorldHolderScript __instance)
     {
-        Seed.GenerateSeed(0);
-    }
+        Seed.GenerateSeed();
+	}
 }

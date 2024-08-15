@@ -31,11 +31,11 @@ public class SwordForgePatcher
             {
                 __instance.nains[i].gameObject.SetActive(value: true);
             }
-            __instance.StartCoroutine("ForgeCutscene");
+            __instance.StartCoroutine(ForgeCutscene(__instance));
         }
         return false;
     }
-    private IEnumerator ForgeCutscene(SwordCutscene __instance)
+    private static IEnumerator ForgeCutscene(SwordCutscene __instance)
     {
         __instance.music.volume = 0.2f;
         __instance.cutscenePhase = 1;
@@ -79,18 +79,13 @@ public class SwordForgePatcher
         }
         yield return new WaitForSeconds(1f);
         __instance.striking = true;
-        MonoBehaviour.print("a");
         __instance.cadenceModifier = 1.5f;
-        MonoBehaviour.print("b");
         yield return new WaitForSeconds(2f);
         __instance.cadenceModifier = 2f;
-        MonoBehaviour.print("c");
         yield return new WaitForSeconds(2f);
         __instance.cadenceModifier = 3f;
-        MonoBehaviour.print("d");
         yield return new WaitForSeconds(2f);
         __instance.cadenceModifier = 5f;
-        MonoBehaviour.print("e");
         yield return new WaitForSeconds(4f);
         __instance.striking = false;
         for (int n = 0; n < 6; n++)

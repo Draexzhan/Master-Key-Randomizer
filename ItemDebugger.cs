@@ -41,7 +41,6 @@ class ItemDebuggerPatch1
     {
         if (collider.CompareTag("ObjetRare"))
         {
-            MonoBehaviour.print("attrape !");
             collider.GetComponent<objetRareScript>().grabIt();
             return false;
         }
