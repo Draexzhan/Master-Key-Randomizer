@@ -143,11 +143,9 @@ class RareItemPatcher
 			if (PlayerPrefs.GetInt(UnityEngine.Object.FindObjectOfType<FoxMove>().saveslot + itemname) > 0 && !__instance.isUWMap)
             {
                 UnityEngine.Object.Destroy(__instance.gameObject);
-                LogDebug("item destroyed.");
 			}
 			else if ((itemname == "Woods Potion" || itemname == "Snow Potion" || itemname == "Ruins Warp" || itemname == "Start Warp") && PlayerPrefs.GetInt(UnityEngine.Object.FindObjectOfType<FoxMove>().saveslot + itemname) > 0)
 			{
-				LogDebug("REYOOZABOWL");
 				__instance.valeur = 0;
                 int i = __instance.GetComponent<Transform>().childCount - 1;
                 foreach (GameObject child in __instance.transform.GetChild(i))

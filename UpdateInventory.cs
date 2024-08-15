@@ -444,8 +444,8 @@ public class UpdateInventory : MonoBehaviour
         CheckData checkData = CheckClass.GetData(checkIdentifier);
         ItemData itemData;
         FieldInfo fieldInfo;
-        itemData = checkData.CheckItem;
-        try
+		itemData = ItemCheatSheet.GetData(checkData.CheckItem.Name);
+		try
 		{
 			try
 			{
