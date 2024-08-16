@@ -11,6 +11,7 @@ If done correctly, the title screen should say "Randomizer" on it, and you shoul
 
 # Playing a randomized world
 The randomization window displays the stats for the current world, as well as its seed number. These numbers will be 0 if the file is empty or corrupt. You can set the save number to any positive number of your choice. These saves do not conflict with the vanilla saves and will not overwrite them. Currently, the vanilla saves can also be used for randomized worlds, however, the eventual plan is to relegate them to the Vanilla game exclusively, so any seeds attached to them may become inaccessible in a later update.
+**Currently, the mod is not Vanilla safe and will randomize the pool on existing saves when loaded.**
 
 If a save is corrupt, you may need to erase it, even if the displayed numbers are all 0.
 
