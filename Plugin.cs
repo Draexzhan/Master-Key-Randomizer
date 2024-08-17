@@ -20,35 +20,45 @@ namespace MasterKeyRandomizer;
 	[BepInProcess("Master Key.exe")]
 public class MasterKeyRandomizer : BaseUnityPlugin
 {
-    private void Awake()
+	static readonly Harmony harmonyCore = new Harmony("com.draexzhan.patch");
+	static readonly Harmony harmonyRando = new Harmony("com.draexzhanRando.patch");
+	private void Awake()
     {
         MKLogger.SetLogger(((MasterKeyRandomizer)this).Logger);
         ((MasterKeyRandomizer)this).Logger.LogInfo((object)"Master Key Randomizer (v0.1.0.0) is loaded!");
-        var harmony = new Harmony("com.draexzhan.patch");
-        harmony.PatchAll(typeof(TitleImagePatch1));
-        harmony.PatchAll(typeof(RandomizerEditor));
-		harmony.PatchAll(typeof(IntroScriptV2Patch1));
-        harmony.PatchAll(typeof(PortalPatcherPatch1));
-        harmony.PatchAll(typeof(ItemDebuggerPatch1));
-        harmony.PatchAll(typeof(ChestPatcherPatch1));
-        harmony.PatchAll(typeof(SaveDataPatch1));
-        harmony.PatchAll(typeof(RareItemPatcher));
-        harmony.PatchAll(typeof(GhostPatch1));
-        harmony.PatchAll(typeof(DragonPatcher));
-        harmony.PatchAll(typeof(PlayerPatch));
-        harmony.PatchAll(typeof(SwordForgePatcher));
-        harmony.PatchAll(typeof(TreadmillPatch1));
-        harmony.PatchAll(typeof(EnemyPatch1));
-        harmony.PatchAll(typeof(BlockPatch1));
-        harmony.PatchAll(typeof(MosterSwordPatcher));
-        harmony.PatchAll(typeof(RandoWarp));
-        harmony.PatchAll(typeof(MusicPatch1));
+        harmonyCore.PatchAll(typeof(TitleImagePatch1));
+        harmonyCore.PatchAll(typeof(RandomizerEditor));
         Application.runInBackground = true;
         UnityEngine.Object.DontDestroyOnLoad((UnityEngine.Object)new GameObject("quick settings gui", new Type[1] { typeof(RandomizerEditor) })
         {
             hideFlags = (HideFlags)61
         });
     }
+
+    static public void RandoMode()
+    {
+		harmonyRando.PatchAll(typeof(IntroScriptV2Patch1));
+		harmonyRando.PatchAll(typeof(PortalPatcherPatch1));
+		harmonyRando.PatchAll(typeof(ItemDebuggerPatch1));
+		harmonyRando.PatchAll(typeof(ChestPatcherPatch1));
+		harmonyRando.PatchAll(typeof(SaveDataPatch1));
+		harmonyRando.PatchAll(typeof(RareItemPatcher));
+		harmonyRando.PatchAll(typeof(GhostPatch1));
+		harmonyRando.PatchAll(typeof(DragonPatcher));
+		harmonyRando.PatchAll(typeof(PlayerPatch));
+		harmonyRando.PatchAll(typeof(SwordForgePatcher));
+		harmonyRando.PatchAll(typeof(TreadmillPatch1));
+		harmonyRando.PatchAll(typeof(EnemyPatch1));
+		harmonyRando.PatchAll(typeof(BlockPatch1));
+		harmonyRando.PatchAll(typeof(MosterSwordPatcher));
+		harmonyRando.PatchAll(typeof(RandoWarp));
+		harmonyRando.PatchAll(typeof(MusicPatch1));
+	}
+
+    static public void VanillaMode()
+	{
+		harmonyRando.UnpatchSelf();
+	}
 }
 
 public class MKLogger

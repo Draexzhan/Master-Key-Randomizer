@@ -1,4 +1,5 @@
-﻿using System;
+﻿using static MasterKeyRandomizer.MasterKeyRandomizer;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -70,6 +71,7 @@ public class RandomizerEditor : MonoBehaviour
         }
         if (GUI.Button(new Rect(360f, 120f, 100f, 50f), "Play") && saveNumber > 0)
         {
+            RandoMode();
             LoadSceneOnClick SaveLoader = UnityEngine.Object.FindObjectOfType<LoadSceneOnClick>();
             SaveLoader.saveslot = "randomizerSlot" + saveNumber;
             PlayerPrefs.SetInt("RandoLastWorld", saveNumber);

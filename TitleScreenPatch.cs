@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using static MasterKeyRandomizer.MKLogger;
+using static MasterKeyRandomizer.MasterKeyRandomizer;
 
 namespace MenuMod.patches;
 
@@ -23,6 +24,7 @@ class TitleImagePatch1
     public static void NewTitle(mainMenuSaveSelectDecal __instance)
 	{
 		AssetBundle.UnloadAllAssetBundles(false);
+		VanillaMode();
 		AssetBundle Bundle = AssetBundle.LoadFromFile("BepInEx\\plugins\\MasterKeyRandomizer\\masterkeyrandoassets");
         GameObject Title = GameObject.Find("title");
         Title.GetComponent<SpriteRenderer>().sprite = Bundle.LoadAsset<Sprite>("titleForTitleScreen11");
