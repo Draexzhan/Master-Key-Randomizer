@@ -37,7 +37,7 @@ public class UpdateInventory : MonoBehaviour
     {
         busy = true;
         Debug.Log(itemData.ItemNameForSave);
-        FoxMove foxMove = UnityEngine.Object.FindObjectOfType<FoxMove>();
+        FoxMove foxMove = FindObjectOfType<FoxMove>();
         FieldInfo fieldInfo = foxMove.GetType().GetField(itemData.ItemNameForSave);
         int foxInt;
         try
@@ -70,12 +70,12 @@ public class UpdateInventory : MonoBehaviour
             }
             if (itemData.ItemNameForSave == "lanterne")
             {
-                UnityEngine.Object.FindObjectOfType<PlayerHealthAndItemScript>().transform.parent.GetChild(3).GetChild(0).GetComponent<LanterneSwitcher>().updateLanterneSprites();
-                UnityEngine.Object.FindObjectOfType<PlayerHealthAndItemScript>().transform.parent.GetChild(3).GetComponent<LanterneSwitcher>().updateLanterneSprites();
+                FindObjectOfType<PlayerHealthAndItemScript>().transform.parent.GetChild(3).GetChild(0).GetComponent<LanterneSwitcher>().updateLanterneSprites();
+                FindObjectOfType<PlayerHealthAndItemScript>().transform.parent.GetChild(3).GetComponent<LanterneSwitcher>().updateLanterneSprites();
             }
             if (itemData.ItemNameForSave == "loupe")
             {
-                UnityEngine.Object.FindObjectOfType<PlayerHealthAndItemScript>().transform.parent.GetChild(4).GetComponent<VisionSwitcher>().updateVisionSprite();
+                FindObjectOfType<PlayerHealthAndItemScript>().transform.parent.GetChild(4).GetComponent<VisionSwitcher>().updateVisionSprite();
             }
             if (foxMove.picLVL > 0)
             {
@@ -90,7 +90,7 @@ public class UpdateInventory : MonoBehaviour
                 else
                 {
                     LogInfo("OMNOMNOMNOMNOM");
-                    PlayerHealthAndItemScript phais = UnityEngine.Object.FindObjectOfType<PlayerHealthAndItemScript>();
+                    PlayerHealthAndItemScript phais = FindObjectOfType<PlayerHealthAndItemScript>();
 					phais.character.enableMove(b: false);
 					GameObject.FindGameObjectWithTag("Controls").GetComponent<FoxControllerScript>().disableInput = true;
 					phais.character.gameObject.GetComponent<SpriteRenderer>().enabled = false;
@@ -123,9 +123,9 @@ public class UpdateInventory : MonoBehaviour
 				foxMove.enableMove(b: false);
 				GameObject.FindGameObjectWithTag("Controls").GetComponent<FoxControllerScript>().disableInput = true;
 				foxMove.gameObject.GetComponent<SpriteRenderer>().enabled = false;
-				UnityEngine.Object.FindObjectOfType<PlayerHealthAndItemScript>().boisPotion();
-				UnityEngine.Object.FindObjectOfType<PlayerHealthAndItemScript>().Invoke("finiDeBoirePotion", 3f);
-				var TP = GameObject.Instantiate(Resources.FindObjectsOfTypeAll<bulleCascadeSpawner>().Where(obj => obj.name == "potionForet").First());
+				FindObjectOfType<PlayerHealthAndItemScript>().boisPotion();
+				FindObjectOfType<PlayerHealthAndItemScript>().Invoke("finiDeBoirePotion", 3f);
+				var TP = Instantiate(Resources.FindObjectsOfTypeAll<bulleCascadeSpawner>().Where(obj => obj.name == "potionForet").First());
 				TP.transform.GetChild(0).GetComponent<SceneLoader>().Start();
 				TP.transform.GetChild(0).GetComponent<SceneLoader>().Invoke("sceneLoadExtern", 3f);
 				foxMove.removeVelo();
@@ -140,9 +140,9 @@ public class UpdateInventory : MonoBehaviour
 				foxMove.enableMove(b: false);
 				GameObject.FindGameObjectWithTag("Controls").GetComponent<FoxControllerScript>().disableInput = true;
 				foxMove.gameObject.GetComponent<SpriteRenderer>().enabled = false;
-                UnityEngine.Object.FindObjectOfType<PlayerHealthAndItemScript>().boisPotion();
-				UnityEngine.Object.FindObjectOfType<PlayerHealthAndItemScript>().Invoke("finiDeBoirePotion", 3f);
-				var TP = GameObject.Instantiate(Resources.FindObjectsOfTypeAll<bulleCascadeSpawner>().Where(obj => obj.name == "potionRoute").First());
+                FindObjectOfType<PlayerHealthAndItemScript>().boisPotion();
+				FindObjectOfType<PlayerHealthAndItemScript>().Invoke("finiDeBoirePotion", 3f);
+				var TP = Instantiate(Resources.FindObjectsOfTypeAll<bulleCascadeSpawner>().Where(obj => obj.name == "potionRoute").First());
 				TP.transform.GetChild(0).GetComponent<SceneLoader>().Start();
 				TP.transform.GetChild(0).GetComponent<SceneLoader>().Invoke("sceneLoadExtern", 3f);
 				foxMove.removeVelo();
@@ -154,7 +154,7 @@ public class UpdateInventory : MonoBehaviour
 			if (itemData.Name == "Ruins Warp")
 			{
 				LogDebug("Teleport to the Ruins!");
-				var TP = GameObject.Instantiate(Resources.FindObjectsOfTypeAll<bulleCascadeSpawner>().Where(obj => obj.name == "PoufTPRetour").First());
+				var TP = Instantiate(Resources.FindObjectsOfTypeAll<bulleCascadeSpawner>().Where(obj => obj.name == "PoufTPRetour").First());
                 TP.transform.GetChild(0).GetComponent<SceneLoader>().Start();
 				TP.transform.GetChild(0).GetComponent<SceneLoader>().Invoke("sceneLoadExtern", 0f);
 				foxMove.removeVelo();
@@ -165,7 +165,7 @@ public class UpdateInventory : MonoBehaviour
 			if (itemData.Name == "Start Warp")
 			{
 				LogDebug("Teleport to the Start!");
-				var TP = GameObject.Instantiate(Resources.FindObjectsOfTypeAll<bulleCascadeSpawner>().Where(obj => obj.name == "PoufTPLeyndell").First());
+				var TP = Instantiate(Resources.FindObjectsOfTypeAll<bulleCascadeSpawner>().Where(obj => obj.name == "PoufTPLeyndell").First());
 				TP.transform.GetChild(0).GetComponent<SceneLoader>().Start();
 				TP.transform.GetChild(0).GetComponent<SceneLoader>().Invoke("sceneLoadExtern", 0f);
 				foxMove.removeVelo();
@@ -209,7 +209,7 @@ public class UpdateInventory : MonoBehaviour
         GameObject itemObject = new GameObject("Held Item");
         itemObject.AddComponent<SpriteRenderer>().sprite = item;
         itemObject.GetComponent<SpriteRenderer>().sortingOrder = 11;
-        FoxMove foxMove = UnityEngine.Object.FindObjectOfType<FoxMove>();
+        FoxMove foxMove = FindObjectOfType<FoxMove>();
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
         itemObject.transform.parent = Player.transform;
         itemObject.transform.localPosition = UnityEngine.Vector3.zero;
@@ -258,7 +258,7 @@ public class UpdateInventory : MonoBehaviour
         GameObject itemObject = new GameObject("Held Item");
         itemObject.AddComponent<SpriteRenderer>().sprite = item;
         itemObject.GetComponent<SpriteRenderer>().sortingOrder = 11;
-        FoxMove foxMove = UnityEngine.Object.FindObjectOfType<FoxMove>();
+        FoxMove foxMove = FindObjectOfType<FoxMove>();
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
         itemObject.transform.parent = Player.transform;
         itemObject.transform.localPosition = UnityEngine.Vector3.zero;
@@ -285,7 +285,7 @@ public class UpdateInventory : MonoBehaviour
         GameObject itemObject = new GameObject("Held Item");
         itemObject.AddComponent<SpriteRenderer>().sprite = item;
         itemObject.GetComponent<SpriteRenderer>().sortingOrder = 11;
-        FoxMove foxMove = UnityEngine.Object.FindObjectOfType<FoxMove>();
+        FoxMove foxMove = FindObjectOfType<FoxMove>();
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
         itemObject.transform.parent = Player.transform;
         itemObject.transform.localPosition = UnityEngine.Vector3.zero;
@@ -312,7 +312,7 @@ public class UpdateInventory : MonoBehaviour
         GameObject itemObject = new GameObject("Held Item");
         itemObject.AddComponent<SpriteRenderer>().sprite = item;
         itemObject.GetComponent<SpriteRenderer>().sortingOrder = 11;
-        FoxMove foxMove = UnityEngine.Object.FindObjectOfType<FoxMove>();
+        FoxMove foxMove = FindObjectOfType<FoxMove>();
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
         itemObject.transform.parent = Player.transform;
         itemObject.transform.localPosition = UnityEngine.Vector3.zero;
@@ -427,31 +427,34 @@ public class UpdateInventory : MonoBehaviour
         yield return new WaitForSeconds(grabDuration);
         if (itemData.AppendTier)
         {
-            objetRareScript[] allItems = UnityEngine.Object.FindObjectsOfType<objetRareScript>();
+            objetRareScript[] allItems = FindObjectsOfType<objetRareScript>();
             for (int i = 0; i < allItems.Length; i++)
             {
                 if (UpdateAppearance(allItems[i].gameObject.name + allItems[i].transform.position.ToString(), itemData.Name))
                     allItems[i].gameObject.GetComponent<SpriteRenderer>().sprite = (UpdateAppearance(allItems[i].gameObject.name + allItems[i].transform.position.ToString(), itemData.Name));
             }
         }
-        UnityEngine.Object.Destroy(itemObject);
-        UnityEngine.GameObject.Destroy(parent);
+        Destroy(itemObject);
+        Destroy(parent);
     }
 
     public static Sprite UpdateAppearance(string checkIdentifier)
     {
-        FoxMove foxMove = UnityEngine.Object.FindObjectOfType<FoxMove>();
+        FoxMove foxMove = FindObjectOfType<FoxMove>();
         CheckData checkData = CheckClass.GetData(checkIdentifier);
+        LogDebug(checkData.LocationName);
         ItemData itemData;
         FieldInfo fieldInfo;
 		itemData = ItemCheatSheet.GetData(checkData.CheckItem.Name);
+        LogDebug(itemData.Name);
 		try
 		{
 			try
 			{
 				fieldInfo = foxMove.GetType().GetField(itemData.ItemNameForSave);
-				//LogInfo(fieldInfo.GetValue(foxMove).ToString());
-				itemData.UpdateSpriteName((int)fieldInfo.GetValue(foxMove));
+                //LogInfo(fieldInfo.GetValue(foxMove).ToString());
+                if (fieldInfo.GetValue(foxMove) != null)
+				    itemData.UpdateSpriteName((int)fieldInfo.GetValue(foxMove));
 			}
 			catch (Exception) { LogInfo("FieldData skipped. string given was " + checkIdentifier); }
 		}
@@ -479,7 +482,7 @@ public class UpdateInventory : MonoBehaviour
     public static Sprite UpdateAppearance(string checkIdentifier, string compareName)
     {
         Debug.Log(checkIdentifier);
-        FoxMove foxMove = UnityEngine.Object.FindObjectOfType<FoxMove>();
+        FoxMove foxMove = FindObjectOfType<FoxMove>();
         CheckData checkData = CheckClass.GetData(checkIdentifier);
         ItemData itemData;
         FieldInfo fieldInfo;
