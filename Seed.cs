@@ -29,7 +29,8 @@ public class Seed
             "Light Bulb", "Water Dungeon Key", "Snowy Peaks Key", "Factory Pass",
             "Ziggurat Key", "Forge Pass", "Water Treasure", "House Treasure",
             "Ice Treasure", "Lightning Treasure", "Gear Piece 1", "Gear Piece 2",
-        "Gear Piece 3", "Vitamins", "Boots", "Gloves", "Lens", "Balloon", "Snorkel"};
+            "Gear Piece 3", "Vitamins", "Boots", "Gloves", "Lens", "Balloon", "Snorkel",
+            "Ruins Warp", "Woods Potion", "Snow Potion" };
     public static void GenerateSeed()
     {
         string saveSlot = UnityEngine.GameObject.FindGameObjectWithTag("Player").GetComponent<FoxMove>().saveslot;
@@ -45,7 +46,7 @@ public class Seed
 			ItemRandomizer.AssumeFill(Checks);
 			string path = Application.persistentDataPath + "\\SpoilerLogs\\SpoilerLogForSeed" + seed + ".txt";
             StreamWriter SpoilerLog = new StreamWriter(path, true);
-			foreach (CheckData check in CheckLookup.Locations.Values)
+            foreach (CheckData check in CheckLookup.Locations.Values)
             {
                 try
                 {
@@ -60,12 +61,14 @@ public class Seed
                 {
                     SpoilerLog.WriteLine(check.LocationName + " has " + check.CheckItem.Name);
                 }
-                catch (Exception) 
+                catch (Exception)
                 {
-                    LogError(check.LocationName + "has <ERROR>");
-                        }
-			}
-			PlayerPrefs.SetInt(saveSlot + "randoSeed", seed);
+                    LogError(check.LocationName + " has <ERROR>");
+                    SpoilerLog.WriteLine(check.LocationName + " has <ERROR>");
+                }
+            }
+            SpoilerLog.Flush();
+            PlayerPrefs.SetInt(saveSlot + "randoSeed", seed);
 			LogInfo("A new randomized world has been made with seed " + seed + ".");
 
         }
@@ -303,7 +306,8 @@ public class Seed
             PrecollectedItems.Add("Gear Piece 3");
             PrecollectedItems.Add("Snow Potion");
             PrecollectedItems.Add("Ruins Warp");
-            PrecollectedItems.Add("Forest Potion");
+            PrecollectedItems.Add("Start Warp");
+            PrecollectedItems.Add("Woods Potion");
             PrecollectedItems.Add("Triple Crystal");
             PrecollectedItems.Add("Cheese");
             PrecollectedItems.Add("Overworld Map");
@@ -491,8 +495,7 @@ public class Seed
 			LogInfo("All Major items have been placed. Placing remaining items...");
 
             //Now all that remains are minor items. No logic is necessary to shuffle these so we're going completely random and calling it a day.
-            PrecollectedItems.ToList().OrderBy(r => rand.Next());
-			foreach (string item in PrecollectedItems.ToList())
+			foreach (string item in PrecollectedItems.ToList().OrderBy(r => rand.Next()))
             {
                 EmptyChecks.First().CheckItem = ItemCheatSheet.GetData(item);
                 FilledLocations.Add(EmptyChecks.First());

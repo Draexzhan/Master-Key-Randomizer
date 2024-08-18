@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Threading.Tasks;
 using static pieceScript;
+using static MasterKeyRandomizer.MKLogger;
 
 public class ItemCheatSheet
 {
@@ -72,15 +73,16 @@ public class ItemCheatSheet
 			ItemNameForSave = itemNameForSave;
             AppendTier = appendTier;
             ItemTypeName = spriteName;
-			SpriteName = ItemTypeName + (appendTier ? " " + Math.Min((int)quantityToGive, tierCap) : "") + ".png";
+			SpriteName = ItemTypeName + (appendTier ? " " + Math.Min(quantityToGive, tierCap) : "") + ".png";
 			QuantityToGive = quantityToGive;
 			TierCap = tierCap;
 			CelebrationType = celebrationType;
 		}
 		public void UpdateSpriteName(int currentTier)
 		{
+			LogDebug(currentTier.ToString() + " " + AppendTier.ToString());
 			if (AppendTier)
-				SpriteName = ItemTypeName + " " + Math.Min((int)QuantityToGive + currentTier, TierCap) + ".png";
+				SpriteName = ItemTypeName + " " + Math.Min(QuantityToGive + currentTier, TierCap) + ".png";
 
 			else
 				SpriteName = ItemTypeName + ".png";
@@ -143,8 +145,8 @@ public class ItemCheatSheet
 			{ "Forge Pass", new ItemData("Forge Pass", "progression", "passForge", "passForge", false, 1, 11, 2 ) },
 			{ "Woods Potion", new ItemData("Woods Potion", "progression", "No Data", "Potion", false, 1, 1, 0) },
 			{ "Snow Potion", new ItemData("Snow Potion", "progression", "No Data", "Potion", false, 1, 1, 0) },
-			{ "Ruins Warp", new ItemData("Ruins Warp", "progression", "No Data", "Warp Cloud", false, 1, 1, 0) },
-			{ "Start Warp", new ItemData("Start Warp", "useful", "No Data", "Warp Cloud", false, 1, 1, 0) },
+			{ "Start Warp", new ItemData("Start Warp", "progression", "No Data", "Warp Cloud", false, 1, 1, 0) },
+			{ "Ruins Warp", new ItemData("Ruins Warp", "useful", "No Data", "Warp Cloud", false, 1, 1, 0) },
 			{ "Coffee", new ItemData("Coffee", "useful", "No Data", "Coffee", false, 1, 60, 2) },
 			{ "Moster Sword", new ItemData("Moster Sword", "trap", "No Data", "MosterSword", false, 1, 1, 0) },
 			{ "Archipelago Trap", new ItemData("Archipelago Trap", "trap", "No Data", "PellyMinus", false, 1, 1, 0) },
