@@ -21,10 +21,6 @@ namespace RareItem.patches;
 
 class RareItemPatcher
 {
-    public static class RandoItem
-    {
-        public static ItemData itemData { get; private set; }
-    }
     [HarmonyPrefix]
     [HarmonyPatch(typeof(objetRareScript), nameof(objetRareScript.Start))]
     public static bool StartPatch1(objetRareScript __instance)
@@ -32,13 +28,14 @@ class RareItemPatcher
         __instance.joueur = GameObject.FindGameObjectWithTag("Player");
         __instance.OrigPos = __instance.transform.position;
         string itemname;
-		LogInfo(__instance.gameObject.name + __instance.OrigPos.ToString());
+        string LocationID = __instance.gameObject.name + __instance.OrigPos.ToString();
+		LogInfo(LocationID);
         try
         {
-            __instance.gameObject.GetComponent<SpriteRenderer>().sprite = UpdateAppearance(__instance.gameObject.name + __instance.OrigPos.ToString());
-            itemname = CheckClass.GetData(__instance.gameObject.name + __instance.OrigPos.ToString()).CheckItem.Name;
+            __instance.gameObject.GetComponent<SpriteRenderer>().sprite = UpdateAppearance(LocationID);
+            itemname = CheckClass.GetData(LocationID).CheckItem.Name;
         }
-        catch (Exception) { itemname = ItemCheatSheet.GetData("Error").Name; }
+        catch (Exception) { LogInfo("itemname errored."); itemname = GetData("Error").Name; }
 
         //I think there's an issue with potions and warps not having a nextitem.
 		if (__instance.nextItem != null)
@@ -48,7 +45,7 @@ class RareItemPatcher
 			__instance.copyOfNextItem.name = __instance.nextItem.name;
 		}
 		__instance.isPotion = false;
-		if ((((__instance.isPomme || __instance.isFromage || __instance.isRez || __instance.isRez2 || __instance.isCafe || __instance.pierreFinale) && !__instance.EnCoffre) || itemname == "Ruins Warp" || itemname == "Start Warp" || itemname == "Woods Potion" || itemname == "Snow Potion") && itemname != "Error")
+		if ((((__instance.isPomme || __instance.isFromage || __instance.isRez || __instance.isRez2 || __instance.isCafe || __instance.pierreFinale) && !__instance.EnCoffre && CheckClass.GetData(__instance.gameObject.name + __instance.OrigPos.ToString()).LocationName != "Fromage(-118.00, 101.94, -1.00)") || itemname == "Ruins Warp" || itemname == "Start Warp" || itemname == "Woods Potion" || itemname == "Snow Potion") && itemname != "Error")
         {
             __instance.isUWMap = true;
             LogInfo(itemname + " should respawn.");
@@ -69,10 +66,11 @@ class RareItemPatcher
     public static bool GrabRarePatch1(objetRareScript __instance)
 	{
 		__instance.joueur = GameObject.FindGameObjectWithTag("Player");
-
+        string CheckName = CheckClass.GetData(__instance.gameObject.name + __instance.OrigPos.ToString()).LocationName;
+        PlayerPrefs.SetInt(UnityEngine.Object.FindObjectOfType<FoxMove>().saveslot + CheckName + "Collected", 1);
 		if ((__instance.gameObject.name + __instance.OrigPos.ToString()).Equals("Force2(165.50, 229.50, -1.00)"))
         {
-            CassableScript MyRock = FindMyRock(new UnityEngine.Vector3(165, 232, 0));
+            CassableScript MyRock = FindMyRock(new Vector3(165, 232, 0));
             if (MyRock)
                 MyRock.casse(true);
         }
@@ -106,9 +104,10 @@ class RareItemPatcher
 		try
 		{
 			string itemname = CheckClass.GetData(__instance.gameObject.name + __instance.OrigPos.ToString()).CheckItem.Name;
-			PlayerPrefs.SetInt(UnityEngine.Object.FindObjectOfType<FoxMove>().saveslot + itemname, 1);
+			string CheckName = CheckClass.GetData(__instance.gameObject.name + __instance.OrigPos.ToString()).LocationName;
+			PlayerPrefs.SetInt(UnityEngine.Object.FindObjectOfType<FoxMove>().saveslot + CheckName + "Collected", 1);
 		}
-		catch (Exception) { }
+		catch (Exception) { LogError("There was an error saving the collected status of this check."); }
 		if ((__instance.valeur > 0 || __instance.isUWMap) && __instance.joueur != null)
 		{
 			MonoBehaviour.print(__instance.gameObject.transform.parent);
@@ -123,7 +122,7 @@ class RareItemPatcher
         return false;
 	}
 
-    public static CassableScript FindMyRock(UnityEngine.Vector3 pos)
+    public static CassableScript FindMyRock(Vector3 pos)
     {
         CassableScript[] Boulders = UnityEngine.Object.FindObjectsOfType<CassableScript>();
         for (int i = 0; i < Boulders.Length; i++)
@@ -139,12 +138,13 @@ class RareItemPatcher
     {
         try
         {
-			string itemname = CheckClass.GetData(__instance.gameObject.name + __instance.OrigPos.ToString()).CheckItem.Name;
-			if (PlayerPrefs.GetInt(UnityEngine.Object.FindObjectOfType<FoxMove>().saveslot + itemname) > 0 && !__instance.isUWMap)
+			string CheckName = CheckClass.GetData(__instance.gameObject.name + __instance.OrigPos.ToString()).LocationName;
+			string itemName = CheckClass.GetData(__instance.gameObject.name + __instance.OrigPos.ToString()).CheckItem.Name;
+			if (PlayerPrefs.GetInt(UnityEngine.Object.FindObjectOfType<FoxMove>().saveslot + CheckName + "Collected") > 0 && !__instance.isUWMap)
             {
                 UnityEngine.Object.Destroy(__instance.gameObject);
 			}
-			else if ((itemname == "Woods Potion" || itemname == "Snow Potion" || itemname == "Ruins Warp" || itemname == "Start Warp") && PlayerPrefs.GetInt(UnityEngine.Object.FindObjectOfType<FoxMove>().saveslot + itemname) > 0)
+			else if ((itemName == "Woods Potion" || itemName == "Snow Potion" || itemName == "Ruins Warp" || itemName == "Start Warp") && PlayerPrefs.GetInt(UnityEngine.Object.FindObjectOfType<FoxMove>().saveslot + CheckName) > 0)
 			{
 				__instance.valeur = 0;
                 int i = __instance.GetComponent<Transform>().childCount - 1;

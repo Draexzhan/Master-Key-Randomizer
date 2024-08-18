@@ -426,7 +426,7 @@ public class CheckClass
             { "CoffreSouloEntreIle1(-1.00, 598.00, 0.00)", new CheckData("Water Dungeon - Double Salvage 1", 364, "CoffreSouloEntreIle1(-1.00, 598.00, 0.00)" ) },
             { "CoffreSouloEntreIle2(-1.00, 597.00, 0.00)", new CheckData("Water Dungeon - Double Salvage 2", 365, "CoffreSouloEntreIle2(-1.00, 597.00, 0.00)" ) },
             { "CoffreGGFric1(609.50, 6.50, 0.00)", new CheckData("Sprawling Cave - Chest near Village Cave", 366, "CoffreGGFric1(609.50, 6.50, 0.00)") },
-            { "CoffreSouloGrotteForetCoeur(571.00, -14.00, 0.00)", new CheckData("Dark Woods - Grotto Salvage", 367, "CoffreSouloGrotteForetCoeur(571.00, -14.00, 0.00)") }
+            { "CoffreSouloGrotteForetCoeur(627.00, 32.00, 0.00)", new CheckData("Dark Woods - Grotto Salvage", 367, "CoffreSouloGrotteForetCoeur(627.00, 32.00, 0.00)") }
         };
     }
     public static CheckData GetData(string id)
