@@ -7,7 +7,7 @@ namespace MasterKeyRandoMenu;
 
 public class RandomizerEditor : MonoBehaviour
 {
-    public static bool expanded = false;
+    public static bool expanded = true;
 
     private static int saveNumber = PlayerPrefs.GetInt("RandoLastWorld", 1);
     private static string saveNumberString = saveNumber.ToString(); 
