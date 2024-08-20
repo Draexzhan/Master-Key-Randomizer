@@ -1,14 +1,9 @@
-using BepInEx;
 using HarmonyLib;
-using System;
-using System.Reflection;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Bindings;
-using UnityEngine.TextCore.Text;
 using UnityEngine.Tilemaps;
-using static UnityEngine.UIElements.UIR.BestFitAllocator;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
+using System.Collections;
 
 namespace IntroV2Override.patches;
 
@@ -26,7 +21,7 @@ class IntroScriptV2Patch1
             componentsInChildren[i].transform.Translate(16, 999, 999);
             componentsInChildren[i].casse();
         }
-        //PlayerPrefs.SetString(GameObject.FindGameObjectWithTag("Player").GetComponent<FoxMove>().saveslot + "respawn", "keyCave");
+        PlayerPrefs.SetString(GameObject.FindGameObjectWithTag("Player").GetComponent<FoxMove>().saveslot + "respawn", "keyCave");
         __instance.got = true;
 		
     }
@@ -90,4 +85,48 @@ class IntroScriptV2Patch1
             }
         }
     }
+
+    //check if we need to use a different spawn coroutine
+    [HarmonyPrefix]
+    [HarmonyPatch(typeof(LoadSceneOnClick), nameof(LoadSceneOnClick.LoadSceneAndPlay))]
+    private static bool GameLaunchPatch(LoadSceneOnClick __instance, ref string sceneName)
+	{
+		if (Time.timeScale == 1f && __instance.oldMainCam.GetComponent<fonduCam>().fonduCD >= __instance.oldMainCam.GetComponent<fonduCam>().fonduDuration)
+		{
+			__instance.oldMainCam.GetComponent<fonduCam>().fondu();
+			PlayerPrefs.SetString("lastSlotLaunched", __instance.saveslot);
+			PlayerPrefs.SetInt("ID" + __instance.saveslot, PlayerPrefs.GetInt("ID" + __instance.saveslot, 0) + 1);
+            if (PlayerPrefs.GetString(__instance.saveslot + "respawn") == "keyCave")
+            {
+                __instance.StartCoroutine(KeyCaveSpawn(__instance));
+				return false;
+			}
+            else
+                __instance.StartCoroutine(__instance.launchGameAfterFondu(sceneName));
+		}
+        return true;
+    }
+
+    private static IEnumerator KeyCaveSpawn(LoadSceneOnClick __instance)
+	{
+		MonoBehaviour.print(__instance.oldMainCam.GetComponent<fonduCam>().fonduDuration);
+		Object.Destroy(__instance.EventSystemToDestroy);
+		yield return new WaitForSeconds(__instance.oldMainCam.GetComponent<fonduCam>().fonduDuration);
+		Object.Destroy(__instance.AudioListenerToDestroy);
+		__instance.instCam = Object.Instantiate(__instance.mainCamera, new Vector3(15.5f, -100f, 10f), Quaternion.identity);
+		__instance.instCam.GetComponent<Camera>().enabled = false;
+		__instance.instCam.GetComponent<SpriteRenderer>().enabled = true;
+		Transform obj5 = Object.Instantiate(__instance.fox, new Vector3(23.5f, -90f, 10f), Quaternion.identity);
+		obj5.GetComponent<SpriteRenderer>().enabled = false;
+        obj5.GetComponent<FoxMove>().directionFacing = 3;
+		obj5.GetComponent<FoxMove>().saveslot = __instance.saveslot;
+		__instance.instUI = Object.Instantiate(__instance.ui, new Vector3(-1000f, -1000f, 0f), Quaternion.identity);
+		__instance.instUI.GetComponentInChildren<Camera>().rect = Rect.zero;
+		__instance.oldMainCam.transform.GetComponent<Camera>().rect = Rect.zero;
+		float realtimeSinceStartup = Time.realtimeSinceStartup;
+		MonoBehaviour.print("loading started" + realtimeSinceStartup);
+		__instance.Invoke("fixNullRef", 0.1f);
+		MonoBehaviour.print("loading finished, was it fast? " + (Time.realtimeSinceStartup - realtimeSinceStartup) + "   " + Time.realtimeSinceStartup);
+	}
+
 }
