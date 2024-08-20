@@ -1,18 +1,11 @@
-﻿using Pathfinding.Util;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using static ItemCheatSheet;
 using static CheckClass;
-using static CheckIndex;
 using System.Reflection;
 using static MasterKeyRandomizer.MKLogger;
 using UnityEngine;
 using System.Linq;
-using UnityEngine.XR;
-using static UnityEngine.ParticleSystem.PlaybackState;
-using MonoMod.Utils;
-using HarmonyLib;
-using System.Linq.Expressions;
 using System.IO;
 
 
@@ -20,7 +13,7 @@ public class Seed
 {
 	public const long BASE_ID = 12011993;
     public static List<CheckData> Checks = new();
-    public static System.Random rand = new System.Random();
+    public static System.Random rand;
     public static bool DebugCheckListings = true;
     public static int seed;
     public static List<string> ProgressionNames = new List<string> { "Weapon Upgrade",
@@ -33,9 +26,13 @@ public class Seed
             "Ruins Warp", "Woods Potion", "Snow Potion" };
     public static void GenerateSeed()
     {
-        string saveSlot = UnityEngine.GameObject.FindGameObjectWithTag("Player").GetComponent<FoxMove>().saveslot;
+        string saveSlot = GameObject.FindGameObjectWithTag("Player").GetComponent<FoxMove>().saveslot;
         if (PlayerPrefs.GetInt(saveSlot + "randoSeed", 0) == default)
 		{
+            if (PlayerPrefs.GetInt("DoSeedPreset") == 0)
+                rand = new System.Random(PlayerPrefs.GetInt("SeedPreset", 34));
+            else
+                rand = new System.Random();
             seed = rand.Next();
             LogInfo("Beginning Generation...");
 			LogInfo(CheckLookup.Locations.Count.ToString());
@@ -46,6 +43,15 @@ public class Seed
 			ItemRandomizer.AssumeFill(Checks);
 			string path = Application.persistentDataPath + "\\SpoilerLogs\\SpoilerLogForSeed" + seed + ".txt";
             StreamWriter SpoilerLog = new StreamWriter(path, true);
+            SpoilerLog.WriteLine("Spoiler Log for Seed " + seed.ToString() + "\n------------------------------------------\n");
+            SpoilerLog.WriteLine("Seed Settings: \n\nStarting Location - " + (PlayerPrefs.GetInt("StartLogic") == 0 ? "Starting Cave" : "Town"));
+            SpoilerLog.WriteLine("Lantern Logic - " + (PlayerPrefs.GetInt("LanternLogic") == 0 ? "Need in the Dark" : "Minimum"));
+			SpoilerLog.WriteLine("Lens Logic - " + (PlayerPrefs.GetInt("") == 0 ? "Visibility Required" : "Minimum"));
+			SpoilerLog.WriteLine("Boots Logic - " + (PlayerPrefs.GetInt("") == 0 ? "Ice Traction" : "Minimum"));
+			SpoilerLog.WriteLine("Warp Shuffle - " + (PlayerPrefs.GetInt("") == 0 ? "On" : "Off"));
+			SpoilerLog.WriteLine("Dream Pedestal - " + (PlayerPrefs.GetInt("") == 0 ? "In Logic" : "Vanilla"));
+            SpoilerLog.WriteLine("Secret Logic - " + (PlayerPrefs.GetInt("") == 0 ? "All in Logic" : "Exclude Sneakiest"));
+            SpoilerLog.WriteLine("\nLocations and their items\n------------------------------------------\n");
             foreach (CheckData check in CheckLookup.Locations.Values)
             {
                 try
@@ -67,10 +73,82 @@ public class Seed
                     SpoilerLog.WriteLine(check.LocationName + " has <ERROR>");
                 }
             }
-            SpoilerLog.Flush();
+			foreach (KeyValuePair<string, int> keyValuePair in AccessChecker.Access.ToList())
+				AccessChecker.Access[keyValuePair.Key] = 0;
+
+            //print to the spoiler log the intended path for collection
+            SpoilerLog.WriteLine("\n\nLogical Path\n------------------------------------------\n");
+            int sphere = 0;
+            List<CheckData> SphereStash = new List<CheckData>();
+            while (true)
+            {
+                //increase the sphere count by 1
+                sphere++;
+                foreach (CheckData check in Checks.ToList())
+				{
+                    //iterate through every check and see if it can be collected with what we have.
+					string checkField = "CheckAccess" + check.LocationID.ToString();
+					MethodInfo CheckAccessMethod = typeof(CheckIndex).GetMethod(checkField, BindingFlags.Public | BindingFlags.Static);
+					bool canAccess = (bool)CheckAccessMethod.Invoke(null, null);
+                    if (canAccess)
+                    {
+                        //The item is accessible, add it to the spoiler log, and to the stash of items we collected in this Sphere.
+                        SphereStash.Add(check);
+                        Checks.Remove(check);
+                    }
+				}
+
+                if (SphereStash.Count == 0) 
+                {
+                    //We can no longer collect any more items in this seed.
+                    SpoilerLog.WriteLine("\n----------------------------------------------------------------------------------------------------------------------------\nEnd of Logic. Remaining checks (which should only be out of logic junk, or hardcoded locations) are:\n");
+                    foreach (CheckData check in Checks.ToList())
+					{
+						//Hopefully we're in this block because there are either no more items remaining, or the ones that are are at checks excluded from the settings.
+						//just in case we aren't, we're going to list every item we can't collect.
+						try
+						{
+							SpoilerLog.WriteLine(check.CheckItem.Name + " located at " + check.LocationName);
+						}
+						catch (Exception)
+						{
+							LogError(check.LocationName + " has <ERROR>");
+							SpoilerLog.WriteLine("<ERROR> located at " + check.LocationName);
+						}
+					}
+                    break;
+                }
+                else
+				{
+					SpoilerLog.WriteLine("\nSphere " + sphere.ToString() + "\n---------");
+					foreach (CheckData check in SphereStash.ToList())
+					{
+                        try
+                        {
+                            //we have obtained all the items available in this sphere, now we add them to the spoiler log's inventory.
+                            if (ProgressionNames.Contains(check.CheckItem.Name))
+                                ItemRandomizer.AccessAdd(check.CheckItem.Name, AccessChecker.Access);
+
+                            SpoilerLog.WriteLine("Collect " + check.CheckItem.Name + " from " + check.LocationName);
+                        }
+                        catch (Exception)
+                        {
+                            LogError(check.LocationName + " has <ERROR>");
+							SpoilerLog.WriteLine("Collect <ERROR> from " + check.LocationName);
+						}
+					SphereStash.Remove(check);
+
+				    }
+                }
+            }
+			SpoilerLog.Flush();
             PlayerPrefs.SetInt(saveSlot + "randoSeed", seed);
 			LogInfo("A new randomized world has been made with seed " + seed + ".");
-
+            if (PlayerPrefs.GetInt("StartLogic") == 1)
+            {
+                PlayerPrefs.SetString(saveSlot + "respawn", "village");
+                PlayerPrefs.SetInt(saveSlot + "IntroFinie", 1);
+            }
         }
         else
         {
@@ -203,6 +281,7 @@ public class Seed
             { "WesternWaterfallCaveAccess", false },
             { "SmithAccess", false },
             { "ZigguratAccess", false },
+            { "LowerZigguratAccess", false },
             { "EarlyWoodsAccess", false },
             { "DeepWoodsAccess", false },
             { "TPToWoodsAccess", false },
@@ -297,7 +376,7 @@ public class Seed
             }
             for (int i = 0; i < 57; i++)
                 PrecollectedItems.Add("Crystal");
-            for (int i = 0; i < 42; i++)
+            for (int i = 0; i < 34; i++)
                 PrecollectedItems.Add("Half Container");
             for (int i = 0; i < 11; i++)
                 PrecollectedItems.Add("Forge Pass");
@@ -360,6 +439,27 @@ public class Seed
 				{ "Super Meat", CheckLookup.Locations["REZ2(-632.50, 0.50, -1.00)"] },
 				{ "Dark Ore", CheckLookup.Locations["PierreFinal()"] }
 			};
+            if (PlayerPrefs.GetInt("WarpShuffle") == 1)
+            {
+                HardcodedLocations.Add("Ruins Warp", CheckLookup.Locations["CoffreLeyndell(555.50, -48.50, 0.00)"]);
+				HardcodedLocations.Add("Start Warp", CheckLookup.Locations["CoffreRetour(-8.50, 242.50, 0.00)"]);
+				HardcodedLocations.Add("Woods Potion", CheckLookup.Locations["potionForet(-523.50, -18.50, 0.00)"]);
+				HardcodedLocations.Add("Snow Potion", CheckLookup.Locations["potionRoute(-521.50, -18.50, 0.00)"]);
+                PrecollectedItems.Remove("Ruins Warp");
+                PrecollectedItems.Remove("Start Warp");
+				PrecollectedItems.Remove("Woods Potion");
+				PrecollectedItems.Remove("Snow Potion");
+                EmptyChecks.Remove(CheckLookup.Locations["CoffreLeyndell(555.50, -48.50, 0.00)"]);
+				EmptyChecks.Remove(CheckLookup.Locations["CoffreRetour(-8.50, 242.50, 0.00)"]);
+				EmptyChecks.Remove(CheckLookup.Locations["potionForet(-523.50, -18.50, 0.00)"]);
+				EmptyChecks.Remove(CheckLookup.Locations["potionRoute(-521.50, -18.50, 0.00)"]);
+			}
+            if (PlayerPrefs.GetInt("DreamLogic") == 1)
+            {
+                HardcodedLocations.Add("Moster Sword", CheckLookup.Locations["DreamSword"]);
+                PrecollectedItems.Remove("Moster Sword");
+                EmptyChecks.Remove(CheckLookup.Locations["DreamSword"]);
+            }
 
             LogInfo("Cataloging Key Items...");
             foreach (string item in PrecollectedItems.ToList().OrderBy(r => rand.Next()))
@@ -404,7 +504,6 @@ public class Seed
                             AccessChecker.Access[keyValuePair.Key] = 0;
 
 						RemainingItems.Clear();
-						LogInfo(startCount.ToString());
 						foreach (KeyValuePair<string, int> unplacedItem in JustTheKeys.ToList())
                         {
                             RemainingItems.Add(unplacedItem.Key, unplacedItem.Value);
@@ -412,7 +511,7 @@ public class Seed
                                 AccessAdd(unplacedItem.Key, AccessChecker.Access);
                             startCount += unplacedItem.Value;
 						}
-						LogInfo(startCount.ToString());
+						LogInfo(startCount.ToString() + " unplaced items.");
 
 						//reset our checks for collection
 						AccessSubtract(item, AccessChecker.Access);
@@ -447,7 +546,7 @@ public class Seed
                             }
                             //LogInfo("Can't place here!");
 						}
-						LogInfo(emptyAccessesRemaining.ToString() + ", " + JustTheKeys.Count.ToString());
+						LogInfo(emptyAccessesRemaining.ToString() + " empty accesses remaining, " + JustTheKeys.Count.ToString() + " key items remaining.");
 
 						//Wuh oh! There's still key items to place, but we can't access any more empty checks!
 						if (emptyAccessesRemaining == 0 && JustTheKeys.Count != 0)
@@ -541,9 +640,9 @@ public class Seed
     }
     public static Dictionary<string, int[]> HardBlacklist = new()
     {
-        { "Snow Potion", new int[17]{221, 222, 223, 224, 228, 230, 231, 236, 237, 273, 280, 281, 282, 283, 284, 285, 286 } },
-        { "Woods Potion", new int[17]{221, 222, 223, 224, 228, 230, 231, 236, 237, 273, 280, 281, 282, 283, 284, 285, 286 } },
-        { "Ruins Warp", new int[17]{221, 222, 223, 224, 228, 230, 231, 236, 237, 273, 280, 281, 282, 283, 284, 285, 286 } },
-        { "Start Warp", new int[17]{221, 222, 223, 224, 228, 230, 231, 236, 237, 273, 280, 281, 282, 283, 284, 285, 286 } }
+        { "Snow Potion", new int[30] {106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 139, 181, 221, 222, 223, 224, 228, 230, 231, 236, 237, 273, 280, 281, 282, 283, 284, 285, 286 } },
+        { "Woods Potion", new int[30]{106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 139, 181, 221, 222, 223, 224, 228, 230, 231, 236, 237, 273, 280, 281, 282, 283, 284, 285, 286 } },
+        { "Ruins Warp", new int[30]  {106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 139, 181, 221, 222, 223, 224, 228, 230, 231, 236, 237, 273, 280, 281, 282, 283, 284, 285, 286 } },
+        { "Start Warp", new int[30]  {106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 139, 181, 221, 222, 223, 224, 228, 230, 231, 236, 237, 273, 280, 281, 282, 283, 284, 285, 286 } }
     };
 }
