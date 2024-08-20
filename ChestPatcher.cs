@@ -1,15 +1,8 @@
-﻿using BepInEx;
-using HarmonyLib;
+﻿using HarmonyLib;
 using System;
-using System.Reflection;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Bindings;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
 using UnityEngine.SceneManagement;
-using System.Numerics;
 using static UpdateInventory;
-using static UnityEngine.ParticleSystem.PlaybackState;
 using static ItemCheatSheet;
 using static MasterKeyRandomizer.MKLogger;
 
@@ -37,7 +30,7 @@ class ChestPatcherPatch1
     [HarmonyPatch(typeof(CoffreScript), nameof(CoffreScript.OnTriggerStay2D))]
     public static bool OnTriggerStay2DPatch1(CoffreScript __instance, ref Collider2D collision)
     {
-        MonoBehaviour.print(collision.gameObject.name);
+        //MonoBehaviour.print(collision.gameObject.name);
         if (collision.gameObject.tag == "Player" && __instance.player.GetComponent<FoxMove>().PDVActuels > 0 && __instance.coffreVide == 0 && (!__instance.coffreCaché || __instance.player.GetComponent<FoxMove>().vision > 0) && __instance.soulo == (__instance.player.GetComponent<FoxMove>().isSoulo || (__instance.player.GetComponent<FoxMove>().isSouterre && __instance.player.GetComponent<FoxMove>().souterreTimer > 0.4f)) && !__instance.player.GetComponent<FoxMove>().isFloating && !__instance.player.GetComponent<FoxMove>().invulnerable && (!__instance.key1 || __instance.player.GetComponent<FoxMove>().Fragment1 == 1) && (!__instance.key2 || __instance.player.GetComponent<FoxMove>().Fragment2 == 1) && (!__instance.key3 || __instance.player.GetComponent<FoxMove>().Fragment3 == 1) && (!__instance.key4 || __instance.player.GetComponent<FoxMove>().Fragment4 == 1))
         {
             if (__instance.contenuPrefab.GetComponent<objetRareScript>() == null)
@@ -90,7 +83,7 @@ class ChestPatcherPatch1
     [HarmonyPatch(typeof(CoffreScript), nameof(CoffreScript.OnCollisionStay2D))]
     public static bool OnCollisionStay2DPatch1(CoffreScript __instance, ref Collision2D collision)
     {
-        MonoBehaviour.print(collision.gameObject.name);
+        //MonoBehaviour.print(collision.gameObject.name);
         if (collision.gameObject.tag == "Player" && __instance.player.GetComponent<FoxMove>().PDVActuels > 0 && __instance.coffreVide == 0 && (!__instance.coffreCaché || __instance.player.GetComponent<FoxMove>().vision > 0) && __instance.soulo == (__instance.player.GetComponent<FoxMove>().isSoulo || (__instance.player.GetComponent<FoxMove>().isSouterre && __instance.player.GetComponent<FoxMove>().souterreTimer > 0.4f)) && !__instance.player.GetComponent<FoxMove>().isFloating && !__instance.player.GetComponent<FoxMove>().invulnerable && (!__instance.key1 || __instance.player.GetComponent<FoxMove>().Fragment1 >= 1) && (!__instance.key2 || __instance.player.GetComponent<FoxMove>().Fragment2 >= 1) && (!__instance.key3 || __instance.player.GetComponent<FoxMove>().Fragment3 >= 1) && (!__instance.key4 || __instance.player.GetComponent<FoxMove>().Fragment4 >= 1))
         {
             if (__instance.contenuPrefab.GetComponent<objetRareScript>() == null)

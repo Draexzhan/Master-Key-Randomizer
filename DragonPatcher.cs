@@ -1,20 +1,10 @@
-﻿using BepInEx;
-using HarmonyLib;
-using MasterKeyRandomizer;
-using System;
+﻿using HarmonyLib;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Numerics;
-using System.Text.RegularExpressions;
 using System.Threading;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.TextCore.Text;
-using UnityEngine.UIElements;
 using static MasterKeyRandomizer.MKLogger;
 using UnityStandardAssets.Utility;
-using static ItemCheatSheet;
 using static UpdateInventory;
 
 public class DragonPatcher : MonoBehaviour
@@ -47,12 +37,12 @@ public class DragonPatcher : MonoBehaviour
         __instance.cristinstances = new List<Transform>();
         for (int k = 0; k < __instance.toGive; k++)
         {
-            Transform item = UnityEngine.Object.Instantiate(__instance.cristalProjectile, __instance.player.transform.position + UnityEngine.Vector3.up, UnityEngine.Quaternion.identity);
+            Transform item = Instantiate(__instance.cristalProjectile, __instance.player.transform.position + Vector3.up, Quaternion.identity);
             __instance.cristinstances.Add(item);
         }
         for (int j = 0; j < __instance.toGive; j++)
         {
-            __instance.cristinstances[j].GetComponent<AutoMoveAndRotate>().moveUnitsPerSecond.value = UnityEngine.Vector3.up * 5f;
+            __instance.cristinstances[j].GetComponent<AutoMoveAndRotate>().moveUnitsPerSecond.value = Vector3.up * 5f;
             __instance.Invoke("avale", 0.55f);
             yield return new WaitForSeconds(0.2f);
         }
@@ -87,20 +77,19 @@ public class DragonPatcher : MonoBehaviour
             yield return new WaitForSeconds(0.25f);
             __instance.dragon.sprite = __instance.pouah;
             AudioSource.PlayClipAtPoint(__instance.pouahSFX, __instance.gameObject.transform.position, GameObject.FindGameObjectWithTag("Starter").GetComponent<starterScript>().SFXVol);
-            Transform obj = UnityEngine.Object.Instantiate(__instance.projectilePrefab, __instance.dragon.gameObject.transform.position, UnityEngine.Quaternion.identity);
+            Transform obj = Instantiate(__instance.projectilePrefab, __instance.dragon.gameObject.transform.position, Quaternion.identity);
             obj.GetComponent<projectile>().shooter = __instance.transform;
             obj.GetComponent<projectile>().velocity = 10f;
-            obj.transform.Rotate(90f * UnityEngine.Vector3.forward);
+            obj.transform.Rotate(90f * Vector3.forward);
             obj.GetComponent<ATKScript>().degats = 0;
             yield return new WaitForSeconds(1.5f);
-            //Transform transform = UnityEngine.Object.Instantiate(__instance.rewards[__instance.nextPalier].rew, __instance.player.transform.position, UnityEngine.Quaternion.identity);
             AddToInventory(CheckClass.GetData("Dragon" + (__instance.nextPalier + 1)).CheckItem);
             __instance.anim.enabled = true;
             LogInfo("Dagron");
         }
         foreach (Transform cristinstance in __instance.cristinstances)
         {
-            UnityEngine.Object.Destroy(cristinstance.gameObject);
+            Destroy(cristinstance.gameObject);
         }
         yield return new WaitForSeconds(0.5f);
 		LogInfo("Dargon");

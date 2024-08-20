@@ -1,17 +1,4 @@
-﻿using BepInEx;
-using HarmonyLib;
-using System;
-using System.Reflection;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Bindings;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
-using UnityEngine.SceneManagement;
-using System.Numerics;
-using static UpdateInventory;
-using static UnityEngine.ParticleSystem.PlaybackState;
-using static ItemCheatSheet;
-using System.Diagnostics;
+﻿using HarmonyLib;
 
 namespace PortalPatcher.patches;
 

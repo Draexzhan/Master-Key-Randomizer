@@ -1,7 +1,6 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
-using static MasterKeyRandomizer.MKLogger;
 using static MasterKeyRandomizer.MasterKeyRandomizer;
 
 namespace MenuMod.patches;

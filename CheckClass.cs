@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using static ItemCheatSheet;
-using static Seed;
-using static MasterKeyRandomizer.MKLogger;
-using static CheckIndex;
 
 public class CheckClass
 {

@@ -1,20 +1,6 @@
-﻿using BepInEx;
-using HarmonyLib;
-using MasterKeyRandomizer;
-using System;
+﻿using HarmonyLib;
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Numerics;
-using System.Reflection;
-using System.Text.RegularExpressions;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.TextCore.Text;
-using UnityEngine.UIElements;
-using UnityStandardAssets.Utility;
-using static creditsScript;
-using static CheckClass;
 using static ItemCheatSheet;
 using static UpdateInventory;
 

@@ -1,16 +1,7 @@
-﻿using BepInEx;
-using HarmonyLib;
-using System;
-using System.Reflection;
-using System.Collections.Generic;
+﻿using HarmonyLib;
 using UnityEngine;
-using UnityEngine.Bindings;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
-using UnityEngine.SceneManagement;
-using static System.Net.Mime.MediaTypeNames;
 using static ItemCheatSheet;
 using static CheckClass;
-using UnityEngine.TextCore.Text;
 
 namespace ItemDebugger.patches;
 

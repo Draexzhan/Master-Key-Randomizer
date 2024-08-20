@@ -1,10 +1,5 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Reflection;
-using System.Threading.Tasks;
-using static pieceScript;
 using static MasterKeyRandomizer.MKLogger;
 
 public class ItemCheatSheet
@@ -158,7 +153,7 @@ public class ItemCheatSheet
 	}
 	public static ItemData GetData(string id)
 	{
-		UnityEngine.Debug.Log(id);
+		//UnityEngine.Debug.Log(id);
 		ItemLookup.TranslatedItemNames.TryGetValue(id, out ItemData value);
 		return value;
 	}

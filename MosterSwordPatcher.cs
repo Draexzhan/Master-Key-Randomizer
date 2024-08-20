@@ -1,23 +1,8 @@
 ﻿using HarmonyLib;
-using BepInEx.Logging;
-using System.IO;
-using System.Reflection;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using static UpdateInventory;
-using static ItemCheatSheet;
-using static CheckClass;
 using static MasterKeyRandomizer.MKLogger;
-using BepInEx;
-using MasterKeyRandomizer;
-using System.Threading.Tasks;
-using System.ComponentModel;
-using System.Threading;
-using UnityEngine.UIElements;
-using UnityEngine.TextCore.Text;
-using UnityEngine.SocialPlatforms.Impl;
-using System.Numerics;
 
 public class MosterSwordPatcher
 {

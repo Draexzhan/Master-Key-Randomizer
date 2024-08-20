@@ -1,14 +1,5 @@
-﻿using BepInEx;
-using HarmonyLib;
-using MasterKeyRandomizer;
-using System;
-using System.IO;
+﻿using HarmonyLib;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.TextCore.Text;
-using UnityEngine.UIElements;
-using static CheckClass;
-using static ItemCheatSheet;
 using static UpdateInventory;
 
 public class PlayerPatch 
