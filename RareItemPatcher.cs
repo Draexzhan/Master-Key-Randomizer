@@ -1,21 +1,9 @@
-﻿using BepInEx;
-using HarmonyLib;
+﻿using HarmonyLib;
 using System;
-using System.Reflection;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Bindings;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
-using UnityEngine.UIElements;
-using UnityEngine.SceneManagement;
-using static System.Net.Mime.MediaTypeNames;
-using static Mono.Security.X509.X520;
 using static ItemCheatSheet;
 using static UpdateInventory;
 using static MasterKeyRandomizer.MKLogger;
-using System.IO;
-using UnityEngine.SocialPlatforms;
-using static UnityEngine.UIElements.StylePropertyAnimationSystem;
 
 namespace RareItem.patches;
 
@@ -110,9 +98,9 @@ class RareItemPatcher
 		catch (Exception) { LogError("There was an error saving the collected status of this check."); }
 		if ((__instance.valeur > 0 || __instance.isUWMap) && __instance.joueur != null)
 		{
-			MonoBehaviour.print(__instance.gameObject.transform.parent);
-			MonoBehaviour.print(__instance.gameObject.name);
-			MonoBehaviour.print(__instance.OrigPos);
+			//MonoBehaviour.print(__instance.gameObject.transform.parent);
+			//MonoBehaviour.print(__instance.gameObject.name);
+			//MonoBehaviour.print(__instance.OrigPos);
 			Transform transform = UnityEngine.Object.Instantiate(__instance.pancarteVendu, __instance.OrigPos, Quaternion.identity, __instance.gameObject.transform.parent);
 			if (__instance.nextItem != null)
 			{
