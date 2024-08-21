@@ -11,7 +11,7 @@ class ItemDebuggerPatch1
     [HarmonyPatch(typeof(objetRareScript), nameof(objetRareScript.itemTPOnPlayer))]
     public static void GrabMessagePatch1(objetRareScript __instance)
     {
-        ItemDebuggerPatch1.CollectMessage(__instance.gameObject.name + " 1located at " + __instance.transform.name + __instance.transform.position.ToString());
+        CollectMessage(__instance.gameObject.name + " 1located at " + __instance.transform.name + __instance.transform.position.ToString());
     }
     [HarmonyPrefix]
     [HarmonyPatch(typeof(pieceScript), nameof(pieceScript.grabIt))]
@@ -19,8 +19,8 @@ class ItemDebuggerPatch1
     {
         if (__instance.EnCoffre)
         {
-            UnityEngine.Object.Destroy(__instance.gameObject);
-            ItemDebuggerPatch1.CollectMessage(__instance.gameObject.name + " 2located at " + __instance.transform.name + __instance.transform.position.ToString());
+            Object.Destroy(__instance.gameObject);
+            CollectMessage(__instance.gameObject.name + " 2located at " + __instance.transform.name + __instance.transform.position.ToString());
             return false;
         }
         return true;

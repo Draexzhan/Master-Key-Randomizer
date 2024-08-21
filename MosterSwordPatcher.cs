@@ -145,8 +145,8 @@ public class MosterSwordPatcher
 		AudioSource.PlayClipAtPoint(__instance.perdPDVSFX, __instance.gameObject.transform.position, GameObject.FindGameObjectWithTag("Starter").GetComponent<starterScript>().SFXVol * 0.25f);
 		__instance.player.PDVActuels = __instance.PDVentrant;
 		AddToInventory(CheckClass.GetData("DreamSword").CheckItem);
-		UnityEngine.Object.Destroy(__instance.Sword.gameObject);
-		UnityEngine.Object.Destroy(__instance.fakePlayerInst.gameObject);
+		Object.Destroy(__instance.Sword.gameObject);
+		Object.Destroy(__instance.fakePlayerInst.gameObject);
 		LogInfo("seven years later...");
 		__instance.player.setDesactiveMoveCinematics(val: false);
 		GameObject.FindGameObjectWithTag("Controls").GetComponent<FoxControllerScript>().disableMenu = false;
