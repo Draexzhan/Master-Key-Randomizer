@@ -23,7 +23,7 @@ class ChestPatcherPatch1
             }
             else __instance.repeatable = false;
         }
-        catch (Exception) { LogError("Man I don't even know why I'm getting this error in the chestpatcher but everything seems to work otherwise and frankly that's good enough for me."); }
+        catch (Exception e) { LogError(e.ToString()); }
 	}
 
     [HarmonyPrefix]
@@ -167,7 +167,7 @@ class ChestPatcherPatch1
                 }
             }
         }
-        catch (Exception) { }
+        catch (Exception e) { LogError("Error in chest update: " + e.ToString());  }
         return false;
         }
 }
