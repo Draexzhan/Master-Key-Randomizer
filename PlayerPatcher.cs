@@ -1,21 +1,16 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 using static UpdateInventory;
+using static MasterKeyRandomizer.MKLogger;
 
 public class PlayerPatch 
 {
     [HarmonyPrefix]
     [HarmonyPatch(typeof(PlayerHealthAndItemScript), nameof(PlayerHealthAndItemScript.OnTriggerStay2D))]
-    public static bool PatchPlayerTriggerStay2D(PlayerHealthAndItemScript __instance, ref Collider2D collider)
+    public static bool PatchPlayerTriggerStay2D(PlayerHealthAndItemScript __instance, Collider2D collider)
     {
         if (collider != null)
         {
-            if (collider.gameObject.GetComponent<pieceScript>() != null)
-            {
-				AddToInventory(CheckClass.GetData(collider.gameObject.name + collider.transform.position.ToString()).CheckItem);
-				UnityEngine.Object.Destroy(collider.gameObject.GetComponent<pieceScript>());
-                return false;
-			}
             if (collider.CompareTag("attaqueEnemie") || (collider.gameObject.GetComponent<ATKScript>() != null && collider.gameObject.GetComponent<ATKScript>().toEveryOne))
             {
                 if (collider.gameObject.GetComponent<ATKScript>().moneySteal != 0)
@@ -35,24 +30,25 @@ public class PlayerPatch
                     vector = collider.ClosestPoint(__instance.transform.position);
                 }
                 __instance.subisDegats(collider.gameObject.GetComponent<ATKScript>().degats, vector, collider.gameObject.GetComponent<ATKScript>().Repousse, collider.gameObject.GetComponent<ATKScript>().fromFinalBoss);
-            }
-        }
+			}
+			if (collider.CompareTag("ObjetRare") && (__instance.character.argent >= collider.GetComponent<objetRareScript>().valeur))
+			{
+				LogDebug("item collected and affordable. Adding to inventory and destroying original.");
+				__instance.character.argent -= collider.GetComponent<objetRareScript>().valeur;
+				AddToInventory(CheckClass.GetData(collider.GetComponent<objetRareScript>().gameObject.name + collider.GetComponent<objetRareScript>().OrigPos).CheckItem);
+				Object.Destroy(collider.gameObject);
+			}
+		}
         if (__instance.character.PDVActuels > __instance.character.PDVMax)
         {
             __instance.character.PDVActuels = __instance.character.PDVMax;
-        }
-        if (collider.CompareTag("ObjetRare") && (__instance.character.argent >= collider.GetComponent<objetRareScript>().valeur))
-        {
-            __instance.character.argent -= collider.GetComponent<objetRareScript>().valeur;
-            AddToInventory(CheckClass.GetData(collider.GetComponent<objetRareScript>().gameObject.name + collider.GetComponent<objetRareScript>().OrigPos).CheckItem);
-            UnityEngine.Object.Destroy(collider.gameObject);
         }
         return false;
     }
 
     [HarmonyPrefix]
     [HarmonyPatch(typeof(PlayerHealthAndItemScript), nameof(PlayerHealthAndItemScript.OnTriggerEnter2D))]
-    public static bool PatchPlayerTriggerEnter2D(PlayerHealthAndItemScript __instance, ref Collider2D collider)
+    public static bool PatchPlayerTriggerEnter2D(PlayerHealthAndItemScript __instance, Collider2D collider)
     {
         if (collider != null)
         {
@@ -91,7 +87,7 @@ public class PlayerPatch
         {
             __instance.character.argent -= collider.GetComponent<objetRareScript>().valeur;
             AddToInventory(CheckClass.GetData(collider.gameObject.name + collider.transform.position.ToString()).CheckItem);
-            UnityEngine.Object.Destroy(collider.gameObject);
+            Object.Destroy(collider.gameObject);
         }
         return false;
     }
