@@ -37,8 +37,8 @@ public class CheckIndex
         {
             return true;
         }
-        if (BushCut() || RuinsWarpBackdoor())
-        {
+        if (BushCut() || PlayerPrefs.GetInt("StartLogic") == 1 || RuinsWarpBackdoor())
+		{
             AccessCache["TownAccess"] = true;
             return true;
         }
