@@ -13,7 +13,7 @@ public class Seed
 {
 	public const long BASE_ID = 12011993;
     public static List<CheckData> Checks = new();
-    public static System.Random rand;
+    public static System.Random rand = new();
     public static bool DebugCheckListings = true;
     public static int seed;
     public static List<string> ProgressionNames = new List<string> { "Weapon Upgrade",
@@ -27,14 +27,14 @@ public class Seed
     public static void GenerateSeed()
     {
         string saveSlot = GameObject.FindGameObjectWithTag("Player").GetComponent<FoxMove>().saveslot;
-        if (PlayerPrefs.GetInt(saveSlot + "randoSeed", 0) == default)
+        if (PlayerPrefs.GetInt(saveSlot + "maxArgent", 0) == 0)
 		{
             if (PlayerPrefs.GetInt("DoSeedPreset") == 0)
-                rand = new System.Random(PlayerPrefs.GetInt("SeedPreset", 34));
+                seed = PlayerPrefs.GetInt("SeedPreset", 34);
             else
-                rand = new System.Random();
-            seed = rand.Next();
-            LogInfo("Beginning Generation...");
+                seed = rand.Next();
+			rand = new System.Random(seed);
+			LogInfo("Beginning Generation...");
 			LogInfo(CheckLookup.Locations.Count.ToString());
             Checks.AddRange(CheckLookup.Locations.Values);
 			DirectoryInfo spoilerPath = Directory.CreateDirectory(Application.persistentDataPath + "\\SpoilerLogs");
@@ -46,18 +46,18 @@ public class Seed
             SpoilerLog.WriteLine("Spoiler Log for Seed " + seed.ToString() + "\n------------------------------------------\n");
             SpoilerLog.WriteLine("Seed Settings: \n\nStarting Location - " + (PlayerPrefs.GetInt("StartLogic") == 0 ? "Starting Cave" : "Town"));
             SpoilerLog.WriteLine("Lantern Logic - " + (PlayerPrefs.GetInt("LanternLogic") == 0 ? "Need in the Dark" : "Minimum"));
-			SpoilerLog.WriteLine("Lens Logic - " + (PlayerPrefs.GetInt("") == 0 ? "Visibility Required" : "Minimum"));
-			SpoilerLog.WriteLine("Boots Logic - " + (PlayerPrefs.GetInt("") == 0 ? "Ice Traction" : "Minimum"));
-			SpoilerLog.WriteLine("Warp Shuffle - " + (PlayerPrefs.GetInt("") == 0 ? "On" : "Off"));
-			SpoilerLog.WriteLine("Dream Pedestal - " + (PlayerPrefs.GetInt("") == 0 ? "In Logic" : "Vanilla"));
-            SpoilerLog.WriteLine("Secret Logic - " + (PlayerPrefs.GetInt("") == 0 ? "All in Logic" : "Exclude Sneakiest"));
+			SpoilerLog.WriteLine("Lens Logic - " + (PlayerPrefs.GetInt("LensLogic") == 0 ? "Visibility Required" : "Minimum"));
+			SpoilerLog.WriteLine("Boots Logic - " + (PlayerPrefs.GetInt("BootsLogic") == 0 ? "Ice Traction" : "Minimum"));
+			SpoilerLog.WriteLine("Warp Shuffle - " + (PlayerPrefs.GetInt("WarpShuffle") == 0 ? "On" : "Off"));
+			SpoilerLog.WriteLine("Dream Pedestal - " + (PlayerPrefs.GetInt("DreamLogic") == 0 ? "In Logic" : "Vanilla"));
+            SpoilerLog.WriteLine("Secret Logic - " + (PlayerPrefs.GetInt("SecretLogic") == 0 ? "All in Logic" : "Exclude Sneakiest"));
             SpoilerLog.WriteLine("\nLocations and their items\n------------------------------------------\n");
             foreach (CheckData check in CheckLookup.Locations.Values)
             {
                 try
                 {
                     PlayerPrefs.SetString(saveSlot + check.LocationName, check.CheckItem.Name);
-                    LogInfo($"{check.CheckItem.Name}");
+                    //LogInfo($"{check.CheckItem.Name}");
                 }
                 catch (NullReferenceException)
                 {
@@ -322,7 +322,7 @@ public class Seed
     public static int GetTier(string id)
     {
         AccessChecker.Access.TryGetValue(id, out int value);
-        LogInfo(id + ", " + value.ToString());
+        //LogInfo(id + ", " + value.ToString());
         return value;
 
     }
@@ -511,7 +511,7 @@ public class Seed
                                 AccessAdd(unplacedItem.Key, AccessChecker.Access);
                             startCount += unplacedItem.Value;
 						}
-						LogInfo(startCount.ToString() + " unplaced items.");
+						//LogInfo(startCount.ToString() + " unplaced items.");
 
 						//reset our checks for collection
 						AccessSubtract(item, AccessChecker.Access);
@@ -546,7 +546,7 @@ public class Seed
                             }
                             //LogInfo("Can't place here!");
 						}
-						LogInfo(emptyAccessesRemaining.ToString() + " empty accesses remaining, " + JustTheKeys.Count.ToString() + " key items remaining.");
+						//LogInfo(emptyAccessesRemaining.ToString() + " empty accesses remaining, " + JustTheKeys.Count.ToString() + " key items remaining.");
 
 						//Wuh oh! There's still key items to place, but we can't access any more empty checks!
 						if (emptyAccessesRemaining == 0 && JustTheKeys.Count != 0)

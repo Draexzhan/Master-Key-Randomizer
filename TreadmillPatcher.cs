@@ -22,29 +22,30 @@ class TreadmillPatch1
 			string treadmillName;
 			if (__instance.transform.position.x < -500f)
 			{
-				treadmillName = "TreadmillGym";
+				treadmillName = "Gym - Treadmill";
 			}
 			else if (__instance.transform.position.y > 500f)
 			{
-				treadmillName = "TreadmillHaunt";
+				treadmillName = "Haunted House - Treadmill";
 			}
 			else
 			{
-				treadmillName = "TreadmillRuin";
+				treadmillName = "Ruined City - Treadmill";
 			}
-			if (__instance.vitesse == 1f && PlayerPrefs.GetInt(__instance.player.GetComponent<FoxMove>().saveslot + treadmillName, 0) != 1)
+			if (__instance.vitesse >= 1f && PlayerPrefs.GetInt(__instance.player.GetComponent<FoxMove>().saveslot + treadmillName, 0) != 1)
             {
-				PlayerPrefs.SetInt(__instance.player.GetComponent<FoxMove>().saveslot + treadmillName, 1);
-				string key = GameObject.FindGameObjectWithTag("Player").GetComponent<FoxMove>().saveslot + "infoWorld";
+				string text = Object.FindObjectOfType<FoxMove>().saveslot + treadmillName;
+				PlayerPrefs.SetInt(text, 1);
+				string key = Object.FindObjectOfType<FoxMove>().saveslot + "infoWorld";
 				string[] stringArray = PlayerPrefsX.GetStringArray(key);
 				string[] array = new string[stringArray.Length + 1];
 				stringArray.CopyTo(array, 0);
-				new string[1] { treadmillName }.CopyTo(array, stringArray.Length);
+				new string[1] { text }.CopyTo(array, stringArray.Length);
 				PlayerPrefsX.SetStringArray(key, array);
 				string[] stringArray2 = PlayerPrefsX.GetStringArray("binaryResetOnQuit");
 				string[] array2 = new string[stringArray2.Length + 1];
 				stringArray2.CopyTo(array2, 0);
-				new string[1] { treadmillName }.CopyTo(array2, stringArray2.Length);
+				new string[1] { text }.CopyTo(array2, stringArray2.Length);
 				PlayerPrefsX.SetStringArray("binaryResetOnQuit", array2);
 				Debug.Log(treadmillName);
                 ItemData TreadmillReward = CheckClass.GetData(treadmillName).CheckItem;

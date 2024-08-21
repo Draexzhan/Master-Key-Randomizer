@@ -8,10 +8,10 @@ public class RandomizerEditor : MonoBehaviour
 {
     public static bool expanded = true;
 
-    private static int saveNumber = PlayerPrefs.GetInt("RandoLastWorld", 1);
-    private static string saveNumberString = saveNumber.ToString();
+    public static int saveNumber = PlayerPrefs.GetInt("RandoLastWorld", 1);
+    public static string saveNumberString = saveNumber.ToString();
     public static int seedPreset = PlayerPrefs.GetInt("SeedPreset", 1);
-	private static string seedPresetString = seedPreset.ToString();
+	public static string seedPresetString = seedPreset.ToString();
     public static int StartLogic = PlayerPrefs.GetInt("StartLogic", 0);
     public static int LanternLogic = PlayerPrefs.GetInt("LanternLogic", 0);
     public static int LensLogic = PlayerPrefs.GetInt("LensLogic", 0);
@@ -31,7 +31,7 @@ public class RandomizerEditor : MonoBehaviour
     private void OnGUI()
     {
         Scene activeScene = SceneManager.GetActiveScene();
-        if (((Scene)(activeScene)).name == "MainMenu")
+        if ((activeScene).name == "MainMenu")
         {
             Cursor.visible = true;
             if (expanded)
@@ -50,7 +50,7 @@ public class RandomizerEditor : MonoBehaviour
 
     private static void RandomizerSettingsWindow(int windowID)
     {
-        bool EraseConfirm = false;
+        //bool EraseConfirm = false;
         GUI.Label(new Rect(360f, 20f, 160f, 30f), "Save Number:");
         saveNumberString = GUI.TextField(new Rect(360f, 40f, 100f, 20f), saveNumberString);
         if (int.TryParse(saveNumberString, out var result))
@@ -140,11 +140,14 @@ public class RandomizerEditor : MonoBehaviour
 		if (flagy0 && PlayerPrefs.GetInt("DoSeedPreset") == 1)
 		{
 			PlayerPrefs.SetInt("DoSeedPreset", 0);
-			GUI.Label(new Rect(10f, 380f, 160f, 40f), "Seed:"); seedPresetString = GUI.TextField(new Rect(360f, 40f, 100f, 20f), saveNumberString);
 		}
 		else if (flagy1 && PlayerPrefs.GetInt("DoSeedPreset") == 0)
 		{
 			PlayerPrefs.SetInt("DoSeedPreset", 1);
+		}
+		if (flagy0)
+		{
+			GUI.Label(new Rect(10f, 380f, 160f, 40f), "Seed:"); seedPresetString = GUI.TextField(new Rect(80f, 380f, 100f, 20f), seedPresetString);
 		}
 
 
@@ -153,11 +156,13 @@ public class RandomizerEditor : MonoBehaviour
             expanded = false;
         }
         if (GUI.Button(new Rect(70f, 400f, 50f, 30f), "Erase"))
-        {
-            EraseConfirm = GUI.Button(new Rect(130f, 400f, 150f, 30f), "Are you sure?");
-            LoadSceneOnClick SaveLoader = FindObjectOfType<LoadSceneOnClick>();
+		{
+			//EraseConfirm = GUI.Button(new Rect(130f, 400f, 150f, 30f), "Are you sure?");
+			LoadSceneOnClick SaveLoader = FindObjectOfType<LoadSceneOnClick>();
             SaveLoader.saveslot = "randomizerSlot" + saveNumber + "%";
             PlayerPrefs.SetInt("randomizerSlot" + saveNumber + "%randoSeed", default);
+			foreach (string key in CheckClass.CheckLookup.Locations.Keys)
+				PlayerPrefs.DeleteKey(SaveLoader.saveslot + key);
             SaveLoader.eraseSave();
         }
         if (GUI.Button(new Rect(360f, 120f, 100f, 50f), "Play") && saveNumber > 0)
@@ -165,20 +170,18 @@ public class RandomizerEditor : MonoBehaviour
             RandoMode();
             LoadSceneOnClick SaveLoader = FindObjectOfType<LoadSceneOnClick>();
             SaveLoader.saveslot = "randomizerSlot" + saveNumber + "%";
-            PlayerPrefs.SetInt("RandoLastWorld", saveNumber);
+			if (int.TryParse(seedPresetString, out var result2))
+			{
+				seedPreset = result2;
+			}
+			PlayerPrefs.SetInt("SeedPreset", seedPreset);
+			PlayerPrefs.SetInt("RandoLastWorld", saveNumber);
             SaveLoader.LoadSceneAndPlay("OverWorld");
-        }
-        if (EraseConfirm)
-        {
-            LoadSceneOnClick SaveLoader = FindObjectOfType<LoadSceneOnClick>();
-            SaveLoader.saveslot = "randomizerSlot" + saveNumber + "%";
-            SaveLoader.eraseSave();
-            EraseConfirm = false;
         }
     }
 	private static void RandomizerStatsWindow(int windowID)
 	{
-		bool EraseConfirm = false;
+		//bool EraseConfirm = false;
 		GUI.Label(new Rect(360f, 20f, 160f, 30f), "Save Number:");
 		saveNumberString = GUI.TextField(new Rect(360f, 40f, 100f, 20f), saveNumberString);
 		if (int.TryParse(saveNumberString, out var result))
@@ -211,10 +214,12 @@ public class RandomizerEditor : MonoBehaviour
 		}
 		if (GUI.Button(new Rect(70f, 400f, 50f, 30f), "Erase"))
 		{
-			EraseConfirm = GUI.Button(new Rect(130f, 400f, 150f, 30f), "Are you sure?");
+			//EraseConfirm = GUI.Button(new Rect(130f, 400f, 150f, 30f), "Are you sure?");
 			LoadSceneOnClick SaveLoader = FindObjectOfType<LoadSceneOnClick>();
 			SaveLoader.saveslot = "randomizerSlot" + saveNumber + "%";
 			PlayerPrefs.SetInt("randomizerSlot" + saveNumber + "%randoSeed", default);
+			foreach (string key in CheckClass.CheckLookup.Locations.Keys)
+				PlayerPrefs.DeleteKey(SaveLoader.saveslot + key);
 			SaveLoader.eraseSave();
 		}
 		if (GUI.Button(new Rect(360f, 120f, 100f, 50f), "Play") && saveNumber > 0)
@@ -225,19 +230,12 @@ public class RandomizerEditor : MonoBehaviour
 			PlayerPrefs.SetInt("RandoLastWorld", saveNumber);
 			SaveLoader.LoadSceneAndPlay("OverWorld");
 		}
-		if (EraseConfirm)
-		{
-			LoadSceneOnClick SaveLoader = FindObjectOfType<LoadSceneOnClick>();
-			SaveLoader.saveslot = "randomizerSlot" + saveNumber + "%";
-			SaveLoader.eraseSave();
-			EraseConfirm = false;
-		}
 	}
 
 	private static void UpdateLoadedSave()
     {
         LoadSceneOnClick SaveLoader = FindObjectOfType<LoadSceneOnClick>();
         SaveLoader.saveslot = "randomizerSlot" + saveNumber + "%";
-
+		PlayerPrefs.SetInt("SeedPreset", seedPreset);
     }
 }
