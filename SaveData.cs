@@ -88,8 +88,7 @@ class SaveDataPatch1
         PlayerPrefs.SetInt(__instance.saveslot + "crossbKilled", __instance.crossbKilled);
         PlayerPrefs.SetInt(__instance.saveslot + "robotKilled", __instance.robotKilled);
         PlayerPrefs.SetInt(__instance.saveslot + "No Data", 0);
-        string[] array = new string[80]
-        {
+		string[] array = {
                 "argent", "maxArgent", "PDVActuels", "PDVMax", "demiReceptacle", "bottes", "palmes", "muscle", "distance", "lanterne",
                 "vision", "boomerang", "creuse", "ballon", "rez", "clover", "magnet", "armor", "bourse", "picLVL",
                 "carteOW", "carteUW", "carteEW", "carteSO", "carteNE", "carteNO", "carteSE", "cartePyra", "carteBonus", "carteFinal",
