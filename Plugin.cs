@@ -7,12 +7,12 @@ using SaveData.patches;
 using PortalPatcher.patches;
 using BepInEx.Logging;
 using RareItem.patches;
-using System;
 using UnityEngine;
 using Ghost.patches;
 using MenuMod.patches;
 using MasterKeyRandoMenu;
 using Music.patches;
+using Rock.patches;
 
 namespace MasterKeyRandomizer;
 [BepInPlugin("com.draexzhan.MasterKeyRandomizer", "Master Key Randomizer", "0.1.1.0")]
@@ -23,24 +23,24 @@ public class MasterKeyRandomizer : BaseUnityPlugin
 	static readonly Harmony harmonyRando = new Harmony("com.draexzhanRando.patch");
 	private void Awake()
     {
-        MKLogger.SetLogger(((MasterKeyRandomizer)this).Logger);
-        ((MasterKeyRandomizer)this).Logger.LogInfo((object)"Master Key Randomizer (v0.1.1.0) is loaded!");
+        MKLogger.SetLogger(Logger);
+        Logger.LogInfo("Master Key Randomizer (v0.1.1.0) is loaded!");
         harmonyCore.PatchAll(typeof(TitleImagePatch1));
         harmonyCore.PatchAll(typeof(RandomizerEditor));
         Application.runInBackground = true;
-        UnityEngine.Object.DontDestroyOnLoad((UnityEngine.Object)new GameObject("quick settings gui", new Type[1] { typeof(RandomizerEditor) })
+        DontDestroyOnLoad(new GameObject("quick settings gui", [typeof(RandomizerEditor)])
         {
             hideFlags = (HideFlags)61
         });
     }
 
     static public void RandoMode()
-    {
+	{
+		harmonyRando.PatchAll(typeof(SaveDataPatch1));
 		harmonyRando.PatchAll(typeof(IntroScriptV2Patch1));
 		harmonyRando.PatchAll(typeof(PortalPatcherPatch1));
 		harmonyRando.PatchAll(typeof(ItemDebuggerPatch1));
 		harmonyRando.PatchAll(typeof(ChestPatcherPatch1));
-		harmonyRando.PatchAll(typeof(SaveDataPatch1));
 		harmonyRando.PatchAll(typeof(RareItemPatcher));
 		harmonyRando.PatchAll(typeof(GhostPatch1));
 		harmonyRando.PatchAll(typeof(DragonPatcher));
@@ -52,6 +52,7 @@ public class MasterKeyRandomizer : BaseUnityPlugin
 		harmonyRando.PatchAll(typeof(MosterSwordPatcher));
 		harmonyRando.PatchAll(typeof(RandoWarp));
 		harmonyRando.PatchAll(typeof(MusicPatch1));
+        harmonyRando.PatchAll(typeof(RockPatch1));
 	}
 
     static public void VanillaMode()
@@ -65,22 +66,22 @@ public class MKLogger
     private static ManualLogSource Logger;
     public static void LogInfo(string message)
     {
-        Logger.LogInfo((object)message);
+        Logger.LogInfo(message);
     }
 
     public static void LogWarning(string message)
     {
-        Logger.LogWarning((object)message);
+        Logger.LogWarning(message);
     }
 
     public static void LogError(string message)
     {
-        Logger.LogError((object)message);
+        Logger.LogError(message);
     }
 
     public static void LogDebug(string message)
     {
-        Logger.LogDebug((object)message);
+        Logger.LogDebug(message);
     }
 
     public static void SetLogger(ManualLogSource logger)

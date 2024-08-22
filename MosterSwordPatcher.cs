@@ -23,12 +23,12 @@ public class MosterSwordPatcher
 	static IEnumerator MosterSwordRedux(oopsMasterSwordCutscene __instance)
 	{
 		__instance.player = GameObject.FindGameObjectWithTag("Player").GetComponent<FoxMove>();
-		__instance.playerTargetPos = __instance.transform.position + 0.75f * UnityEngine.Vector3.up;
+		__instance.playerTargetPos = __instance.transform.position + 0.75f * Vector3.up;
 		yield return new WaitForSeconds(1f);
-		__instance.playerTargetPos = UnityEngine.Vector2.zero;
+		__instance.playerTargetPos = Vector2.zero;
 		__instance.player.GetComponent<FoxMove>().setDesactiveMoveCinematics(val: true);
 		GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMonoMove>().changeVolumeMultiplierOverTime(0f, 2f);
-		__instance.fakePlayerInst = Object.Instantiate(__instance.fakePlayer, __instance.transform.position, UnityEngine.Quaternion.identity);
+		__instance.fakePlayerInst = Object.Instantiate(__instance.fakePlayer, __instance.transform.position, Quaternion.identity);
 		__instance.player.gameObject.GetComponent<SpriteRenderer>().enabled = false;
 		__instance.Sword.GetComponent<SpriteRenderer>().sortingOrder = 0;
 		__instance.player.setDesactiveMoveCinematics(val: true);
@@ -53,7 +53,7 @@ public class MosterSwordPatcher
 			if (i == 6)
 			{
 				__instance.fakePlayerInst.GetComponent<SpriteRenderer>().sprite = __instance.fakePlayerSprites[0];
-				__instance.instScin = Object.Instantiate(__instance.prefabScintille, __instance.transform.position + UnityEngine.Vector3.up * 0.5f, UnityEngine.Quaternion.identity);
+				__instance.instScin = Object.Instantiate(__instance.prefabScintille, __instance.transform.position + Vector3.up * 0.5f, Quaternion.identity);
 				ParticleSystem.MainModule main = __instance.instScin.GetComponent<ParticleSystem>().main;
 				main.simulationSpeed = 0.8f;
 				__instance.chestSFXsansCroc.volume = GameObject.FindGameObjectWithTag("Starter").GetComponent<starterScript>().SFXVol;

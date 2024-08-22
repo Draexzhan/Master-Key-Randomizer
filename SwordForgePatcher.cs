@@ -57,7 +57,7 @@ public class SwordForgePatcher
         for (int k = 0; k < 20; k++)
         {
             yield return new WaitForSeconds(0.2f);
-            int num = UnityEngine.Random.Range(0, 6);
+            int num = Random.Range(0, 6);
             if (__instance.nains[num].GetComponent<AutoVelocity>().targetVelo == 0f)
             {
                 __instance.StartCoroutine(__instance.nainSaute(num));
@@ -82,7 +82,7 @@ public class SwordForgePatcher
         for (int num2 = 0; num2 < 6; num2++)
         {
             __instance.nains[num2].GetComponent<SpriteRenderer>().sprite = __instance.nainSmashing;
-            AudioSource.PlayClipAtPoint((UnityEngine.Random.Range(0f, 1f) < 0.5f) ? __instance.smashSFX1 : __instance.smashSFX2, __instance.gameObject.transform.position, GameObject.FindGameObjectWithTag("Starter").GetComponent<starterScript>().SFXVol);
+            AudioSource.PlayClipAtPoint((Random.Range(0f, 1f) < 0.5f) ? __instance.smashSFX1 : __instance.smashSFX2, __instance.gameObject.transform.position, GameObject.FindGameObjectWithTag("Starter").GetComponent<starterScript>().SFXVol);
         }
         __instance.SwordForging.SetActive(value: false);
         __instance.SwordReady.SetActive(value: true);
@@ -106,7 +106,7 @@ public class SwordForgePatcher
         for (int k = 0; k < 50; k++)
         {
             yield return new WaitForSeconds(0.2f);
-            int num5 = UnityEngine.Random.Range(0, 6);
+            int num5 = Random.Range(0, 6);
             if (__instance.nains[num5].GetComponent<AutoVelocity>().targetVelo == 0f)
             {
                 __instance.StartCoroutine(__instance.nainSaute(num5));

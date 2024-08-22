@@ -11,7 +11,7 @@ using System.Linq;
 
 public class UpdateInventory : MonoBehaviour
 {
-    public static UnityEngine.Vector3 TPDestination;
+    public static Vector3 TPDestination;
     private GameObject rareEffectObj;
     //private static GameObject Warp;
     private readonly SynchronizationContext context = SynchronizationContext.Current;
@@ -199,16 +199,16 @@ public class UpdateInventory : MonoBehaviour
         FoxMove foxMove = FindObjectOfType<FoxMove>();
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
         itemObject.transform.parent = Player.transform;
-        itemObject.transform.localPosition = UnityEngine.Vector3.zero;
-        itemObject.transform.position = itemObject.transform.position + UnityEngine.Vector3.right * 0.25f + 0.75f * UnityEngine.Vector3.up;
+        itemObject.transform.localPosition = Vector3.zero;
+        itemObject.transform.position = itemObject.transform.position + Vector3.right * 0.25f + 0.75f * Vector3.up;
         float grabDuration = 6;
         AudioClip Fanfare = Bundle.LoadAsset<AudioClip>("Progression_Jingle.wav");
         foxMove.objetTrouve(grabDuration);
         foxMove.removeVelo();
         rareEffectObj = new GameObject("objRareEffect");
         rareEffectObj.transform.parent = itemObject.transform;
-        rareEffectObj.transform.localPosition = UnityEngine.Vector3.zero;
-        rareEffectObj.AddComponent<rotateTransform>().axis = UnityEngine.Vector3.forward;
+        rareEffectObj.transform.localPosition = Vector3.zero;
+        rareEffectObj.AddComponent<rotateTransform>().axis = Vector3.forward;
         rareEffectObj.GetComponent<rotateTransform>().rotationPerSecond = 0.125f;
         Sprite white = Bundle.LoadAsset<Sprite>("rareEffectWhite.png");
         Sprite black = Bundle.LoadAsset<Sprite>("rareEffectBlack.png");
@@ -227,10 +227,10 @@ public class UpdateInventory : MonoBehaviour
             gameObject.AddComponent<SpriteRenderer>().sprite = ((i % 2) == 0 ? white : black);
             gameObject.GetComponent<SpriteRenderer>().sortingOrder = 21;
             gameObject.transform.Rotate(0f, 0f, ((float)i / 16f * 180f));
-            gameObject.transform.localPosition = UnityEngine.Vector3.zero;
-            gameObject.transform.Translate(11f * UnityEngine.Vector3.right);
+            gameObject.transform.localPosition = Vector3.zero;
+            gameObject.transform.Translate(11f * Vector3.right);
             gameObject.AddComponent<TranslateTransform>().TotalMove = -gameObject.transform.localPosition;
-            gameObject.transform.Translate(11f * UnityEngine.Vector3.right);
+            gameObject.transform.Translate(11f * Vector3.right);
             gameObject.GetComponent<TranslateTransform>().OverTime = 0.5f;
             gameObject.GetComponent<TranslateTransform>().goBackScheduled = grabDuration - 1f;
         }
@@ -248,8 +248,8 @@ public class UpdateInventory : MonoBehaviour
         FoxMove foxMove = FindObjectOfType<FoxMove>();
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
         itemObject.transform.parent = Player.transform;
-        itemObject.transform.localPosition = UnityEngine.Vector3.zero;
-        itemObject.transform.position = itemObject.transform.position + UnityEngine.Vector3.right * 0.25f + 0.75f * UnityEngine.Vector3.up;
+        itemObject.transform.localPosition = Vector3.zero;
+        itemObject.transform.position = itemObject.transform.position + Vector3.right * 0.25f + 0.75f * Vector3.up;
         float grabDuration = 3;
         AudioClip Fanfare = Bundle.LoadAsset<AudioClip>("Useful_Jingle.wav");
         foxMove.objetTrouve(grabDuration);
@@ -275,8 +275,8 @@ public class UpdateInventory : MonoBehaviour
         FoxMove foxMove = FindObjectOfType<FoxMove>();
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
         itemObject.transform.parent = Player.transform;
-        itemObject.transform.localPosition = UnityEngine.Vector3.zero;
-        itemObject.transform.position = itemObject.transform.position + UnityEngine.Vector3.right * 0.25f + 0.75f * UnityEngine.Vector3.up;
+        itemObject.transform.localPosition = Vector3.zero;
+        itemObject.transform.position = itemObject.transform.position + Vector3.right * 0.25f + 0.75f * Vector3.up;
         float grabDuration = 2.5f;
         AudioClip Fanfare = Bundle.LoadAsset<AudioClip>("Junk_Jingle.wav");
         foxMove.objetTrouve(grabDuration);
@@ -302,15 +302,15 @@ public class UpdateInventory : MonoBehaviour
         FoxMove foxMove = FindObjectOfType<FoxMove>();
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
         itemObject.transform.parent = Player.transform;
-        itemObject.transform.localPosition = UnityEngine.Vector3.zero;
-        itemObject.transform.position = itemObject.transform.position + UnityEngine.Vector3.right * 0.25f + 0.75f * UnityEngine.Vector3.up;
+        itemObject.transform.localPosition = Vector3.zero;
+        itemObject.transform.position = itemObject.transform.position + Vector3.right * 0.25f + 0.75f * Vector3.up;
         float grabDuration = 4;
         AudioClip Fanfare = Bundle.LoadAsset<AudioClip>("Trap_Jingle.ogg");
         if (itemData.Name == "Moster Sword")
 		{
 			itemObject.GetComponent<SpriteRenderer>().sprite = Bundle.LoadAsset<Sprite>("MosterSwordPulled.png");
             itemObject.GetComponent<SpriteRenderer>().flipY = true;
-            itemObject.transform.position += UnityEngine.Vector3.right * .1f;
+            itemObject.transform.position += Vector3.right * .1f;
 			foxMove.objetTrouve(8.5f);
 			foxMove.removeVelo();
 			context.Send(delegate
@@ -353,7 +353,7 @@ public class UpdateInventory : MonoBehaviour
 		fakePlayer.AddComponent<SpriteRenderer>().sprite = fakePlayerSprite;
         fakePlayer.GetComponent<SpriteRenderer>().sortingOrder = 0;
         fakePlayer.transform.parent = player.transform;
-		fakePlayer.transform.localPosition = UnityEngine.Vector3.zero;
+		fakePlayer.transform.localPosition = Vector3.zero;
 		LogDebug("cutscene started");
 		GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraMonoMove>().changeVolumeMultiplierOverTime(0f, 2f);
         LogDebug(":D");
@@ -373,11 +373,11 @@ public class UpdateInventory : MonoBehaviour
         player.GetComponent<Animator>().SetBool("boomerang", value: true);
         AudioSource.PlayClipAtPoint(player.coupEpeeSFX, player.transform.position, GameObject.FindGameObjectWithTag("Starter").GetComponent<starterScript>().SFXVol);
 		itemObject.GetComponent<SpriteRenderer>().enabled = true;
-        itemObject.AddComponent<rotateTransform>().axis = UnityEngine.Vector3.forward;
+        itemObject.AddComponent<rotateTransform>().axis = Vector3.forward;
 		itemObject.GetComponent<rotateTransform>().rotationPerSecond = -2f;
         fakePlayer.GetComponent<SpriteRenderer>().enabled = false;
         itemObject.transform.parent = fakePlayer.transform;
-        itemObject.transform.localPosition = UnityEngine.Vector3.zero;
+        itemObject.transform.localPosition = Vector3.zero;
 		player.gameObject.GetComponent<SpriteRenderer>().enabled = true;
 		StartCoroutine(Throwing(itemObject));
 		yield return new WaitForSeconds(0.5f);
@@ -392,10 +392,10 @@ public class UpdateInventory : MonoBehaviour
     static IEnumerator Throwing(GameObject itemObject)
     {
         float distanceThrown = 0f;
-        UnityEngine.Vector3 ThrowPoint = itemObject.transform.position;
+        Vector3 ThrowPoint = itemObject.transform.position;
         while(distanceThrown < 40f)
         {
-            itemObject.transform.position += UnityEngine.Vector3.right * 15 * Time.deltaTime;
+            itemObject.transform.position += Vector3.right * 15 * Time.deltaTime;
             distanceThrown += 15 * Time.deltaTime;
             LogInfo(distanceThrown.ToString());
             yield return new WaitForSeconds(Time.deltaTime);

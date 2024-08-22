@@ -97,13 +97,13 @@ class EnemyPatch1
                 break;
         }
         __instance.hasBeenHit = false;
-        UnityEngine.Vector3 vector;
-        if (!__instance.isLooting && UnityEngine.Vector3.Distance(__instance.transform.parent.position, new UnityEngine.Vector3(1000f, 1000f, 1000f)) > 10f)
+        Vector3 vector;
+        if (!__instance.isLooting && Vector3.Distance(__instance.transform.parent.position, new Vector3(1000f, 1000f, 1000f)) > 10f)
         {
             __instance.loote();
             if (__instance.exploMort != null)
             {
-                UnityEngine.Object.Instantiate(__instance.exploMort, __instance.transform.position, UnityEngine.Quaternion.identity);
+                Object.Instantiate(__instance.exploMort, __instance.transform.position, Quaternion.identity);
             }
             if (__instance.sureThingLooted != null)
             {
@@ -114,7 +114,7 @@ class EnemyPatch1
             }
 			if (__instance.animMortBoss != null)
 			{
-                UnityEngine.Object.Instantiate(__instance.animMortBoss, __instance.transform.position, UnityEngine.Quaternion.identity);
+                Object.Instantiate(__instance.animMortBoss, __instance.transform.position, Quaternion.identity);
             __instance.animMortBossPos = __instance.transform.position;
             __instance.Invoke("insantiateBigExploMort", 2.1f);
             __instance.Invoke("CancelInvoke", 2.2f);
@@ -123,7 +123,7 @@ class EnemyPatch1
 		Time.timeScale = 1f;
 		if (__instance.respawnable)
 		{
-			__instance.transform.parent.position = new UnityEngine.Vector3(1000f, 1000f, 1000f);
+			__instance.transform.parent.position = new Vector3(1000f, 1000f, 1000f);
 			return false;
 		}
 		string saveslot = __instance.player.GetComponent<FoxMove>().saveslot;
@@ -150,9 +150,9 @@ class EnemyPatch1
 		}
 		else
 		{
-			UnityEngine.Object.Destroy(__instance.transform.parent.gameObject, 10f);
+			Object.Destroy(__instance.transform.parent.gameObject, 10f);
 		}
-        __instance.transform.parent.position = new UnityEngine.Vector3(1000f, 1000f, 1000f);
+        __instance.transform.parent.position = new Vector3(1000f, 1000f, 1000f);
         __instance.gameObject.GetComponent<Collider2D>().enabled = false;
         return false;
     }
