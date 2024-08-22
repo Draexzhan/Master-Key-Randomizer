@@ -2,31 +2,73 @@ using HarmonyLib;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 using System.Collections;
+using static MasterKeyRandomizer.MKLogger;
 
 namespace IntroV2Override.patches;
 
 class IntroScriptV2Patch1
 {
-
     [HarmonyPrefix]
+    [HarmonyPatch(typeof(introScriptV2), nameof(introScriptV2.Start))]
+    public static bool DontDeleteUnlessCollected(introScriptV2 __instance)
+	{
+		MonoBehaviour.print("This is the part where the wall breaks!");
+		CassableScript[] componentsInChildren = __instance.transform.GetComponentsInChildren<CassableScript>();
+		for (int i = 0; i < componentsInChildren.Length; i++)
+		{
+			GameObject.Destroy(componentsInChildren[i].gameObject);
+		}
+		__instance.GetComponentInChildren<objetRareScript>().transform.SetParent(null);
+		__instance.timer = 0f;
+		__instance.etape = 0;
+		__instance.timer2 = 0f;
+        __instance.player = GameObject.FindGameObjectWithTag("Player");
+        __instance.player.GetComponent<FoxMove>().Save();
+		LogDebug(PlayerPrefs.GetString(__instance.player.GetComponent<FoxMove>().saveslot + "respawn", "nul"));
+		if (PlayerPrefs.GetInt(__instance.player.GetComponent<FoxMove>().saveslot + "IntroFinie", 0) == 1)
+		{
+            Object.Destroy(__instance.fakePlayer);
+            return false; 
+        }
+        if (PlayerPrefs.GetString(__instance.player.GetComponent<FoxMove>().saveslot + "respawn", "nul") != "error")
+        {
+            Object.Destroy(__instance.fakePlayer);
+            return false;
+		}
+        __instance.starter = GameObject.FindGameObjectWithTag("Starter").GetComponent<starterScript>();
+		MonoBehaviour.print(PlayerPrefs.GetInt(__instance.player.GetComponent<FoxMove>().saveslot + "IntroFinie", 0));
+		for (int i = 0; i < __instance.braseros.Length; i++)
+		{
+			__instance.braseros[i].transform.GetChild(0).gameObject.SetActive(value: false);
+			__instance.braseros[i].transform.GetChild(1).gameObject.SetActive(value: false);
+		}
+		return false;
+    }
+    [HarmonyPrefix]
+    [HarmonyPatch(typeof(introScriptV2), nameof(introScriptV2.casseMurs))]
+    public static bool StirredNotShaken(introScriptV2 __instance)
+    {
+        return false;
+    }
+
+		[HarmonyPrefix]
     [HarmonyPatch(typeof(introScriptV2), nameof(introScriptV2.criChute))]
     public static void CriChutePrefix(introScriptV2 __instance)
 	{
-        MonoBehaviour.print("This is the part where the wall breaks!");
-        CassableScript[] componentsInChildren = __instance.transform.GetComponentsInChildren<CassableScript>();
-        for (int i = 0; i < componentsInChildren.Length; i++)
-        {
-            componentsInChildren[i].transform.Translate(16, 999, 999);
-            componentsInChildren[i].casse();
-        }
         PlayerPrefs.SetString(GameObject.FindGameObjectWithTag("Player").GetComponent<FoxMove>().saveslot + "respawn", "keyCave");
-        __instance.got = true;
-		
-    }
+        if (__instance.player.GetComponent<FoxMove>().MasterKey == 1 && !__instance.got)
+    		__instance.got = true;
+	}
 
     [HarmonyPrefix]
+    [HarmonyPatch(typeof(introScriptV2), nameof(introScriptV2.FixedUpdate))]
+    public static bool FixedUpdatePrefix(introScriptV2 __instance)
+	{
+		return __instance.starter != null;
+    }
+
+	[HarmonyPrefix]
     [HarmonyPatch(typeof(PlayerHealthAndItemScript), nameof(PlayerHealthAndItemScript.GoodToGo))]
     public static void GoodToGo(PlayerHealthAndItemScript __instance)
     {
@@ -96,37 +138,34 @@ class IntroScriptV2Patch1
 			__instance.oldMainCam.GetComponent<fonduCam>().fondu();
 			PlayerPrefs.SetString("lastSlotLaunched", __instance.saveslot);
 			PlayerPrefs.SetInt("ID" + __instance.saveslot, PlayerPrefs.GetInt("ID" + __instance.saveslot, 0) + 1);
-            if (PlayerPrefs.GetString(__instance.saveslot + "respawn") == "keyCave")
-            {
-                __instance.StartCoroutine(KeyCaveSpawn(__instance));
-				return false;
+            if (PlayerPrefs.GetString(__instance.saveslot + "respawn", "nul") == "keyCave" || PlayerPrefs.GetString(__instance.saveslot + "respawn", "nul") == "error")
+			{
+                PlayerPrefs.SetString(__instance.saveslot + "respawn", "keyCave");
+				__instance.StartCoroutine(KeyCaveSpawn(__instance));
 			}
             else
                 __instance.StartCoroutine(__instance.launchGameAfterFondu(sceneName));
 		}
-        return true;
+        return false;
     }
 
     private static IEnumerator KeyCaveSpawn(LoadSceneOnClick __instance)
 	{
-		MonoBehaviour.print(__instance.oldMainCam.GetComponent<fonduCam>().fonduDuration);
+        LogDebug("Should be spawning in the Key Cave.");
 		Object.Destroy(__instance.EventSystemToDestroy);
 		yield return new WaitForSeconds(__instance.oldMainCam.GetComponent<fonduCam>().fonduDuration);
 		Object.Destroy(__instance.AudioListenerToDestroy);
-		__instance.instCam = Object.Instantiate(__instance.mainCamera, new Vector3(15.5f, -100f, 10f), Quaternion.identity);
+		__instance.instCam = Object.Instantiate(__instance.mainCamera, new Vector3(15.5f, -100f, -10f), Quaternion.identity);
 		__instance.instCam.GetComponent<Camera>().enabled = false;
 		__instance.instCam.GetComponent<SpriteRenderer>().enabled = true;
-		Transform obj5 = Object.Instantiate(__instance.fox, new Vector3(23.5f, -90f, 10f), Quaternion.identity);
-		obj5.GetComponent<SpriteRenderer>().enabled = false;
-        obj5.GetComponent<FoxMove>().directionFacing = 3;
-		obj5.GetComponent<FoxMove>().saveslot = __instance.saveslot;
+		Transform obj9 = Object.Instantiate(__instance.fox, new Vector3(15.5f, -100f, 10f), Quaternion.identity);
+		obj9.GetComponent<SpriteRenderer>().enabled = false;
+        obj9.GetComponent<FoxMove>().directionFacing = 3;
+		obj9.GetComponent<FoxMove>().saveslot = __instance.saveslot;
 		__instance.instUI = Object.Instantiate(__instance.ui, new Vector3(-1000f, -1000f, 0f), Quaternion.identity);
 		__instance.instUI.GetComponentInChildren<Camera>().rect = Rect.zero;
 		__instance.oldMainCam.transform.GetComponent<Camera>().rect = Rect.zero;
-		float realtimeSinceStartup = Time.realtimeSinceStartup;
-		MonoBehaviour.print("loading started" + realtimeSinceStartup);
 		__instance.Invoke("fixNullRef", 0.1f);
-		MonoBehaviour.print("loading finished, was it fast? " + (Time.realtimeSinceStartup - realtimeSinceStartup) + "   " + Time.realtimeSinceStartup);
 	}
 
 }
