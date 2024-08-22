@@ -149,6 +149,10 @@ public class Seed
                 PlayerPrefs.SetString(saveSlot + "respawn", "village");
                 PlayerPrefs.SetInt(saveSlot + "IntroFinie", 1);
             }
+            else
+            {
+                PlayerPrefs.SetInt(saveSlot + "IntroFinie", 0);
+            }
         }
         else
         {

@@ -87,13 +87,6 @@ class RareItemPatcher
 			    __instance.gameObject.GetComponent<SpriteRenderer>().sprite = UpdateAppearance(__instance.gameObject.name + __instance.OrigPos.ToString());
 			}
 			__instance.used = true;
-			LogInfo("ItemData grabbed.");
-			if (!__instance.isUWMap)
-			{
-				LogInfo("The item formerly known as " + __instance.gameObject.name + " has been destroyed.");
-				UnityEngine.Object.Destroy(__instance.gameObject);
-                return false;
-            }
 			return false;
         }
         else if (__instance.EnCoffre)

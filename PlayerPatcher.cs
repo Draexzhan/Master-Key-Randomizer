@@ -77,17 +77,18 @@ public class PlayerPatch
                     vector = collider.ClosestPoint(__instance.transform.position);
                 }
             __instance.subisDegats(collider.gameObject.GetComponent<ATKScript>().degats, vector, collider.gameObject.GetComponent<ATKScript>().Repousse, collider.gameObject.GetComponent<ATKScript>().fromFinalBoss);
-            }
-        }
+			}
+			if (collider.CompareTag("ObjetRare") && (__instance.character.argent >= collider.GetComponent<objetRareScript>().valeur))
+			{
+                LogDebug("Itemdata affordable and therefore grabbed. Adding to inventory.");
+				__instance.character.argent -= collider.GetComponent<objetRareScript>().valeur;
+				AddToInventory(CheckClass.GetData(collider.gameObject.name + collider.transform.position.ToString()).CheckItem);
+				Object.Destroy(collider.gameObject);
+			}
+		}
         if (__instance.character.PDVActuels > __instance.character.PDVMax)
         {
         __instance.character.PDVActuels = __instance.character.PDVMax;
-        }
-        if (collider.CompareTag("ObjetRare") && (__instance.character.argent >= collider.GetComponent<objetRareScript>().valeur))
-        {
-            __instance.character.argent -= collider.GetComponent<objetRareScript>().valeur;
-            AddToInventory(CheckClass.GetData(collider.gameObject.name + collider.transform.position.ToString()).CheckItem);
-            Object.Destroy(collider.gameObject);
         }
         return false;
     }
