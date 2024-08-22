@@ -2035,7 +2035,7 @@ public class CheckIndex
     }
     public static bool CheckAccess152() //Swamp - Past Shallow Maze Lever
     {
-        return TownAccess();
+        return TownAccess() && (Weapon() || Swim1() || Balloon1());
     }
     public static bool CheckAccess153() //Swamp - Boomerang Grotto
     {
