@@ -287,7 +287,7 @@ public class CheckClass
             { "(30.50, 580.00, -10.00)", new CheckData("Haunted House - Kitchen Ghost", 228, "(30.50, 580.00, -10.00)" ) },
             { "CoffreMap(35.50, 611.50, 0.00)", new CheckData("Haunted House - Bedroom Chest", 229, "CoffreMap(35.50, 611.50, 0.00)" ) },
             { "(30.50, 610.00, -10.00)", new CheckData("Haunted House - Bedroom Ghost", 230, "(30.50, 610.00, -10.00)" ) },
-            { "(0.50, 610.00, -10.00)", new CheckData("Haunted House - Balcony Ghost", 231, "(0.50, 610.00, -10.00)" ) },
+            { "(0.50, 610.00, -10.00)", new CheckData("Haunted House - Excercise Room Ghost", 231, "(0.50, 610.00, -10.00)" ) },
             { "TreadmillHaunt", new CheckData("Haunted House - Treadmill", 232, "TreadmillHaunt" ) },
             { "CoffreLanterne2(0.50, 620.50, 0.00)", new CheckData("Haunted House - Lantern Chest", 233, "CoffreLanterne2(0.50, 620.50, 0.00)" ) },
             { "CoffreArgent3(-5.50, 622.50, 0.00)", new CheckData("Haunted House - Stump Chest", 234, "CoffreArgent3(-5.50, 622.50, 0.00)" ) },
