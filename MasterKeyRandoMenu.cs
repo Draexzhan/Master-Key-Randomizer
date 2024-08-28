@@ -166,19 +166,22 @@ public class RandomizerEditor : MonoBehaviour
             SaveLoader.eraseSave();
         }
         if (GUI.Button(new Rect(360f, 120f, 100f, 50f), "Play") && saveNumber > 0)
-        {
-            RandoMode();
-            LoadSceneOnClick SaveLoader = FindObjectOfType<LoadSceneOnClick>();
-            SaveLoader.saveslot = "randomizerSlot" + saveNumber;
-			if (int.TryParse(seedPresetString, out var result2))
+		{
+			LoadSceneOnClick SaveLoader = FindObjectOfType<LoadSceneOnClick>();
+			if (Time.timeScale == 1f && SaveLoader.oldMainCam.GetComponent<fonduCam>().fonduCD >= SaveLoader.oldMainCam.GetComponent<fonduCam>().fonduDuration)
 			{
-				seedPreset = result2;
+				RandoMode();
+				SaveLoader.saveslot = "randomizerSlot" + saveNumber;
+				if (int.TryParse(seedPresetString, out var result2))
+				{
+					seedPreset = result2;
+				}
+				PlayerPrefs.SetInt("SeedPreset", seedPreset);
+				PlayerPrefs.SetInt("RandoLastWorld", saveNumber);
+				if (PlayerPrefs.GetInt("StartLogic") == 1)
+					PlayerPrefs.SetString(SaveLoader.saveslot + "respawn", "village");
+				SaveLoader.LoadSceneAndPlay("OverWorld");
 			}
-			PlayerPrefs.SetInt("SeedPreset", seedPreset);
-			PlayerPrefs.SetInt("RandoLastWorld", saveNumber);
-			if (PlayerPrefs.GetInt("StartLogic") == 1)
-				PlayerPrefs.SetString(SaveLoader.saveslot + "respawn", "village");
-            SaveLoader.LoadSceneAndPlay("OverWorld");
         }
     }
 	private static void RandomizerStatsWindow(int windowID)
@@ -226,11 +229,14 @@ public class RandomizerEditor : MonoBehaviour
 		}
 		if (GUI.Button(new Rect(360f, 120f, 100f, 50f), "Play") && saveNumber > 0)
 		{
-			RandoMode();
 			LoadSceneOnClick SaveLoader = FindObjectOfType<LoadSceneOnClick>();
-			SaveLoader.saveslot = "randomizerSlot" + saveNumber;
-			PlayerPrefs.SetInt("RandoLastWorld", saveNumber);
-			SaveLoader.LoadSceneAndPlay("OverWorld");
+			if (Time.timeScale == 1f && SaveLoader.oldMainCam.GetComponent<fonduCam>().fonduCD >= SaveLoader.oldMainCam.GetComponent<fonduCam>().fonduDuration)
+			{
+				RandoMode();
+				SaveLoader.saveslot = "randomizerSlot" + saveNumber;
+				PlayerPrefs.SetInt("RandoLastWorld", saveNumber);
+				SaveLoader.LoadSceneAndPlay("OverWorld");
+			}
 		}
 	}
 
