@@ -1,9 +1,9 @@
 # Master Key Randomizer
- A Randomizer for the indie game Master Key
+ A Randomizer for the indie game Master Key.
 This randomizer is still in Alpha. You may encounter bugs while playing.
 
 # Installation
-Download either the .zip with BepInEx or the .zip without it. If you don't know which one you should download, download the BepInEx one.
+Download either the .zip with BepInEx or the .zip without it. If you do not already have BepInEx installed, or you don't know which one you should download, download the BepInEx one.
 
 Unzip the contents into the folder with your Master Key executable and run the game.
 
