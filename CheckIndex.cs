@@ -1603,7 +1603,7 @@ public class CheckIndex
     }
     public static bool CheckAccess44() //East Overworld - Southeast of Dark Woods
     {
-        return TownAccess();
+        return TownAccess() && (BushCut() || EasyFlight());
     }
     public static bool CheckAccess45() //Near Starting Cave - Warp Cave
     {
