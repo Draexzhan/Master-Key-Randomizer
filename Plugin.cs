@@ -15,7 +15,7 @@ using Music.patches;
 using Rock.patches;
 
 namespace MasterKeyRandomizer;
-[BepInPlugin("com.draexzhan.MasterKeyRandomizer", "Master Key Randomizer", "0.1.1.0")]
+[BepInPlugin("com.draexzhan.MasterKeyRandomizer", "Master Key Randomizer", "0.1.1.1")]
 	[BepInProcess("Master Key.exe")]
 public class MasterKeyRandomizer : BaseUnityPlugin
 {
@@ -24,7 +24,7 @@ public class MasterKeyRandomizer : BaseUnityPlugin
 	private void Awake()
     {
         MKLogger.SetLogger(Logger);
-        Logger.LogInfo("Master Key Randomizer (v0.1.1.0) is loaded!");
+        Logger.LogInfo("Master Key Randomizer (v0.1.1.1) is loaded!");
         harmonyCore.PatchAll(typeof(TitleImagePatch1));
         harmonyCore.PatchAll(typeof(RandomizerEditor));
         Application.runInBackground = true;
