@@ -7,6 +7,7 @@ using static MasterKeyRandomizer.MKLogger;
 using UnityEngine;
 using System.Linq;
 using System.IO;
+using MonoMod.Utils;
 
 
 public class Seed
@@ -434,19 +435,21 @@ public class Seed
             Dictionary<string, int> JustTheKeys = new Dictionary<string, int>();    // A pool of just the key items that still need to be placed
             EmptyChecks.AddRange(ShuffledChecks);
             LogInfo("EmptyChecks Filled.");
-            Dictionary<string, CheckData> HardcodedLocations = new Dictionary<string, CheckData>
+            Dictionary<string, CheckData> HardcodedLocations = new Dictionary<string, CheckData>();
+            HardcodedLocations.Clear();
+            HardcodedLocations.AddRange(new Dictionary<string, CheckData>()
             {
                 { "Coffee", CheckLookup.Locations["Cafe(30.25, -20.25, -1.00)"] },
-				{ "Apple", CheckLookup.Locations["Pomme(-599.50, 2.50, -1.00)"] },
-				{ "Cheese", CheckLookup.Locations["Fromage(-634.50, 0.50, -1.00)"] },
-				{ "Meat", CheckLookup.Locations["REZ(-603.50, 2.50, -1.00)"] },
-				{ "Super Meat", CheckLookup.Locations["REZ2(-632.50, 0.50, -1.00)"] },
-				{ "Dark Ore", CheckLookup.Locations["PierreFinal()"] }
-			};
+                { "Apple", CheckLookup.Locations["Pomme(-599.50, 2.50, -1.00)"] },
+                { "Cheese", CheckLookup.Locations["Fromage(-634.50, 0.50, -1.00)"] },
+                { "Meat", CheckLookup.Locations["REZ(-603.50, 2.50, -1.00)"] },
+                { "Super Meat", CheckLookup.Locations["REZ2(-632.50, 0.50, -1.00)"] },
+                { "Dark Ore", CheckLookup.Locations["PierreFinal()"] }
+            });
             if (PlayerPrefs.GetInt("WarpShuffle") == 1)
             {
-                HardcodedLocations.Add("Ruins Warp", CheckLookup.Locations["CoffreLeyndell(555.50, -48.50, 0.00)"]);
-				HardcodedLocations.Add("Start Warp", CheckLookup.Locations["CoffreRetour(-8.50, 242.50, 0.00)"]);
+                HardcodedLocations.Add("Start Warp", CheckLookup.Locations["CoffreLeyndell(555.50, -48.50, 0.00)"]);
+				HardcodedLocations.Add("Ruins Warp", CheckLookup.Locations["CoffreRetour(-8.50, 242.50, 0.00)"]);
 				HardcodedLocations.Add("Woods Potion", CheckLookup.Locations["potionForet(-523.50, -18.50, 0.00)"]);
 				HardcodedLocations.Add("Snow Potion", CheckLookup.Locations["potionRoute(-521.50, -18.50, 0.00)"]);
                 PrecollectedItems.Remove("Ruins Warp");
