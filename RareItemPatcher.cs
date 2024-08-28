@@ -76,6 +76,7 @@ class RareItemPatcher
     [HarmonyPatch(typeof(objetRareScript), nameof(objetRareScript.grabIt))]
     public static bool GrabRarePatch1(objetRareScript __instance)
 	{
+        LogDebug("grabbing " + __instance.gameObject.name + " (This is the check name, not the received item name)");
 		__instance.joueur = GameObject.FindGameObjectWithTag("Player");
         string CheckName = CheckClass.GetData(__instance.gameObject.name + __instance.OrigPos.ToString()).LocationName;
         PlayerPrefs.SetInt(UnityEngine.Object.FindObjectOfType<FoxMove>().saveslot + CheckName, 1);

@@ -33,7 +33,7 @@ public class PlayerPatch
 			}
 			if (collider.CompareTag("ObjetRare") && (__instance.character.argent >= collider.GetComponent<objetRareScript>().valeur))
 			{
-				LogDebug("item collected and affordable. Adding to inventory and destroying original.");
+				LogDebug("item collected and affordable. Adding to inventory and destroying original. (TriggerStay2D)");
 				__instance.character.argent -= collider.GetComponent<objetRareScript>().valeur;
 				AddToInventory(CheckClass.GetData(collider.GetComponent<objetRareScript>().gameObject.name + collider.GetComponent<objetRareScript>().OrigPos).CheckItem);
 				Object.Destroy(collider.gameObject);
@@ -80,7 +80,7 @@ public class PlayerPatch
 			}
 			if (collider.CompareTag("ObjetRare") && (__instance.character.argent >= collider.GetComponent<objetRareScript>().valeur))
 			{
-                LogDebug("Itemdata affordable and therefore grabbed. Adding to inventory.");
+                LogDebug("Itemdata affordable and therefore grabbed. Adding to inventory. (TriggerEnter2D)");
 				__instance.character.argent -= collider.GetComponent<objetRareScript>().valeur;
 				AddToInventory(CheckClass.GetData(collider.gameObject.name + collider.transform.position.ToString()).CheckItem);
 				Object.Destroy(collider.gameObject);
