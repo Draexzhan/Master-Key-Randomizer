@@ -4,7 +4,6 @@ using UnityEngine;
 using static ItemCheatSheet;
 using static UpdateInventory;
 using static MasterKeyRandomizer.MKLogger;
-using UnityEngine.SceneManagement;
 
 namespace RareItem.patches;
 
@@ -21,10 +20,31 @@ class RareItemPatcher
 		LogInfo(LocationID);
         try
         {
-            __instance.gameObject.GetComponent<SpriteRenderer>().sprite = UpdateAppearance(LocationID);
             itemname = CheckClass.GetData(LocationID).CheckItem.Name;
-        }
-        catch (Exception) { LogInfo("itemname errored."); itemname = GetData("Error").Name; }
+            LogDebug(itemname + " should be at " + LocationID);
+            if (itemname == "Error")
+            {
+                if (LocationID == "Cafe(30.25, -20.25, -1.00)")
+                    itemname = "Coffee";
+                else if (LocationID == "REZ(-603.50, 2.50, -1.00)")
+                    itemname = "Meat";
+                else if (LocationID == "Pomme(-599.50, 2.50, -1.00)")
+                    itemname = "Apple";
+                else if (LocationID == "Fromage(-634.50, 0.50, -1.00)")
+                    itemname = "Cheese";
+                else if (LocationID == "REZ2(-632.50, 0.50, -1.00)")
+                    itemname = "Super Meat";
+                else
+                {
+                    LogError("itemname errored at " + LocationID + ".");
+                    itemname = "Error";
+                }
+                if (itemname != "Error")
+				CheckClass.GetData(LocationID).CheckItem = ItemLookup.TranslatedItemNames[itemname];
+			}
+			__instance.gameObject.GetComponent<SpriteRenderer>().sprite = UpdateAppearance(LocationID);
+		}
+        catch (Exception) { LogInfo("itemname errored at " + LocationID + "."); itemname = GetData("Error").Name; }
 
         //I think there's an issue with potions and warps not having a nextitem.
 		if (__instance.nextItem != null)
