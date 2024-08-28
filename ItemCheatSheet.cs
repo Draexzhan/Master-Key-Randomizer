@@ -100,8 +100,8 @@ public class ItemCheatSheet
 			{ "Boots", new ItemData("Boots", "progression", "bottes", "Boots", true, 1, 2, 3 ) },
 			{ "Vitamins", new ItemData("Vitamins", "progression", "muscle", "Vitamins", false, 1, 2, 3 ) },
 			{ "Grappling Hook", new ItemData("Grappling Hook", "progression", "distance", "Grappling Hook", true, 1, 2, 3 ) },
-			{ "Apple", new ItemData("Apple", "useful", "PDVActuels", "Apple", false, 10, 60, 0) },
-			{ "Cheese", new ItemData("Cheese", "useful", "PDVActuels", "Cheese", false, 50, 60, 0) },
+			{ "Apple", new ItemData("Apple", "useful", "PDVActuels", "Apple", false, 0, 60, 0) }, //these are listed as healing 0 because the healing is done elsewhere.
+			{ "Cheese", new ItemData("Cheese", "useful", "PDVActuels", "Cheese", false, 0, 60, 0) }, //these are listed as healing 0 because the healing is done elsewhere.
 			{ "Meat", new ItemData("Meat", "useful", "rez", "Meat 1", false, 1, 60, 2) },
 			{ "Super Meat", new ItemData("Super Meat", "useful", "rez", "Meat 2", false, 2, 60, 2) },
 			{ "Wallet Upgrade", new ItemData("Wallet Upgrade", "progression", "Bourse", "Wallet", true, 1, 3, 3) },
