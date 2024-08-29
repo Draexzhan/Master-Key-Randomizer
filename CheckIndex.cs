@@ -2897,5 +2897,9 @@ public class CheckIndex
 	{
         return ForestGrottoAccess() && Swim1() && Vision();
 	}
+    public static bool CheckAccess368() //Mountain - Overlooking Capybaras
+    {
+        return MountainAccess() && Balloon1();
+    }
 	#endregion individual checks
 }
