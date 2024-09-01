@@ -2077,7 +2077,7 @@ public class CheckIndex
     {
         return SwampBackDoorAccess() && Balloon1() && AllowMajorSecrets();
     }
-    public static bool CheckAccess163() //Snow Potion Slope - Buried Treasure
+    public static bool CheckAccess163() //Snow Potion Slope - Buried Treasure 1
     {
         return (GetTier("Snow Potion") > 0 || (!WarpShuffle() && PotionShopAccess() && SnowMushroomAccess())) && Gloves();
     }
@@ -2901,5 +2901,25 @@ public class CheckIndex
     {
         return MountainAccess() && Balloon1();
     }
+    public static bool CheckAccess369() //Path to Ruined City - Buried Under Sentinel
+    {
+        return BannerHallAccess() && Vision() && Gloves();    
+    }
+    public static bool CheckAccess370() //Snow Potion Slope - Buried Treasure 2
+    {
+		return (GetTier("Snow Potion") > 0 || (!WarpShuffle() && PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets();
+	}
+	public static bool CheckAccess371() //Snow Potion Slope - Buried Treasure 3
+	{
+		return (GetTier("Snow Potion") > 0 || (!WarpShuffle() && PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets();
+	}
+	public static bool CheckAccess372() //Snow Potion Slope - Buried Treasure 4
+	{
+		return (GetTier("Snow Potion") > 0 || (!WarpShuffle() && PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets();
+	}
+	public static bool CheckAccess373() //Snow Potion Slope - Buried Treasure 5
+	{
+		return (GetTier("Snow Potion") > 0 || (!WarpShuffle() && PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets();
+	}
 	#endregion individual checks
 }

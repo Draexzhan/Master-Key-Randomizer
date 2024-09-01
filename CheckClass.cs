@@ -219,7 +219,7 @@ public class CheckClass
             { "potionRoute(-521.50, -18.50, 0.00)", new CheckData("Potion Shop - Right", 160, "potionRoute(-521.50, -18.50, 0.00)" ) },// **Warp Shuffle Only**
             { "potionForet(-523.50, -18.50, 0.00)", new CheckData("Potion Shop - Left", 161, "potionForet(-523.50, -18.50, 0.00)" ) },// **Warp Shuffle Only**
             { "CoffreDisqueMaraisPiano(109.50, -29.50, 0.00)", new CheckData("Swamp - Buried Among Trees", 162, "CoffreDisqueMaraisPiano(109.50, -29.50, 0.00)" ) },// **Super Secret Logic Only**
-            { "CoffreSouterreNeigeCoeur(-89.00, 29.50, 0.00)", new CheckData("Snow Potion Slope - Buried Treasure", 163, "CoffreSouterreNeigeCoeur(-89.00, 29.50, 0.00)" ) },
+            { "CoffreSouterreNeigeCoeur(-89.00, 29.50, 0.00)", new CheckData("Snow Potion Slope - Buried Treasure 1", 163, "CoffreSouterreNeigeCoeur(-89.00, 29.50, 0.00)" ) },
             { "CoffreArgentBarCache(-125.50, 106.50, 0.00)", new CheckData("Nightclub - Brawl Chest", 164, "CoffreArgentBarCache(-125.50, 106.50, 0.00)" ) },
             { "Fromage(-118.00, 101.94, -1.00)", new CheckData("Nightclub - Meal", 165, "Fromage(-118.00, 101.94, -1.00)" ) },
             { "CoffreCachéRavinCyclo(-88.00, -1.00, 0.00)", new CheckData("Far West Overworld - Ravine Lens Chest", 166, "CoffreCachéRavinCyclo(-88.00, -1.00, 0.00)" ) },
@@ -424,8 +424,14 @@ public class CheckClass
             { "CoffreSouloEntreIle2(-1.00, 597.00, 0.00)", new CheckData("Water Dungeon - Double Salvage 2", 365, "CoffreSouloEntreIle2(-1.00, 597.00, 0.00)" ) },
             { "CoffreGGFric1(609.50, 6.50, 0.00)", new CheckData("Sprawling Cave - Chest near Village Cave", 366, "CoffreGGFric1(609.50, 6.50, 0.00)") },
             { "CoffreSouloGrotteForetCoeur(627.00, 32.00, 0.00)", new CheckData("Dark Woods - Grotto Salvage", 367, "CoffreSouloGrotteForetCoeur(627.00, 32.00, 0.00)") },
-            { "CoffreSecretBallonMontagne(-74.50, 60.50, 0.00)", new CheckData("Mountain - Overlooking Capybaras", 368, "CoffreSecretBallonMontagne(-74.50, 60.50, 0.00)") }
-        };
+            { "CoffreSecretBallonMontagne(-74.50, 60.50, 0.00)", new CheckData("Mountain - Overlooking Capybaras", 368, "CoffreSecretBallonMontagne(-74.50, 60.50, 0.00)") },
+            { "CoffreSouloSentinelleHallDesNains(-14.00, 130.00, 0.00)", new CheckData("Path to Ruined City - Buried Under Sentinel", 369, "CoffreSouloSentinelleHallDesNains(-14.00, 130.00, 0.00)") },
+			{ "CoffreSouterreNeige1(-86.50, 30.00, 0.00)", new CheckData("Snow Potion Slope - Buried Treasure 2", 370, "CoffreSouterreNeige1(-86.50, 30.00, 0.00)" ) },
+            { "CoffreSouterreNeige2(-92.50, 30.50, 0.00)", new CheckData("Snow Potion Slope - Buried Treasure 3", 371, "CoffreSouterreNeige2(-92.50, 30.50, 0.00)" ) },
+            { "CoffreSouterreNeige3(-91.00, 28.00, 0.00)", new CheckData("Snow Potion Slope - Buried Treasure 4", 372, "CoffreSouterreNeige3(-91.00, 28.00, 0.00)" ) },
+            { "CoffreSouterreNeige4(-88.00, 27.00, 0.00)", new CheckData("Snow Potion Slope - Buried Treasure 5", 373, "CoffreSouterreNeige4(-88.00, 27.00, 0.00)" ) },
+
+		};
     }
     public static CheckData GetData(string id)
     {
