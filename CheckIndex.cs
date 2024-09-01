@@ -343,7 +343,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (MountainLowerAccess() && AllowDark())
+        if (MountainLowerAccess() && AllowDark() && Charge1())
         {
             AccessCache["MountainCaveSpikeMazeAccess"] = true;
             return true;
@@ -382,7 +382,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (TownAccess())
+        if (TownAccess() && Weapon())
         {
             AccessCache["TownDwarfAccess"] = true;
             return true;
@@ -434,7 +434,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (WaterWayPointAccess() && EasyFlight())
+        if (WaterWayPointAccess() && EasyFlight() && Weapon())
         {
             AccessCache["WaterDwarfAccess"] = true;
             return true;
@@ -720,7 +720,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (EightRoomAccess())
+        if (EightRoomAccess() && Weapon())
         {
             AccessCache["EightRoomDwarfAccess"] = true;
             return true;
@@ -733,7 +733,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (DeepWoodsAccess() && EightRoomAccess())
+        if (DeepWoodsAccess() && EightRoomAccess() && Weapon())
         {
             AccessCache["ForestDwarfAccess"] = true;
             return true;
@@ -746,7 +746,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (SwampAccess() || SwampBackDoorAccess())
+        if (SwampAccess() || SwampBackDoorAccess() && Weapon())
         {
             AccessCache["SwampDwarfAccess"] = true;
             return true;
@@ -851,7 +851,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (MountainAccess() && LongFlight() && Traction())
+        if (MountainAccess() && LongFlight() && Traction() && Weapon())
         {
             AccessCache["MountainDwarfAccess"] = true;
             return true;
@@ -1579,7 +1579,7 @@ public class CheckIndex
     }
     public static bool CheckAccess38() //South of Village - Giant Boulder
     {
-        return TownAccess() && (LongFlight() || Swim1());
+        return TownAccess() && (LongFlight() || Swim1()) && Charge2();
     }
     public static bool CheckAccess39() //North of Village - East of Gate
     {
