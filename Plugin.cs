@@ -15,16 +15,16 @@ using Music.patches;
 using Rock.patches;
 
 namespace MasterKeyRandomizer;
-[BepInPlugin("com.draexzhan.MasterKeyRandomizer", "Master Key Randomizer", "0.1.1.1")]
-	[BepInProcess("Master Key.exe")]
+[BepInPlugin(MKPluginInfo.GUID, MKPluginInfo.NAME, MKPluginInfo.VERSION)]
+[BepInProcess("Master Key.exe")]
 public class MasterKeyRandomizer : BaseUnityPlugin
 {
-	static readonly Harmony harmonyCore = new Harmony("com.draexzhan.patch");
+	static readonly Harmony harmonyCore = new Harmony(MKPluginInfo.GUID);
 	static readonly Harmony harmonyRando = new Harmony("com.draexzhanRando.patch");
 	private void Awake()
     {
         MKLogger.SetLogger(Logger);
-        Logger.LogInfo("Master Key Randomizer (v0.1.1.1) is loaded!");
+        Logger.LogInfo($"{MKPluginInfo.NAME} (v{MKPluginInfo.VERSION}) is loaded!");
         harmonyCore.PatchAll(typeof(TitleImagePatch1));
         harmonyCore.PatchAll(typeof(RandomizerEditor));
         Application.runInBackground = true;
