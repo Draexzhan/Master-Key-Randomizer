@@ -8,4 +8,12 @@ class QOLPatcher
 	{
 		__instance.rate = (1f / 8f);
 	}
+
+	[HarmonyPrefix]
+	[HarmonyPatch(typeof(blocPoussableScript), nameof(blocPoussableScript.Start))]
+	public static void FasterBlockPatch(blocPoussableScript __instance)
+	{
+		__instance.seuil = 12;
+		__instance.transitionTime = .5f;
+	}
 }
