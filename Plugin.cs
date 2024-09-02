@@ -53,6 +53,7 @@ public class MasterKeyRandomizer : BaseUnityPlugin
 		harmonyRando.PatchAll(typeof(RandoWarp));
 		harmonyRando.PatchAll(typeof(MusicPatch1));
         harmonyRando.PatchAll(typeof(RockPatch1));
+        harmonyRando.PatchAll(typeof(QOLPatcher));
 	}
 
     static public void VanillaMode()
