@@ -73,11 +73,11 @@ public class ItemCheatSheet
 			TierCap = tierCap;
 			CelebrationType = celebrationType;
 		}
-		public void UpdateSpriteName(int currentTier)
+		public void UpdateSpriteName(int currentTier, bool GiveQuantity = true)
 		{
 			LogDebug(currentTier.ToString() + " " + AppendTier.ToString());
 			if (AppendTier)
-				SpriteName = ItemTypeName + " " + Math.Min(QuantityToGive + currentTier, TierCap) + ".png";
+				SpriteName = ItemTypeName + " " + Math.Min((GiveQuantity ? QuantityToGive : 0) + currentTier, TierCap) + ".png";
 
 			else
 				SpriteName = ItemTypeName + ".png";

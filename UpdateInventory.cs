@@ -196,11 +196,19 @@ public class UpdateInventory : MonoBehaviour
 	public void RareEffect(ItemData itemData)
 	{
 		AssetBundle Bundle = AssetBundle.LoadFromFile("BepInEx\\plugins\\MasterKeyRandomizer\\masterkeyrandoassets");
+		FoxMove foxMove = FindObjectOfType<FoxMove>();
+		try
+		{
+			FieldInfo fieldInfo = foxMove.GetType().GetField(itemData.ItemNameForSave);
+			//LogInfo(fieldInfo.GetValue(foxMove).ToString());
+			if (fieldInfo.GetValue(foxMove) != null)
+				itemData.UpdateSpriteName((int)fieldInfo.GetValue(foxMove), false);
+		}
+		catch (Exception) { LogInfo("Sprite update skipped. string given was " + itemData.ItemNameForSave); }
 		Sprite item = Bundle.LoadAsset<Sprite>(itemData.SpriteName);
 		GameObject itemObject = new GameObject("Held Item");
 		itemObject.AddComponent<SpriteRenderer>().sprite = item;
 		itemObject.GetComponent<SpriteRenderer>().sortingOrder = 11;
-		FoxMove foxMove = FindObjectOfType<FoxMove>();
 		GameObject Player = GameObject.FindGameObjectWithTag("Player");
 		itemObject.transform.parent = Player.transform;
 		itemObject.transform.localPosition = Vector3.zero;
@@ -416,19 +424,23 @@ public class UpdateInventory : MonoBehaviour
 	static IEnumerator timeForKill(GameObject itemObject, float grabDuration, ItemData itemData, GameObject parent)
 	{
 		yield return new WaitForSeconds(grabDuration);
-		if (itemData.AppendTier)
+		try
 		{
-			LogDebug("Updating item appearances.");
-			objetRareScript[] allItems = FindObjectsOfType<objetRareScript>();
-			for (int i = 0; i < allItems.Length; i++)
+			if (itemData.AppendTier)
 			{
-				if (UpdateAppearance(allItems[i].gameObject.name + allItems[i].transform.position.ToString(), itemData.Name))
+				LogDebug("Updating item appearances.");
+				objetRareScript[] allItems = FindObjectsOfType<objetRareScript>();
+				for (int i = 0; i < allItems.Length; i++)
 				{
-					LogDebug("Updating item appearance of the item " + itemData.Name + " at " + allItems[i].gameObject.name + allItems[i].transform.position.ToString());
-					allItems[i].gameObject.GetComponent<SpriteRenderer>().sprite = (UpdateAppearance(allItems[i].gameObject.name + allItems[i].transform.position.ToString(), itemData.Name));
+					if (UpdateAppearance(allItems[i].gameObject.name + allItems[i].transform.position.ToString(), itemData.Name))
+					{
+						LogDebug("Updating item appearance of the item " + itemData.Name + " at " + allItems[i].gameObject.name + allItems[i].transform.position.ToString());
+						allItems[i].gameObject.GetComponent<SpriteRenderer>().sprite = (UpdateAppearance(allItems[i].gameObject.name + allItems[i].transform.position.ToString(), itemData.Name));
+					}
 				}
 			}
 		}
+		catch (Exception e) { LogError("Error killing object: " + e); }
 		Destroy(itemObject);
 		Destroy(parent);
 	}
