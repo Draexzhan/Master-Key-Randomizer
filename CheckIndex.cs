@@ -2921,5 +2921,9 @@ public class CheckIndex
 	{
 		return (GetTier("Snow Potion") > 0 || (!WarpShuffle() && PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets();
 	}
+    public static bool CheckAccess374() //Forge - Bottom Floor Northwest
+    {
+        return ForgeAccess() && Grapple1() && GetTier("ForgePass") > 9;
+    }
 	#endregion individual checks
 }
