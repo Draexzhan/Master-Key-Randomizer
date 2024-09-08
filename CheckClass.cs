@@ -430,7 +430,8 @@ public class CheckClass
             { "CoffreSouterreNeige2(-92.50, 30.50, 0.00)", new CheckData("Snow Potion Slope - Buried Treasure 3", 371, "CoffreSouterreNeige2(-92.50, 30.50, 0.00)" ) },
             { "CoffreSouterreNeige3(-91.00, 28.00, 0.00)", new CheckData("Snow Potion Slope - Buried Treasure 4", 372, "CoffreSouterreNeige3(-91.00, 28.00, 0.00)" ) },
             { "CoffreSouterreNeige4(-88.00, 27.00, 0.00)", new CheckData("Snow Potion Slope - Buried Treasure 5", 373, "CoffreSouterreNeige4(-88.00, 27.00, 0.00)" ) },
-            { "CoffreTresor7(-61.50, 579.50, 0.00)", new CheckData("Forge - Bottom Floor Northwest", 374, "CoffreTresor7(-61.50, 579.50, 0.00)") }
+            { "CoffreTresor7(-61.50, 579.50, 0.00)", new CheckData("Forge - Bottom Floor Northwest", 374, "CoffreTresor7(-61.50, 579.50, 0.00)") },
+            { "CoffreSouloGGM2(660.50, -28.00, 0.00)", new CheckData("Swamp Grotto - Behind the Waterfall", 375, "CoffreSouloGGM2(660.50, -28.00, 0.00)") }
 
 		};
     }

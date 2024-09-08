@@ -2925,5 +2925,9 @@ public class CheckIndex
     {
         return ForgeAccess() && Grapple1() && GetTier("ForgePass") > 9;
     }
+    public static bool CheckAccess375() //Swamp - Behind the Waterfall
+    {
+        return SwampCaveAccess() && Swim1();
+    }
 	#endregion individual checks
 }
