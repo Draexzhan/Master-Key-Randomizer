@@ -2907,19 +2907,19 @@ public class CheckIndex
     }
     public static bool CheckAccess370() //Snow Potion Slope - Buried Treasure 2
     {
-		return (GetTier("Snow Potion") > 0 || (!WarpShuffle() && PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets();
+		return (GetTier("Snow Potion") > 0 && (!WarpShuffle() && PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets();
 	}
 	public static bool CheckAccess371() //Snow Potion Slope - Buried Treasure 3
 	{
-		return (GetTier("Snow Potion") > 0 || (!WarpShuffle() && PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets();
+		return (GetTier("Snow Potion") > 0 && (!WarpShuffle() && PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets();
 	}
 	public static bool CheckAccess372() //Snow Potion Slope - Buried Treasure 4
 	{
-		return (GetTier("Snow Potion") > 0 || (!WarpShuffle() && PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets();
+		return (GetTier("Snow Potion") > 0 && (!WarpShuffle() && PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets();
 	}
 	public static bool CheckAccess373() //Snow Potion Slope - Buried Treasure 5
 	{
-		return (GetTier("Snow Potion") > 0 || (!WarpShuffle() && PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets();
+		return (GetTier("Snow Potion") > 0 && (!WarpShuffle() && PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets();
 	}
     public static bool CheckAccess374() //Forge - Bottom Floor Northwest
     {
@@ -2929,5 +2929,29 @@ public class CheckIndex
     {
         return SwampCaveAccess() && Swim1();
     }
+    public static bool CheckAccess376() //Near Starting Cave - Unmarked Dig Spot Near Boulder
+    {
+        return TownAccess() && EasyFlight() && Swim1() && Gloves() && AllowMajorSecrets();
+    }
+    public static bool CheckAccess377() //Mountain - Unmarked Dig Spot on Clifftop Behind Smith Shop
+    {
+        return MountainAccess() && Balloon1() && Gloves() && AllowMajorSecrets();
+    }
+    public static bool CheckAccess378() //Mountain - Unmarked Hidden Cave North of Waypoint
+	{
+        return MountainAccess() && Charge1() && Balloon1() && AllowMajorSecrets();
+	}
+	public static bool CheckAccess379() //Dream World - Hidden Chest Next to Arrow Math Stone
+	{
+		return GetTier("Snow Potion") > 0 && Lens() && Balloon1() && AllowMajorSecrets();
+	}
+	public static bool CheckAccess380() //Dream World - Hidden Chest Northwest of Arrow Math Ston
+	{
+		return GetTier("Snow Potion") > 0 && Lens() && Balloon1() && AllowMajorSecrets();
+	}
+	public static bool CheckAccess381() //Dream World - Buried North of Arrow Math Stone
+	{
+		return GetTier("Snow Potion") > 0 && Lens() && Balloon1() && AllowMajorSecrets() && Boomerang1() && Gloves();
+	}
 	#endregion individual checks
 }
