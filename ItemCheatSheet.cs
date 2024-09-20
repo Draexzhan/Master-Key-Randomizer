@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 using static MasterKeyRandomizer.MKLogger;
 
@@ -87,7 +88,7 @@ public class ItemCheatSheet
 	{
 		public static Dictionary<String, ItemData> TranslatedItemNames = new()
 		{
-			{ "1 Coin", new ItemData("1 Coin", "junk", "argent", "Small Coin", false, 1, 9999, 0 ) },
+			{ "1 Coin", new ItemData("1 Coin", "junk", "argent", "Small Coin", false, 1, 9999, 1 ) },
 			{ "5 Coins", new ItemData("5 Coins", "junk", "argent", "Medium Coin", false, 5, 9999, 1 ) },
 			{ "10 Coins", new ItemData("10 Coins", "junk", "argent", "Big Coin", false, 10, 9999, 1 ) },
 			{ "20 Bucks", new ItemData("20 Bucks", "junk", "argent", "Bill", false, 20, 9999, 1 ) },
@@ -148,6 +149,9 @@ public class ItemCheatSheet
 			{ "Archipelago Junk", new ItemData("Archipelago Junk", "junk", "No Data", "Pelly", false, 1, 1, 1) },
 			{ "Archipelago Item", new ItemData("Archipelago Item", "useful", "No Data", "PellyPlus", false, 1, 1, 2) },
 			{ "Archipelago Progress", new ItemData("Archipelago Progress", "progression", "No Data", "PellyProgress", false, 1, 1, 3) },
+			{ "Damage Trap", new ItemData("Damage Trap", "trap", "No Data", "Trap", true, UnityEngine.Random.Range(1, 13), 12, 0) },
+			{ "Cannon Trap", new ItemData("Cannon Trap", "trap", "No Data", "Trap", true, UnityEngine.Random.Range(1, 13), 12, 0) },
+			{ "Spike Trap", new ItemData("Spike Trap", "trap", "No Data", "Trap", true, UnityEngine.Random.Range(1, 13), 12, 0) },
 			{ "Error", new ItemData("Error", "trap", "No Data", "Error", false, 0, 1, 0) }
 		};
 	}

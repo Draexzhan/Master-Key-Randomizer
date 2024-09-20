@@ -6,6 +6,7 @@ using UnityEngine;
 using static ItemCheatSheet;
 using static CheckClass;
 using static MasterKeyRandomizer.MKLogger;
+using static Traps;
 using BepInEx;
 using System.Threading;
 using System.Linq;
@@ -74,41 +75,34 @@ public class UpdateInventory : MonoBehaviour
 			}
 			if (itemData.ItemNameForSave == "PDVActuels")
 			{
-				if (foxMove.PDVActuels == foxMove.PDVMax)
+				LogInfo("OMNOMNOMNOMNOM");
+				PlayerHealthAndItemScript phais = FindObjectOfType<PlayerHealthAndItemScript>();
+				phais.character.enableMove(b: false);
+				GameObject.FindGameObjectWithTag("Controls").GetComponent<FoxControllerScript>().disableInput = true;
+				phais.character.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+				if (itemData.Name == "Apple")
 				{
-
+					phais.mangePomme();
+					phais.deathPosition = phais.transform.position;
+					phais.Invoke("finiDeMangerLaPomme", 3f);
+					ThreadingHelper.Instance.StartCoroutine(WaitForFiveSeconds());
+					busy = false;
+					return;
 				}
-				else
+				else if (itemData.Name == "Cheese")
 				{
-					LogInfo("OMNOMNOMNOMNOM");
-					PlayerHealthAndItemScript phais = FindObjectOfType<PlayerHealthAndItemScript>();
-					phais.character.enableMove(b: false);
-					GameObject.FindGameObjectWithTag("Controls").GetComponent<FoxControllerScript>().disableInput = true;
-					phais.character.gameObject.GetComponent<SpriteRenderer>().enabled = false;
-					if (itemData.Name == "Apple")
-					{
-						phais.mangePomme();
-						phais.deathPosition = phais.transform.position;
-						phais.Invoke("finiDeMangerLaPomme", 3f);
-						ThreadingHelper.Instance.StartCoroutine(WaitForFiveSeconds());
-						busy = false;
-						return;
-					}
-					else if (itemData.Name == "Cheese")
-					{
-						phais.mangeFromage();
-						phais.deathPosition = phais.transform.position;
-						phais.Invoke("finiDeMangerLeFromage", 3f);
-						ThreadingHelper.Instance.StartCoroutine(WaitForFiveSeconds());
-						busy = false;
-						return;
-					}
+					phais.mangeFromage();
+					phais.deathPosition = phais.transform.position;
+					phais.Invoke("finiDeMangerLeFromage", 3f);
+					ThreadingHelper.Instance.StartCoroutine(WaitForFiveSeconds());
+					busy = false;
+					return;
 				}
 			}
 		}
 		else
 		{
-			if (itemData.Name == "Woods Potion") //-38134
+			if (itemData.Name == "Woods Potion")
 			{
 				LogDebug("Teleport to the Woods!\nThe Woods!\nIt's Woods Time for you!");
 				foxMove.enableMove(b: false);
@@ -127,7 +121,7 @@ public class UpdateInventory : MonoBehaviour
 			}
 			if (itemData.Name == "Snow Potion")
 			{
-				LogDebug("Teleport to the Snow!"); //-38112
+				LogDebug("Teleport to the Snow!");
 				foxMove.enableMove(b: false);
 				GameObject.FindGameObjectWithTag("Controls").GetComponent<FoxControllerScript>().disableInput = true;
 				foxMove.gameObject.GetComponent<SpriteRenderer>().enabled = false;
@@ -336,10 +330,23 @@ public class UpdateInventory : MonoBehaviour
 			foxMove.removeVelo();
 			context.Send(delegate
 			{
-				ThreadingHelper.Instance.StartSyncInvoke(() => StartCoroutine(timeForKill(itemObject, grabDuration, itemData, this.GetComponentInParent<GameObject>())));
+				ThreadingHelper.Instance.StartSyncInvoke(() => StartCoroutine(timeForKill(itemObject, grabDuration + 10, itemData, this.GetComponentInParent<GameObject>())));
 			}, null);
 			Bundle.Unload(false);
 			busy = false;
+			if (itemData.Name != "Archipelago Trap")
+			{
+				int Intensity = PlayerPrefs.GetInt(FindObjectOfType<FoxMove>().saveslot + "TrapIntensity");
+				if (itemData.Name == "Cannon Trap")
+					itemObject.AddComponent<Traps>().CannonBallsTrap(10 * Intensity, 1/Intensity);
+				else if (itemData.Name == "Damage Trap")
+					itemObject.AddComponent<Traps>().DamageTrap(Intensity);
+				else if (itemData.Name == "Spike Trap")
+					itemObject.AddComponent<Traps>().SpikeTrap(Intensity);
+			}
+			else
+			{
+			}
 		}
 		Fanfare.LoadAudioData();
 		AudioSource.PlayClipAtPoint(Fanfare, itemObject.transform.position, GameObject.FindGameObjectWithTag("Starter").GetComponent<starterScript>().SFXVol);

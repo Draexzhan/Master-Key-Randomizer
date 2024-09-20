@@ -436,7 +436,7 @@ public class CheckClass
             { "CoffreSouterreNeigeFalaise(-53.50, 59.50, 0.00)", new CheckData("Mountain - Unmarked Dig Spot on Clifftop Behind Smith Shop", 377, "CoffreSouterreNeigeFalaise(-53.50, 59.50, 0.00)") },
             { "CoffreHiddenMont(568.50, 70.50, 0.00)", new CheckData("Mountain - Unmarked Hidden Cave North of Waypoint", 378, "CoffreHiddenMont(568.50, 70.50, 0.00)") },
             { "CoffreArgentCitePetiteIleEst(54.50, 173.50, 0.00)", new CheckData("Dream World - Hidden Chest Next to Arrow Math Stone", 379, "CoffreArgentCitePetiteIleEst(54.50, 173.50, 0.00)") },
-            { "CoffreArgentCiteIleTresSecret(60.50, 182.50, 0.00)", new CheckData("Dream World - Hidden Chest Northwest of Arrow Math Stone", 380, "CoffreArgentCiteIleTresSecret(60.50, 182.50, 0.00)") },
+            { "CoffreArgentCiteIleTresSecrete(60.50, 182.50, 0.00)", new CheckData("Dream World - Hidden Chest Northwest of Arrow Math Stone", 380, "CoffreArgentCiteIleTresSecrete(60.50, 182.50, 0.00)") },
             { "CoffreSouloCiteIleSuperSecrete(45.50, 180.50, 0.00)", new CheckData("Dream World - Buried North of Arrow Math Stone", 381, "CoffreSouloCiteIleSuperSecrete(45.50, 180.50, 0.00)") }
 
 		};

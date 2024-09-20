@@ -39,9 +39,8 @@ class RareItemPatcher
                     LogError("itemname errored at " + LocationID + ".");
                     itemname = "Error";
                 }
-                if (itemname != "Error")
-				CheckClass.GetData(LocationID).CheckItem = ItemLookup.TranslatedItemNames[itemname];
 			}
+			CheckClass.GetData(LocationID).CheckItem = ItemLookup.TranslatedItemNames[itemname];
 			__instance.gameObject.GetComponent<SpriteRenderer>().sprite = UpdateAppearance(LocationID);
 		}
         catch (Exception) { LogInfo("itemname errored at " + LocationID + "."); itemname = GetData("Error").Name; }
@@ -59,7 +58,7 @@ class RareItemPatcher
             __instance.isUWMap = true;
             LogInfo(itemname + " should respawn.");
 		}
-        else if (PlayerPrefs.GetInt(UnityEngine.Object.FindObjectOfType<FoxMove>().saveslot + (CheckClass.GetData(__instance.gameObject.name + __instance.OrigPos.ToString()).LocationName), 0) == 1)
+        else if (PlayerPrefs.GetInt(UnityEngine.Object.FindObjectOfType<FoxMove>().saveslot + CheckClass.GetData(__instance.gameObject.name + __instance.OrigPos.ToString()).LocationName, 0) == 1)
             UnityEngine.Object.Destroy(__instance.gameObject);
 		if (__instance.isRez && __instance.joueur.GetComponent<FoxMove>().rez > 0 && !__instance.EnCoffre)
 		{
@@ -79,8 +78,6 @@ class RareItemPatcher
         LogDebug("grabbing " + __instance.gameObject.name + " (This is the check name, not the received item name)");
 		__instance.joueur = GameObject.FindGameObjectWithTag("Player");
         string CheckName = CheckClass.GetData(__instance.gameObject.name + __instance.OrigPos.ToString()).LocationName;
-        PlayerPrefs.SetInt(UnityEngine.Object.FindObjectOfType<FoxMove>().saveslot + CheckName, 1);
-
 		string text = UnityEngine.Object.FindObjectOfType<FoxMove>().saveslot + CheckName;
 		PlayerPrefs.SetInt(text, 1);
 		string key = __instance.joueur.GetComponent<FoxMove>().saveslot + "infoWorld";

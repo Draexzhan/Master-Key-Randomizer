@@ -1,6 +1,7 @@
 ﻿using static MasterKeyRandomizer.MasterKeyRandomizer;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace MasterKeyRandoMenu;
 
@@ -25,8 +26,12 @@ public class RandomizerEditor : MonoBehaviour
     public static int WarpShuffle = PlayerPrefs.GetInt("WarpShuffle", 1);
     public static int DreamLogic = PlayerPrefs.GetInt("DreamLogic", 1);
     public static int SecretLogic = PlayerPrefs.GetInt("SecretLogic", 0);
+	public static int TrapRate = PlayerPrefs.GetInt("TrapRate", 0);
     public static int EntranceShuffle = PlayerPrefs.GetInt("EntranceShuffle", 0);
     public static string ImportSeedFromFile = string.Empty;
+	public static int TrapPercent = 20;
+	public static float TrapIntensity = PlayerPrefs.GetInt("TrapIntensity", 3);
+	public static float Intensity = 3;
 
     private void OnGUI()
     {
@@ -66,8 +71,9 @@ public class RandomizerEditor : MonoBehaviour
 		GUI.Label(new Rect(10f, 140f, 160f, 40f), "Warp Shuffle:"); bool flag50 = GUI.Toggle(new Rect(140f, 140f, 140f, 20f), PlayerPrefs.GetInt("WarpShuffle") == 0, "On"); bool flag51 = GUI.Toggle(new Rect(280f, 140f, 100f, 20f), PlayerPrefs.GetInt("WarpShuffle") == 1, "Off");
 		GUI.Label(new Rect(10f, 160f, 160f, 40f), "Dream Pedestal:"); bool flag60 = GUI.Toggle(new Rect(140f, 160f, 140f, 20f), PlayerPrefs.GetInt("DreamLogic") == 0, "In Logic"); bool flag61 = GUI.Toggle(new Rect(280f, 160f, 100f, 20f), PlayerPrefs.GetInt("DreamLogic") == 1, "Vanilla");
 		GUI.Label(new Rect(10f, 180f, 160f, 40f), "Secret Logic:"); bool flag70 = GUI.Toggle(new Rect(140f, 180f, 140f, 20f), PlayerPrefs.GetInt("SecretLogic") == 0, "All in Logic"); bool flag71 = GUI.Toggle(new Rect(280f, 180f, 140f, 20f), PlayerPrefs.GetInt("SecretLogic") == 1, "Exclude Sneakiest");
-		
-        
+		GUI.Label(new Rect(10f, 200f, 160f, 40f), "Trap Rate:"); bool flag80 = GUI.Toggle(new Rect(140f, 200f, 140f, 20f), PlayerPrefs.GetInt("TrapRate") == 0, "Disabled"); bool flag81 = GUI.Toggle(new Rect(280f, 200f, 140f, 20f), PlayerPrefs.GetInt("TrapRate") > 0, "Enabled"); bool flag82 = GUI.Toggle(new Rect(420f, 200f, 140f, 20f), PlayerPrefs.GetInt("TrapRate") == -1, "Random");
+		//percentage bar
+        //trap intensity
         
         
         GUI.Label(new Rect(10f, 360f, 160f, 40f), "Seed Preset:"); bool flagy0 = GUI.Toggle(new Rect(140f, 360f, 100f, 20f), PlayerPrefs.GetInt("DoSeedPreset") == 0, "On"); bool flagy1 = GUI.Toggle(new Rect(240f, 360f, 100f, 20f), PlayerPrefs.GetInt("DoSeedPreset") == 1, "Off");
@@ -136,7 +142,27 @@ public class RandomizerEditor : MonoBehaviour
 			PlayerPrefs.SetInt("SecretLogic", 1);
 		}
 
-
+		if (flag80 && PlayerPrefs.GetInt("TrapRate") != 0)
+		{
+			PlayerPrefs.SetInt("TrapRate", 0);
+		}
+		else if (flag81 && PlayerPrefs.GetInt("TrapRate") <= 0)
+		{
+			PlayerPrefs.SetInt("TrapRate", TrapPercent);
+		}
+		else if (flag82 && PlayerPrefs.GetInt("TrapRate") != -1)
+		{
+			PlayerPrefs.SetInt("TrapRate", -1);
+		}
+		if (flag81)
+		{
+			GUI.Label(new Rect(10f, 220f, 160f, 40f), "Trap Percentage:"); TrapPercent = (int)GUI.HorizontalSlider(new Rect(140f, 225f, 112f, 20f), TrapPercent, 1, 100); GUI.Label(new Rect(280f, 220f, 100f, 20f), TrapPercent + "%");
+			GUI.Label(new Rect(10f, 240f, 160f, 40f), "Trap Intensity:"); Intensity = GUI.HorizontalSlider(new Rect(140f, 245f, 112f, 20f), Intensity, 1, 10); GUI.Label(new Rect(280f, 240f, 100f, 20f), (int)Intensity + "/10");
+		}
+		else if (flag82)
+		{
+			GUI.Label(new Rect(10f, 240f, 160f, 40f), "Trap Intensity:"); Intensity = GUI.HorizontalSlider(new Rect(140f, 245f, 112f, 40f), Intensity, 1, 10); GUI.Label(new Rect(280f, 240f, 100f, 20f), (int)Intensity + "/10");
+		}
 		if (flagy0 && PlayerPrefs.GetInt("DoSeedPreset") == 1)
 		{
 			PlayerPrefs.SetInt("DoSeedPreset", 0);
@@ -178,8 +204,24 @@ public class RandomizerEditor : MonoBehaviour
 				}
 				PlayerPrefs.SetInt("SeedPreset", seedPreset);
 				PlayerPrefs.SetInt("RandoLastWorld", saveNumber);
+				if (PlayerPrefs.GetInt("TrapRate", 0) == -1)
+					PlayerPrefs.SetInt(SaveLoader.saveslot + "TrapRate", -1);
+				else
+					PlayerPrefs.SetInt(SaveLoader.saveslot + "TrapRate", PlayerPrefs.GetInt("TrapRate", 0));
+				PlayerPrefs.SetInt(SaveLoader.saveslot + "TrapIntensity", PlayerPrefs.GetInt("TrapIntensity", (int)Intensity));
 				if (PlayerPrefs.GetInt("StartLogic") == 1)
 					PlayerPrefs.SetString(SaveLoader.saveslot + "respawn", "village");
+				string key = SaveLoader.saveslot + "infoWorld";
+				string[] stringArray = PlayerPrefsX.GetStringArray(key);
+				string[] array = new string[stringArray.Length + 1];
+				stringArray.CopyTo(array, 0);
+				new string[1] { SaveLoader.saveslot + "TrapRate" }.CopyTo(array, stringArray.Length);
+				PlayerPrefsX.SetStringArray(key, array);
+				stringArray = PlayerPrefsX.GetStringArray(key);
+				array = new string[stringArray.Length + 1];
+				stringArray.CopyTo(array, 0);
+				new string[1] { SaveLoader.saveslot + "TrapIntensity" }.CopyTo(array, stringArray.Length);
+				PlayerPrefsX.SetStringArray(key, array);
 				SaveLoader.LoadSceneAndPlay("OverWorld");
 			}
         }
