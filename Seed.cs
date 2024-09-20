@@ -40,7 +40,11 @@ public class Seed
             Checks.AddRange(CheckLookup.Locations.Values);
 			DirectoryInfo spoilerPath = Directory.CreateDirectory(Application.persistentDataPath + "\\SpoilerLogs");
 			LogInfo(Checks.Count.ToString());
-			ItemRandomizer.PopulatePrecollected();
+            if (PlayerPrefs.GetInt(saveSlot + "TrapRate", 0) == -1)
+            {
+                PlayerPrefs.SetInt(saveSlot + "TrapRate", rand.Next(1, 100));
+            }
+            ItemRandomizer.PopulatePrecollected();
 			ItemRandomizer.AssumeFill(Checks);
 			string path = Application.persistentDataPath + "\\SpoilerLogs\\SpoilerLogForSeed" + seed + ".txt";
             StreamWriter SpoilerLog = new StreamWriter(path, true);
@@ -52,6 +56,12 @@ public class Seed
 			SpoilerLog.WriteLine("Warp Shuffle - " + (PlayerPrefs.GetInt("WarpShuffle") == 0 ? "On" : "Off"));
 			SpoilerLog.WriteLine("Dream Pedestal - " + (PlayerPrefs.GetInt("DreamLogic") == 0 ? "In Logic" : "Vanilla"));
             SpoilerLog.WriteLine("Secret Logic - " + (PlayerPrefs.GetInt("SecretLogic") == 0 ? "All in Logic" : "Exclude Sneakiest"));
+            SpoilerLog.WriteLine("Traps - " + (PlayerPrefs.GetInt(saveSlot + "TrapRate", 0) > 0 ? "Enabled" : "Disabled"));
+            if (PlayerPrefs.GetInt(saveSlot + "TrapRate", 0) > 0)
+            {
+                SpoilerLog.WriteLine("Percentage of Traps in Junk - " + PlayerPrefs.GetInt(saveSlot + "TrapRate", 0) + "%");
+                SpoilerLog.WriteLine("Trap Intensity - " + PlayerPrefs.GetInt(saveSlot + "TrapIntensity", 3) + "/10");
+            }
             SpoilerLog.WriteLine("\nLocations and their items\n------------------------------------------\n");
             foreach (CheckData check in CheckLookup.Locations.Values)
             {
@@ -335,10 +345,12 @@ public class Seed
     {
         //fake items for simulating before generating.
         public static List<string> PrecollectedItems = new List<string>();
+		private static readonly string saveSlot = GameObject.FindGameObjectWithTag("Player").GetComponent<FoxMove>().saveslot;
 
-        public static void PopulatePrecollected()
+		public static void PopulatePrecollected()
 		{
 			LogInfo("Generating Items...");
+            int junkTotal;
 			PrecollectedItems.Clear();
             for (int i = 0; i < 6; i++)
             {
@@ -404,11 +416,22 @@ public class Seed
             PrecollectedItems.Add("Forge Map");
             PrecollectedItems.Add("Final Dungeon Map");
             PrecollectedItems.Add("Moster Sword");
-            for (int i = PrecollectedItems.Count; i < CheckLookup.Locations.Count - 6; i++)
+            junkTotal = (CheckLookup.Locations.Count - 6) - PrecollectedItems.Count;
+            for (int i = 0; i < junkTotal; i++)
             {
-                if (i % 13 == 0)
+                if (i / junkTotal < PlayerPrefs.GetInt(saveSlot + "TrapRate", 0)/100)
+                {
+                    int trapType = rand.Next(1, 4);
+                    if (trapType == 1)
+                        PrecollectedItems.Add("Cannon Trap");
+                    else if (trapType == 2)
+                        PrecollectedItems.Add("Damage Trap");
+                    else if (trapType == 3)
+                        PrecollectedItems.Add("Spike Trap");
+                }
+                else if (i % 13 == 0)
                     PrecollectedItems.Add("100 Diamond");
-                else if (i % 13 <= 2)
+                else if (i % 13 <= 1)
                     PrecollectedItems.Add("50 Gold");
                 else if (i % 13 <= 5)
                     PrecollectedItems.Add("20 Bucks");
