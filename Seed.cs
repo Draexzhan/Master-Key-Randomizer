@@ -181,8 +181,8 @@ public class Seed
 				}
 			}
             LogInfo("This world has already been randomized with seed " + seed + ".");
-        }
-    }
+		}
+	}
 
     private static ItemData GetRandomItem(int seed)
     {

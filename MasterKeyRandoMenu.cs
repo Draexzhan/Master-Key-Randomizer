@@ -1,7 +1,6 @@
 ﻿using static MasterKeyRandomizer.MasterKeyRandomizer;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace MasterKeyRandoMenu;
 
@@ -222,6 +221,7 @@ public class RandomizerEditor : MonoBehaviour
 				stringArray.CopyTo(array, 0);
 				new string[1] { SaveLoader.saveslot + "TrapIntensity" }.CopyTo(array, stringArray.Length);
 				PlayerPrefsX.SetStringArray(key, array);
+				SceneManager.LoadSceneAsync("TempleNeige", LoadSceneMode.Additive);
 				SaveLoader.LoadSceneAndPlay("OverWorld");
 			}
         }

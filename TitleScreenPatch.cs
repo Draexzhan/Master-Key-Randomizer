@@ -1,6 +1,11 @@
 ﻿using HarmonyLib;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Linq;
 using static MasterKeyRandomizer.MasterKeyRandomizer;
+using MasterKeyRandomizer;
+using BepInEx;
 
 namespace MenuMod.patches;
 
@@ -27,4 +32,22 @@ class TitleImagePatch1
         Title.transform.position = new Vector3(-1000f, 2.9f, 0);
         Bundle.Unload(false);
     }
+
+    [HarmonyPostfix]
+    [HarmonyPatch(typeof(starterScript), nameof(starterScript.Start))]
+    public static void PreloadAssets(starterScript __instance)
+    {
+        ThreadingHelper.Instance.StartCoroutine(InitializeTraps());
+	}
+	static IEnumerator InitializeTraps()
+	{
+        MKLogger.LogInfo("About to get the cannonball");
+        AsyncOperation NeigeScene = SceneManager.LoadSceneAsync("TempleNeige", LoadSceneMode.Additive);
+		NeigeScene.allowSceneActivation = false;
+		yield return new WaitUntil(() => NeigeScene.progress >= 0.9f);
+        tombeRocheScript CannonBall = Resources.FindObjectsOfTypeAll<tombeRocheScript>().First();
+        GameObject.Instantiate(CannonBall);
+		MKLogger.LogInfo("CannonBallTrap should exist now");
+	}
+	ThreadingHelper Instance { get { return ThreadingHelper.Instance; } }
 }

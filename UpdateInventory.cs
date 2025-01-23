@@ -338,7 +338,7 @@ public class UpdateInventory : MonoBehaviour
 			{
 				int Intensity = PlayerPrefs.GetInt(FindObjectOfType<FoxMove>().saveslot + "TrapIntensity");
 				if (itemData.Name == "Cannon Trap")
-					itemObject.AddComponent<Traps>().CannonBallsTrap(10 * Intensity, 1/Intensity);
+					itemObject.AddComponent<Traps>().CannonBallsTrap(10 * Intensity, (float)1/Intensity);
 				else if (itemData.Name == "Damage Trap")
 					itemObject.AddComponent<Traps>().DamageTrap(Intensity);
 				else if (itemData.Name == "Spike Trap")

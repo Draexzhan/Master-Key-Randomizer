@@ -13,6 +13,7 @@ using MenuMod.patches;
 using MasterKeyRandoMenu;
 using Music.patches;
 using Rock.patches;
+using CannonPatch.patches;
 
 namespace MasterKeyRandomizer;
 [BepInPlugin(MKPluginInfo.GUID, MKPluginInfo.NAME, MKPluginInfo.VERSION)]
@@ -27,6 +28,7 @@ public class MasterKeyRandomizer : BaseUnityPlugin
         Logger.LogInfo($"{MKPluginInfo.NAME} (v{MKPluginInfo.VERSION}) is loaded!");
         harmonyCore.PatchAll(typeof(TitleImagePatch1));
         harmonyCore.PatchAll(typeof(RandomizerEditor));
+        harmonyCore.PatchAll(typeof(CannonQueue));
         Application.runInBackground = true;
         DontDestroyOnLoad(new GameObject("quick settings gui", [typeof(RandomizerEditor)])
         {

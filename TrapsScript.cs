@@ -8,6 +8,7 @@ using static MasterKeyRandomizer.MKLogger;
 public class Traps : MonoBehaviour
 {
 	#region cannon trap
+	public readonly tombeRocheScript CannonBallTrap = Resources.FindObjectsOfTypeAll<tombeRocheScript>().Where(obj => obj.name == "CannonBallTrap").FirstOrDefault() as tombeRocheScript;
 	public static List<Vector2> alreadyTargetedPos = new();
 	public readonly HelicoPicScript Spikey = Resources.FindObjectsOfTypeAll<HelicoPicScript>().Where(obj => obj.name == "helicoPic").FirstOrDefault() as HelicoPicScript;
 	public tombeRocheScript CannonBall;
@@ -19,11 +20,12 @@ public class Traps : MonoBehaviour
 
 	IEnumerator FireAway(int quantity, float rateOfFire)
 	{
-		AssetBundle Cannonballs = AssetBundle.LoadFromFile("BepInEx\\plugins\\MasterKeyRandomizer\\masterkeyrandoassets");
-		CannonBall = Cannonballs.LoadAsset<tombeRocheScript>("tombeRocheScript");
+		yield return new WaitForSeconds(2);
+		CannonBall = tombeRocheScript.Instantiate(CannonBallTrap);
+		LogDebug(rateOfFire.ToString());
 		for (int i = 0; i < quantity; i++) 
 		{
-			LogDebug("Firing a new volley");
+			LogDebug("Firing Volley #" + i);
 			FireRandom();
 			yield return new WaitForSeconds(rateOfFire);
 			FireRandom();
@@ -31,8 +33,8 @@ public class Traps : MonoBehaviour
 			FirePlayer();
 			yield return new WaitForSeconds(rateOfFire);
 		}
+		LogDebug("All volleys fired!");
 		alreadyTargetedPos.Clear();
-		Cannonballs.Unload(false);
 	}
 	private void FireRandom()
 	{
@@ -54,9 +56,10 @@ public class Traps : MonoBehaviour
 		}
 		LogDebug("Aim");
 		alreadyTargetedPos.Add(vector);
-		tombeRocheScript Cannonball = Instantiate(CannonBall);
-		Cannonball.transform.position = vector;
+		tombeRocheScript nextCannonball = Instantiate(CannonBall);
+		nextCannonball.transform.position = vector;
 		LogDebug("Fire!");
+		nextCannonball.gameObject.SetActive(true);
 	}
 	private void FirePlayer()
 	{
@@ -77,8 +80,9 @@ public class Traps : MonoBehaviour
 			}
 		}
 		alreadyTargetedPos.Add(vector);
-		tombeRocheScript Cannonball = Instantiate(CannonBall);
-		Cannonball.transform.position = vector;
+		tombeRocheScript nextCannonball = Instantiate(CannonBall);
+		nextCannonball.transform.position = vector;
+		nextCannonball.gameObject.SetActive(true);
 	}
 	#endregion cannon trap
 
