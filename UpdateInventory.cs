@@ -330,7 +330,7 @@ public class UpdateInventory : MonoBehaviour
 			foxMove.removeVelo();
 			context.Send(delegate
 			{
-				ThreadingHelper.Instance.StartSyncInvoke(() => StartCoroutine(timeForKill(itemObject, grabDuration + 10, itemData, this.GetComponentInParent<GameObject>())));
+				ThreadingHelper.Instance.StartSyncInvoke(() => StartCoroutine(timeForKill(itemObject, grabDuration + 12, itemData, this.GetComponentInParent<GameObject>())));
 			}, null);
 			Bundle.Unload(false);
 			busy = false;
@@ -430,26 +430,37 @@ public class UpdateInventory : MonoBehaviour
 
 	static IEnumerator timeForKill(GameObject itemObject, float grabDuration, ItemData itemData, GameObject parent)
 	{
-		yield return new WaitForSeconds(grabDuration);
-		try
+		if (grabDuration < 12)
 		{
-			if (itemData.AppendTier)
+			yield return new WaitForSeconds(grabDuration);
+			try
 			{
-				LogDebug("Updating item appearances.");
-				objetRareScript[] allItems = FindObjectsOfType<objetRareScript>();
-				for (int i = 0; i < allItems.Length; i++)
+				if (itemData.AppendTier)
 				{
-					if (UpdateAppearance(allItems[i].gameObject.name + allItems[i].transform.position.ToString(), itemData.Name))
+					LogDebug("Updating item appearances.");
+					objetRareScript[] allItems = FindObjectsOfType<objetRareScript>();
+					for (int i = 0; i < allItems.Length; i++)
 					{
-						LogDebug("Updating item appearance of the item " + itemData.Name + " at " + allItems[i].gameObject.name + allItems[i].transform.position.ToString());
-						allItems[i].gameObject.GetComponent<SpriteRenderer>().sprite = (UpdateAppearance(allItems[i].gameObject.name + allItems[i].transform.position.ToString(), itemData.Name));
+						if (UpdateAppearance(allItems[i].gameObject.name + allItems[i].transform.position.ToString(), itemData.Name))
+						{
+							LogDebug("Updating item appearance of the item " + itemData.Name + " at " + allItems[i].gameObject.name + allItems[i].transform.position.ToString());
+							allItems[i].gameObject.GetComponent<SpriteRenderer>().sprite = (UpdateAppearance(allItems[i].gameObject.name + allItems[i].transform.position.ToString(), itemData.Name));
+						}
 					}
 				}
 			}
+			catch (Exception e) { LogError("Error killing object: " + e); }
+			Destroy(itemObject);
+			Destroy(parent);
 		}
-		catch (Exception e) { LogError("Error killing object: " + e); }
-		Destroy(itemObject);
-		Destroy(parent);
+		else //grab duration is extra long - this only happens for trap items to let their effects play out.
+		{
+			yield return new WaitForSeconds(grabDuration - 12);
+			itemObject.transform.position = itemObject.transform.position + Vector3.right * 50f + Vector3.up * 50f;
+			yield return new WaitForSeconds(12);
+			Destroy(itemObject);
+			Destroy(parent);
+		}
 	}
 
 	public static Sprite UpdateAppearance(string checkIdentifier)

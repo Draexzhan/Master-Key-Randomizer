@@ -149,9 +149,9 @@ public class ItemCheatSheet
 			{ "Archipelago Junk", new ItemData("Archipelago Junk", "junk", "No Data", "Pelly", false, 1, 1, 1) },
 			{ "Archipelago Item", new ItemData("Archipelago Item", "useful", "No Data", "PellyPlus", false, 1, 1, 2) },
 			{ "Archipelago Progress", new ItemData("Archipelago Progress", "progression", "No Data", "PellyProgress", false, 1, 1, 3) },
-			{ "Damage Trap", new ItemData("Damage Trap", "trap", "No Data", "Trap", true, UnityEngine.Random.Range(1, 13), 12, 0) },
-			{ "Cannon Trap", new ItemData("Cannon Trap", "trap", "No Data", "Trap", true, UnityEngine.Random.Range(1, 13), 12, 0) },
-			{ "Spike Trap", new ItemData("Spike Trap", "trap", "No Data", "Trap", true, UnityEngine.Random.Range(1, 13), 12, 0) },
+			{ "Damage Trap", new ItemData("Damage Trap", "trap", "No Data", "Trap", true, UnityEngine.Random.Range(1, 14), 13, 0) },
+			{ "Cannon Trap", new ItemData("Cannon Trap", "trap", "No Data", "Trap", true, UnityEngine.Random.Range(1, 14), 13, 0) },
+			{ "Spike Trap", new ItemData("Spike Trap", "trap", "No Data", "Trap", true, UnityEngine.Random.Range(1, 14), 13, 0) },
 			{ "Error", new ItemData("Error", "trap", "No Data", "Error", false, 0, 1, 0) }
 		};
 	}
