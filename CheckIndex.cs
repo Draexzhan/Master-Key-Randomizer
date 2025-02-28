@@ -460,7 +460,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (TownAccess() && BushCut())
+        if (TownAccess() && BasicBurn())
         {
             AccessCache["RabbitCaveAccess"] = true;
             return true;
