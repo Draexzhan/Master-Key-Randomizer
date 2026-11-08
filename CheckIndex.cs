@@ -5,13 +5,13 @@ using UnityEngine;
 public class CheckIndex
 {
     #region area logic
-    public static bool StartAccess()
+    public static bool StartAccess() //The player can access the starting cave
     {
         if (AccessCache["StartAccess"] == true)
         {
             return true;
         }
-        if (PlayerPrefs.GetInt("StartLogic") == 0 || (TownAccess() && BushCut()))
+        if (PlayerPrefs.GetInt("StartLogic") == 0 || (TownAccess() && BushCut())) //the player starts in the cave, or they have a means of cutting bushes/accessing town
         {
             AccessCache["StartAccess"] = true;
             return true;
@@ -24,7 +24,7 @@ public class CheckIndex
         {
             return true;
         }
-        if ((Balloon1() && GetTier("Ruins Warp") > 0) || (!WarpShuffle() && StartWarpAccess()))
+        if ((Balloon1() || GetTier("Ruins Warp") > 0) || (!WarpShuffle() && StartWarpAccess()))
         {
             AccessCache["RuinsWarpBackdoor"] = true;
             return true;
@@ -50,7 +50,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (TownAccess() && (Charge1() || Balloon1()))
+        if (TownAccess() && (Charge1() || Balloon1() || EasyFlight()))
         {
             AccessCache["WaterWayPointAccess"] = true;
             return true;
@@ -421,7 +421,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (TownAccess() && Charge1())
+        if (TownAccess() && Weapon())
         {
             AccessCache["ThreeFireCaveAccess"] = true;
             return true;
@@ -447,7 +447,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (TownAccess() && (Charge1() || Balloon1()))
+        if ((TownAccess() && (Charge1() || Balloon1())) || (WaterWayPointAccess() && Charge1()))
         {
             AccessCache["NorthOfWaterDungeonAccess"] = true;
             return true;
@@ -467,13 +467,13 @@ public class CheckIndex
         }
         return false;
     }
-    public static bool IceSpikeMazeAccess()
+    public static bool SpikeMazeAccess()
     {
         if (AccessCache["IceSpikeMazeAccess"] == true)
         {
             return true;
         }
-        if (TownAccess() && Charge1() && AllowDark() && Traction())
+        if (TownAccess() && Charge1() && AllowDark())
         {
             AccessCache["IceSpikeMazeAccess"] = true;
             return true;
@@ -590,7 +590,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (WaterWayPointAccess() && AllowDark())
+        if (WaterWayPointAccess() && AllowDark() && Charge1())
         {
             AccessCache["DrakeCaveAccess"] = true;
             return true;
@@ -629,7 +629,7 @@ public class CheckIndex
         {
             return true;
         }
-        if ((TownAccess() && BasicBurn() || HauntWayPointAccess() && BushCut()) && AllowDark())
+        if (((TownAccess() && BasicBurn() || HauntWayPointAccess() && BushCut()) || EightRoomAccess()) && AllowDark())
         {
             AccessCache["ForestGrottoAccess"] = true;
             return true;
@@ -642,7 +642,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (NorthOfLakeAccess() && BasicBurn() && (EasyFlight() || BigBurn()) && Vision())
+        if ((NorthOfLakeAccess() && BasicBurn() && (EasyFlight() || BigBurn()) && Vision()) || (BannerHallAccess() && Balloon1()))
         {
             AccessCache["EightRoomAccess"] = true;
             return true;
@@ -655,7 +655,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (EightRoomAccess())
+        if (EightRoomAccess() && Vision())
         {
             AccessCache["EightRoomLensAccess"] = true;
             return true;
@@ -668,7 +668,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (EightRoomAccess())
+        if (EightRoomAccess() && Vision())
         {
             AccessCache["EightRoomZigguratAccess"] = true;
             return true;
@@ -707,7 +707,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (EightRoomAccess())
+        if (EightRoomAccess() && Vision())
         {
             AccessCache["EightRoomBannerAccess"] = true;
             return true;
@@ -798,7 +798,7 @@ public class CheckIndex
         {
             return true;
         }
-        if ((NorthOfLakeAccess() || MountainCaveAccess()) && AllowDark())
+        if (((NorthOfLakeAccess() && BasicBurn()) || MountainCaveAccess()) && AllowDark())
 
 		{
             AccessCache["MountainCaveAccessLower"] = true;
@@ -1567,7 +1567,7 @@ public class CheckIndex
     }
     public static bool CheckAccess35() //West of Village - Behind Rocks
     {
-        return TownAccess() && Charge1();
+        return (TownAccess() && Charge1()) || (NorthOfWaterDungeonAccess() && EasyFlight());
     }
     public static bool CheckAccess36() //West of Village - Lens Chest
     {
@@ -1643,7 +1643,7 @@ public class CheckIndex
     }
     public static bool CheckAccess54() //West Overworld - Spike Maze Chest
     {
-        return IceSpikeMazeAccess();
+        return SpikeMazeAccess();
     }
     public static bool CheckAccess55() //Southwest Overworld - Behind Reaper
     {
@@ -1679,15 +1679,15 @@ public class CheckIndex
     }
     public static bool CheckAccess63() //Above Starting Cave - Lens Chest
     {
-        return WaterWayPointAccess() && Lens();
+        return WaterWayPointAccess() && Lens() && BigBurn();
     }
     public static bool CheckAccess64() //Above Starting Cave - Sparkling Dig Spot
     {
-        return WaterWayPointAccess() && Gloves() && Balloon1() && Vision();
+        return WaterWayPointAccess() && Gloves() && Balloon1() && Vision() && BigBurn();
     }
     public static bool CheckAccess65() //Above Starting Cave - Unmarked Dig Spot
     {
-        return WaterWayPointAccess() && Gloves() && Balloon1() && AllowMajorSecrets();
+        return WaterWayPointAccess() && Gloves() && Balloon1() && AllowMajorSecrets() && BigBurn();
     }
     public static bool CheckAccess66() //Southwest Overworld - Ledge Chest West of Dungeon
     {
@@ -1719,7 +1719,7 @@ public class CheckIndex
     }
     public static bool CheckAccess73() //Northwest Overworld - West of Scuba Shop
     {
-        return ScubaShopVicinityAccess();
+        return (ScubaShopVicinityAccess() && Charge1()) || (MountainLowerAccess() && EasyFlight());
     }
     public static bool CheckAccess74() //Southwest Overworld - Drake Cave Shallows Maze
     {
@@ -1743,7 +1743,7 @@ public class CheckIndex
     }
     public static bool CheckAccess79() //West Overworld - Lens Chest
     {
-        return NorthOfWaterDungeonAccess() && (Swim1() || Balloon1()) && Lens();
+        return NorthOfWaterDungeonAccess() && (Swim1() || EasyFlight()) && Lens();
     }
     public static bool CheckAccess80() //Central Overworld - Across River North of Village
     {
@@ -1759,7 +1759,7 @@ public class CheckIndex
     }
     public static bool CheckAccess83() //Central Overworld - Alligator Hills Chest
     {
-        return NorthOfLakeAccess() && EasyFlight();
+        return (NorthOfLakeAccess() && EasyFlight()) || (TownAccess() && BasicBurn());
     }
     public static bool CheckAccess84() //West Overworld - Chest by Abandoned House
     {
@@ -1771,7 +1771,7 @@ public class CheckIndex
     }
     public static bool CheckAccess86() //East Overworld - Across the River
     {
-        return TownAccess() && LongFlight();
+        return TownAccess() && EasyFlight();
     }
     public static bool CheckAccess87() //Dark Woods - North of Warning Sign
     {
@@ -2843,7 +2843,7 @@ public class CheckIndex
     }
     public static bool CheckAccess354() //Final Dungeon - Southwest Big Chest
     {
-        return FinalDungeonAccess() && Balloon1() && Weapon() && GetTier("Water Treasure") > 0;
+        return FinalDungeonAccess() && Balloon1() && GetTier("Water Treasure") > 0;
     }
     public static bool CheckAccess355() //Final Dungeon - Northeast Big Chest
     {
@@ -2867,7 +2867,7 @@ public class CheckIndex
     }
     public static bool CheckAccess360() //Final Dungeon - Left Drop Down Chest
     {
-        return FinalDungeonAccess() && Balloon1() && Weapon();
+        return FinalDungeonAccess() && Balloon1();
     }
     public static bool CheckAccess361() //Final Dungeon - Right Drop Down Chest
     {
@@ -2952,6 +2952,12 @@ public class CheckIndex
 	public static bool CheckAccess381() //Dream World - Buried North of Arrow Math Stone
 	{
 		return GetTier("Snow Potion") > 0 && Lens() && Balloon1() && AllowMajorSecrets() && Boomerang1() && Gloves();
+	}
+	public static bool CheckAccess382() //Water Dungeon - Forgotten Corners Puzzle
+	{
+		return WaterDungeonAccess() && Weapon() && AllowMajorSecrets(); 
+        /* This is quite literally a puzzle Achromi forgot about and also didn't quite implement properly.
+         * It works, but the solution is a bit nonsensical due to a clerical error, so I'm relegating it to major secrets. */
 	}
 	#endregion individual checks
 }

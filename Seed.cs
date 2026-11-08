@@ -469,7 +469,13 @@ public class Seed
                 { "Super Meat", CheckLookup.Locations["REZ2(-632.50, 0.50, -1.00)"] },
                 { "Dark Ore", CheckLookup.Locations["PierreFinal()"] }
             });
-            if (PlayerPrefs.GetInt("WarpShuffle") == 1)
+            EmptyChecks.Remove(CheckLookup.Locations["Cafe(30.25, -20.25, -1.00)"]);
+			EmptyChecks.Remove(CheckLookup.Locations["Pomme(-599.50, 2.50, -1.00)"]);
+			EmptyChecks.Remove(CheckLookup.Locations["Fromage(-634.50, 0.50, -1.00)"]);
+			EmptyChecks.Remove(CheckLookup.Locations["REZ(-603.50, 2.50, -1.00)"]);
+			EmptyChecks.Remove(CheckLookup.Locations["REZ2(-632.50, 0.50, -1.00)"]);
+			EmptyChecks.Remove(CheckLookup.Locations["PierreFinal()"]);
+			if (PlayerPrefs.GetInt("WarpShuffle") == 1)
             {
                 HardcodedLocations.Add("Start Warp", CheckLookup.Locations["CoffreLeyndell(555.50, -48.50, 0.00)"]);
 				HardcodedLocations.Add("Ruins Warp", CheckLookup.Locations["CoffreRetour(-8.50, 242.50, 0.00)"]);
