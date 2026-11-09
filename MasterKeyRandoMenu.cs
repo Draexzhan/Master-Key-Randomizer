@@ -25,7 +25,7 @@ public class RandomizerEditor : MonoBehaviour
     public static int WarpShuffle = PlayerPrefs.GetInt("WarpShuffle", 1);
     public static int DreamLogic = PlayerPrefs.GetInt("DreamLogic", 1);
     public static int SecretLogic = PlayerPrefs.GetInt("SecretLogic", 0);
-	public static int TrapRate = PlayerPrefs.GetInt("TrapRate", 0);
+	public static int TrapRate = PlayerPrefs.GetInt("TrapRate", 20);
     public static int EntranceShuffle = PlayerPrefs.GetInt("EntranceShuffle", 0);
     public static string ImportSeedFromFile = string.Empty;
 	public static int TrapPercent = 20;
@@ -206,7 +206,7 @@ public class RandomizerEditor : MonoBehaviour
 				if (PlayerPrefs.GetInt("TrapRate", 0) == -1)
 					PlayerPrefs.SetInt(SaveLoader.saveslot + "TrapRate", -1);
 				else
-					PlayerPrefs.SetInt(SaveLoader.saveslot + "TrapRate", PlayerPrefs.GetInt("TrapRate", 0));
+					PlayerPrefs.SetInt(SaveLoader.saveslot + "TrapRate", (PlayerPrefs.GetInt("TrapRate", 20) == 0 ? 0 : TrapPercent));
 				PlayerPrefs.SetInt(SaveLoader.saveslot + "TrapIntensity", PlayerPrefs.GetInt("TrapIntensity", (int)Intensity));
 				if (PlayerPrefs.GetInt("StartLogic") == 1)
 					PlayerPrefs.SetString(SaveLoader.saveslot + "respawn", "village");

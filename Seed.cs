@@ -44,7 +44,7 @@ public class Seed
             {
                 PlayerPrefs.SetInt(saveSlot + "TrapRate", rand.Next(1, 100));
             }
-            ItemRandomizer.PopulatePrecollected();
+            ItemRandomizer.PopulatePrecollected(PlayerPrefs.GetInt(saveSlot + "TrapRate", 0));
 			ItemRandomizer.AssumeFill(Checks);
 			string path = Application.persistentDataPath + "\\SpoilerLogs\\SpoilerLogForSeed" + seed + ".txt";
             StreamWriter SpoilerLog = new StreamWriter(path, true);
@@ -347,9 +347,10 @@ public class Seed
         public static List<string> PrecollectedItems = new List<string>();
 		private static readonly string saveSlot = GameObject.FindGameObjectWithTag("Player").GetComponent<FoxMove>().saveslot;
 
-		public static void PopulatePrecollected()
+		public static void PopulatePrecollected(int trapRate)
 		{
 			LogInfo("Generating Items...");
+            LogInfo(trapRate.ToString() + "% of junk converted to traps.");
             int junkTotal;
 			PrecollectedItems.Clear();
             for (int i = 0; i < 6; i++)
@@ -419,7 +420,7 @@ public class Seed
             junkTotal = (CheckLookup.Locations.Count - 6) - PrecollectedItems.Count;
             for (int i = 0; i < junkTotal; i++)
             {
-                if (i / junkTotal < PlayerPrefs.GetInt(saveSlot + "TrapRate", 0)/100)
+                if ((float)(i) / (float)junkTotal < (float)trapRate/100)
                 {
                     int trapType = rand.Next(1, 4);
                     if (trapType == 1)
