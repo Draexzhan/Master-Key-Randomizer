@@ -27,6 +27,8 @@ public class RandomizerEditor : MonoBehaviour
     public static int SecretLogic = PlayerPrefs.GetInt("SecretLogic", 0);
 	public static int TrapRate = PlayerPrefs.GetInt("TrapRate", 20);
     public static int EntranceShuffle = PlayerPrefs.GetInt("EntranceShuffle", 0);
+	public static int MapSettings = PlayerPrefs.GetInt("MapSettings", 0);
+	public static int FinalBossAccess = PlayerPrefs.GetInt("FinalBossAccess", 1);
     public static string ImportSeedFromFile = string.Empty;
 	public static int TrapPercent = 20;
 	public static float TrapIntensity = PlayerPrefs.GetInt("TrapIntensity", 3);
@@ -41,9 +43,9 @@ public class RandomizerEditor : MonoBehaviour
             if (expanded)
             {
                 if (PlayerPrefs.GetInt("randomizerSlot" + saveNumber + "maxArgent") == 0)
-                    GUI.Window(101, new Rect(10f, 10f, 500f, 600f), new GUI.WindowFunction(RandomizerSettingsWindow), "Randomizer Settings");
+                    GUI.Window(101, new Rect(10f, 10f, 550f, 600f), new GUI.WindowFunction(RandomizerSettingsWindow), "Randomizer Settings");
 				else
-					GUI.Window(101, new Rect(10f, 10f, 500f, 600f), new GUI.WindowFunction(RandomizerStatsWindow), "Randomizer Settings");
+					GUI.Window(101, new Rect(10f, 10f, 550f, 600f), new GUI.WindowFunction(RandomizerStatsWindow), "Randomizer Settings");
 			}
             else if (GUI.Button(new Rect(20f, 20f, 100f, 30f), "Randomizer"))
             {
@@ -55,8 +57,8 @@ public class RandomizerEditor : MonoBehaviour
     private static void RandomizerSettingsWindow(int windowID)
     {
         //bool EraseConfirm = false;
-        GUI.Label(new Rect(360f, 20f, 160f, 30f), "Save Number:");
-        saveNumberString = GUI.TextField(new Rect(360f, 40f, 100f, 20f), saveNumberString);
+        GUI.Label(new Rect(400f, 20f, 160f, 30f), "Save Number:");
+        saveNumberString = GUI.TextField(new Rect(400f, 40f, 100f, 20f), saveNumberString);
         if (int.TryParse(saveNumberString, out var result))
         {
             saveNumber = result;
@@ -64,18 +66,19 @@ public class RandomizerEditor : MonoBehaviour
         GUI.Label(new Rect(10f, 20f, 160f, 40f), "Settings:" );
         GUI.Label(new Rect(10f, 40f, 160f, 40f), "Start game at:"); bool flag00 = GUI.Toggle(new Rect(140f, 40f, 140f, 20f), PlayerPrefs.GetInt("StartLogic") == 0, "Cave"); bool flag01 = GUI.Toggle(new Rect(280f, 40f, 100f, 20f), PlayerPrefs.GetInt("StartLogic") == 1, "Town");
 		GUI.Label(new Rect(10f, 60f, 160f, 40f), "Lantern Logic:"); bool flag10 = GUI.Toggle(new Rect(140f, 60f, 140f, 20f), PlayerPrefs.GetInt("LanternLogic") == 0, "Need in the Dark"); bool flag11 = GUI.Toggle(new Rect(280f, 60f, 100f, 20f), PlayerPrefs.GetInt("LanternLogic") == 1, "Minimum");
-		GUI.Label(new Rect(10f, 80f, 160f, 40f), "Lens Logic:"); bool flag20 = GUI.Toggle(new Rect(140f, 80f, 140f, 20f), PlayerPrefs.GetInt("LensLogic") == 0, "Visibility Required"); bool flag21 = GUI.Toggle(new Rect(280f, 80f, 100f, 20f), PlayerPrefs.GetInt("LensLogic") == 1, "Minimum");
+		GUI.Label(new Rect(10f, 80f, 160f, 40f), "Lens Logic:"); bool flag20 = GUI.Toggle(new Rect(140f, 80f, 140f, 20f), PlayerPrefs.GetInt("LensLogic") == 0, "Always Require"); bool flag21 = GUI.Toggle(new Rect(280f, 80f, 140f, 20f), PlayerPrefs.GetInt("LensLogic") == 1, "Unmarked Only"); bool flag22 = GUI.Toggle(new Rect(420f, 80f, 140f, 20f), PlayerPrefs.GetInt("LensLogic") == 2, "Minimum");
 		GUI.Label(new Rect(10f, 100f, 160f, 40f), "Boots Logic:"); bool flag30 = GUI.Toggle(new Rect(140f, 100f, 140f, 20f), PlayerPrefs.GetInt("BootsLogic") == 0, "Ice Traction"); bool flag31 = GUI.Toggle(new Rect(280f, 100f, 100f, 20f), PlayerPrefs.GetInt("BootsLogic") == 1, "Minimum");
-		GUI.Label(new Rect(10f, 120f, 160f, 40f), "Keysanity (TODO):"); bool flag40 = GUI.Toggle(new Rect(140f, 120f, 140f, 20f), PlayerPrefs.GetInt("KeysanityLogic") == 0, "On"); bool flag41 = GUI.Toggle(new Rect(280f, 120f, 100f, 20f), PlayerPrefs.GetInt("KeysanityLogic") == 1, "Off");
+		GUI.Label(new Rect(10f, 120f, 160f, 40f), "Keysanity:"); bool flag40 = GUI.Toggle(new Rect(140f, 120f, 140f, 20f), PlayerPrefs.GetInt("KeysanityLogic") == 0, "On"); bool flag41 = GUI.Toggle(new Rect(280f, 120f, 100f, 20f), PlayerPrefs.GetInt("KeysanityLogic") == 1, "Off");
 		GUI.Label(new Rect(10f, 140f, 160f, 40f), "Warp Shuffle:"); bool flag50 = GUI.Toggle(new Rect(140f, 140f, 140f, 20f), PlayerPrefs.GetInt("WarpShuffle") == 0, "On"); bool flag51 = GUI.Toggle(new Rect(280f, 140f, 100f, 20f), PlayerPrefs.GetInt("WarpShuffle") == 1, "Off");
 		GUI.Label(new Rect(10f, 160f, 160f, 40f), "Dream Pedestal:"); bool flag60 = GUI.Toggle(new Rect(140f, 160f, 140f, 20f), PlayerPrefs.GetInt("DreamLogic") == 0, "In Logic"); bool flag61 = GUI.Toggle(new Rect(280f, 160f, 100f, 20f), PlayerPrefs.GetInt("DreamLogic") == 1, "Vanilla");
 		GUI.Label(new Rect(10f, 180f, 160f, 40f), "Secret Logic:"); bool flag70 = GUI.Toggle(new Rect(140f, 180f, 140f, 20f), PlayerPrefs.GetInt("SecretLogic") == 0, "All in Logic"); bool flag71 = GUI.Toggle(new Rect(280f, 180f, 140f, 20f), PlayerPrefs.GetInt("SecretLogic") == 1, "Exclude Sneakiest");
 		GUI.Label(new Rect(10f, 200f, 160f, 40f), "Trap Rate:"); bool flag80 = GUI.Toggle(new Rect(140f, 200f, 140f, 20f), PlayerPrefs.GetInt("TrapRate") == 0, "Disabled"); bool flag81 = GUI.Toggle(new Rect(280f, 200f, 140f, 20f), PlayerPrefs.GetInt("TrapRate") > 0, "Enabled"); bool flag82 = GUI.Toggle(new Rect(420f, 200f, 140f, 20f), PlayerPrefs.GetInt("TrapRate") == -1, "Random");
 		//percentage bar
-        //trap intensity
-        
-        
-        GUI.Label(new Rect(10f, 360f, 160f, 40f), "Seed Preset:"); bool flagy0 = GUI.Toggle(new Rect(140f, 360f, 100f, 20f), PlayerPrefs.GetInt("DoSeedPreset") == 0, "On"); bool flagy1 = GUI.Toggle(new Rect(240f, 360f, 100f, 20f), PlayerPrefs.GetInt("DoSeedPreset") == 1, "Off");
+		//trap intensity
+		GUI.Label(new Rect(10f, 280f, 160f, 40f), "Map Shuffle:"); bool flag90 = GUI.Toggle(new Rect(140f, 280f, 140f, 20f), PlayerPrefs.GetInt("MapSettings") == 0, "Start With"); bool flag91 = GUI.Toggle(new Rect(280f, 280f, 140f, 20f), PlayerPrefs.GetInt("MapSettings") == 1, "In Area"); bool flag92 = GUI.Toggle(new Rect(420f, 280f, 140f, 20f), PlayerPrefs.GetInt("MapSettings") == 2, "Anywhere");
+		GUI.Label(new Rect(10f, 300f, 160f, 40f), "Final Boss Access:"); bool flaga0 = GUI.Toggle(new Rect(140f, 300f, 140f, 20f), PlayerPrefs.GetInt("FinalBossAccess") == 0, "Vanilla"); bool flaga1 = GUI.Toggle(new Rect(280f, 300f, 140f, 20f), PlayerPrefs.GetInt("FinalBossAccess") == 1, "Standard Bosses"); bool flaga2 = GUI.Toggle(new Rect(420f, 300f, 140f, 20f), PlayerPrefs.GetInt("FinalBossAccess") == 2, "All Bosses");
+
+		GUI.Label(new Rect(10f, 360f, 160f, 40f), "Seed Preset:"); bool flagy0 = GUI.Toggle(new Rect(140f, 360f, 100f, 20f), PlayerPrefs.GetInt("DoSeedPreset") == 0, "On"); bool flagy1 = GUI.Toggle(new Rect(240f, 360f, 100f, 20f), PlayerPrefs.GetInt("DoSeedPreset") == 1, "Off");
 
 		if (flag00 && PlayerPrefs.GetInt("StartLogic") == 1)
 		{
@@ -95,13 +98,17 @@ public class RandomizerEditor : MonoBehaviour
 			PlayerPrefs.SetInt("LanternLogic", 1);
 		}
 
-		if (flag20 && PlayerPrefs.GetInt("LensLogic") == 1)
+		if (flag20 && PlayerPrefs.GetInt("LensLogic") != 0)
 		{
 			PlayerPrefs.SetInt("LensLogic", 0);
 		}
-		else if (flag21 && PlayerPrefs.GetInt("LensLogic") == 0)
+		else if (flag21 && PlayerPrefs.GetInt("LensLogic") != 1)
 		{
 			PlayerPrefs.SetInt("LensLogic", 1);
+		}
+		else if (flag22 && PlayerPrefs.GetInt("LensLogic") != 2)
+		{
+			PlayerPrefs.SetInt("LensLogic", 2);
 		}
 
 		if (flag30 && PlayerPrefs.GetInt("BootsLogic") == 1)
@@ -113,6 +120,14 @@ public class RandomizerEditor : MonoBehaviour
 			PlayerPrefs.SetInt("BootsLogic", 1);
 		}
 
+		if (flag40 && PlayerPrefs.GetInt("KeysanityLogic") == 1)
+		{
+			PlayerPrefs.SetInt("KeysanityLogic", 0);
+		}
+		else if (flag41 && PlayerPrefs.GetInt("KeysanityLogic") == 0)
+		{
+			PlayerPrefs.SetInt("KeysanityLogic", 1);
+		}
 
 		if (flag50 && PlayerPrefs.GetInt("WarpShuffle") == 1)
 		{
@@ -162,6 +177,33 @@ public class RandomizerEditor : MonoBehaviour
 		{
 			GUI.Label(new Rect(10f, 240f, 160f, 40f), "Trap Intensity:"); Intensity = GUI.HorizontalSlider(new Rect(140f, 245f, 112f, 40f), Intensity, 1, 10); GUI.Label(new Rect(280f, 240f, 100f, 20f), (int)Intensity + "/10");
 		}
+
+		if (flag90 && PlayerPrefs.GetInt("MapSettings") != 0)
+		{
+			PlayerPrefs.SetInt("MapSettings", 0);
+		}
+		else if (flag91 && PlayerPrefs.GetInt("MapSettings") != 1)
+		{
+			PlayerPrefs.SetInt("MapSettings", 1);
+		}
+		else if (flag92 && PlayerPrefs.GetInt("MapSettings") != 2)
+		{
+			PlayerPrefs.SetInt("MapSettings", 2);
+		}
+
+		if (flaga0 && PlayerPrefs.GetInt("FinalBossAccess") != 0)
+		{
+			PlayerPrefs.SetInt("FinalBossAccess", 0);
+		}
+		else if (flaga1 && PlayerPrefs.GetInt("FinalBossAccess") != 1)
+		{
+			PlayerPrefs.SetInt("FinalBossAccess", 1);
+		}
+		else if (flaga2 && PlayerPrefs.GetInt("FinalBossAccess") != 2)
+		{
+			PlayerPrefs.SetInt("FinalBossAccess", 2);
+		}
+
 		if (flagy0 && PlayerPrefs.GetInt("DoSeedPreset") == 1)
 		{
 			PlayerPrefs.SetInt("DoSeedPreset", 0);
@@ -190,7 +232,7 @@ public class RandomizerEditor : MonoBehaviour
 				PlayerPrefs.DeleteKey(SaveLoader.saveslot + key);
             SaveLoader.eraseSave();
         }
-        if (GUI.Button(new Rect(360f, 120f, 100f, 50f), "Play") && saveNumber > 0)
+        if (GUI.Button(new Rect(400f, 400f, 100f, 50f), "Play") && saveNumber > 0)
 		{
 			LoadSceneOnClick SaveLoader = FindObjectOfType<LoadSceneOnClick>();
 			if (Time.timeScale == 1f && SaveLoader.oldMainCam.GetComponent<fonduCam>().fonduCD >= SaveLoader.oldMainCam.GetComponent<fonduCam>().fonduDuration)
@@ -229,8 +271,8 @@ public class RandomizerEditor : MonoBehaviour
 	private static void RandomizerStatsWindow(int windowID)
 	{
 		//bool EraseConfirm = false;
-		GUI.Label(new Rect(360f, 20f, 160f, 30f), "Save Number:");
-		saveNumberString = GUI.TextField(new Rect(360f, 40f, 100f, 20f), saveNumberString);
+		GUI.Label(new Rect(400f, 20f, 160f, 30f), "Save Number:");
+		saveNumberString = GUI.TextField(new Rect(400f, 40f, 100f, 20f), saveNumberString);
 		if (int.TryParse(saveNumberString, out var result))
 		{
 			saveNumber = result;
@@ -269,7 +311,7 @@ public class RandomizerEditor : MonoBehaviour
 				PlayerPrefs.DeleteKey(SaveLoader.saveslot + key);
 			SaveLoader.eraseSave();
 		}
-		if (GUI.Button(new Rect(360f, 120f, 100f, 50f), "Play") && saveNumber > 0)
+		if (GUI.Button(new Rect(400f, 400f, 100f, 50f), "Play") && saveNumber > 0)
 		{
 			LoadSceneOnClick SaveLoader = FindObjectOfType<LoadSceneOnClick>();
 			if (Time.timeScale == 1f && SaveLoader.oldMainCam.GetComponent<fonduCam>().fonduCD >= SaveLoader.oldMainCam.GetComponent<fonduCam>().fonduDuration)

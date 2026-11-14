@@ -14,6 +14,7 @@ using MasterKeyRandoMenu;
 using Music.patches;
 using Rock.patches;
 using CannonPatch.patches;
+using FinalBossPatcher.patches;
 
 namespace MasterKeyRandomizer;
 [BepInPlugin(MKPluginInfo.GUID, MKPluginInfo.NAME, MKPluginInfo.VERSION)]
@@ -56,6 +57,7 @@ public class MasterKeyRandomizer : BaseUnityPlugin
 		harmonyRando.PatchAll(typeof(MusicPatch1));
         harmonyRando.PatchAll(typeof(RockPatch1));
         harmonyRando.PatchAll(typeof(QOLPatcher));
+        harmonyRando.PatchAll(typeof(FinalBossPatch));
 	}
 
     static public void VanillaMode()

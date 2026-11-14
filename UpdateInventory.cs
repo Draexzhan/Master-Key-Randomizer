@@ -198,7 +198,7 @@ public class UpdateInventory : MonoBehaviour
 			if (fieldInfo.GetValue(foxMove) != null)
 				itemData.UpdateSpriteName((int)fieldInfo.GetValue(foxMove), false);
 		}
-		catch (Exception) { LogInfo("Sprite update skipped. string given was " + itemData.ItemNameForSave); }
+		catch (Exception) { LogWarning("Sprite update skipped. string given was " + itemData.ItemNameForSave); }
 		Sprite item = Bundle.LoadAsset<Sprite>(itemData.SpriteName);
 		GameObject itemObject = new GameObject("Held Item");
 		itemObject.AddComponent<SpriteRenderer>().sprite = item;

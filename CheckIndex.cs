@@ -57,11 +57,11 @@ public class CheckIndex
         }
         return false;
     }
-    public static bool Vision()
-    {
-        return PlayerPrefs.GetInt("LensLogic") == 1 || Lens();
-    }
-    public static bool AllowDark()
+    public static bool Vision(int tier)
+	{
+		return PlayerPrefs.GetInt("LensLogic") >= tier || Lens();
+	}
+	public static bool AllowDark()
     {
         return PlayerPrefs.GetInt("LanternLogic") == 1 || GetTier("Lantern") > 0;
     }
@@ -395,7 +395,7 @@ public class CheckIndex
         {
             return true;
         }
-        if ((TownAccess() || SprawlingCaveAccess()) && Charge1() && Vision())
+        if ((TownAccess() || SprawlingCaveAccess()) && Charge1() && Vision(2))
         {
             AccessCache["TownCaveAccess"] = true;
             return true;
@@ -525,7 +525,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (WaterWayPointAccess() && Charge1() && Vision())
+        if (WaterWayPointAccess() && Charge1() && Vision(2))
         {
             AccessCache["WaterWayPointCaveAccess"] = true;
             return true;
@@ -642,7 +642,7 @@ public class CheckIndex
         {
             return true;
         }
-        if ((NorthOfLakeAccess() && BasicBurn() && (EasyFlight() || BigBurn()) && Vision()) || (BannerHallAccess() && Balloon1()))
+        if ((NorthOfLakeAccess() && BasicBurn() && (EasyFlight() || BigBurn()) && Vision(2)) || (BannerHallAccess() && Balloon1()))
         {
             AccessCache["EightRoomAccess"] = true;
             return true;
@@ -655,8 +655,9 @@ public class CheckIndex
         {
             return true;
         }
-        if (EightRoomAccess() && Vision())
-        {
+        if (EightRoomAccess() && Vision(2))
+
+		{
             AccessCache["EightRoomLensAccess"] = true;
             return true;
         }
@@ -668,7 +669,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (EightRoomAccess() && Vision())
+        if (EightRoomAccess() && Vision(2))
         {
             AccessCache["EightRoomZigguratAccess"] = true;
             return true;
@@ -707,7 +708,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (EightRoomAccess() && Vision())
+        if (EightRoomAccess() && Vision(2))
         {
             AccessCache["EightRoomBannerAccess"] = true;
             return true;
@@ -941,7 +942,7 @@ public class CheckIndex
         {
             return true;
         }
-        if ((GetTier("Woods Potion") > 0 && WarpShuffle()) || (!WarpShuffle() && PotionShopAccess() && ForestMushroomAccess()) || RuinCityBasicAccess() && Charge1() && Swim1() && Vision())
+        if ((GetTier("Woods Potion") > 0 && WarpShuffle()) || (!WarpShuffle() && PotionShopAccess() && ForestMushroomAccess()) || RuinCityBasicAccess() && Charge1() && Swim1() && Vision(2))
         {
             AccessCache["TPToWoodsAccess"] = true;
             return true;
@@ -1085,7 +1086,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (ColosseumAccess() && Vision())
+        if (ColosseumAccess() && Vision(2))
         {
             AccessCache["NightClubAccess"] = true;
             return true;
@@ -1124,7 +1125,7 @@ public class CheckIndex
         {
             return true;
         }
-        if (PotionShopAccess() && SwampAccess() && BigBurn() && Vision())
+        if (PotionShopAccess() && SwampAccess() && BigBurn() && Vision(2))
         {
             AccessCache["SnowMushroomAccess"] = true;
             return true;
@@ -1435,7 +1436,7 @@ public class CheckIndex
     }
     public static bool CheckAccess2() //Starting Cave - Secret Salvage
     {
-        return (StartAccess() && Charge1() && Swim1() && Vision()) || (TownAccess() && Swim2() && Charge2());
+        return (StartAccess() && Charge1() && Swim1() && Vision(2)) || (TownAccess() && Swim2() && Charge2());
     }
     public static bool CheckAccess3() //Starting Cave - Secret Lens Chest
     {
@@ -1451,7 +1452,7 @@ public class CheckIndex
     }
     public static bool CheckAccess6() //Near Starting Cave - Flower Circle
     {
-        return StartAccess() && BushCut() && Gloves();
+        return StartAccess() && BushCut() && Gloves() && Vision(1);
     }
     public static bool CheckAccess7() //East of Village - Bush Farmer's Cave
     {
@@ -1479,7 +1480,7 @@ public class CheckIndex
     }
     public static bool CheckAccess13() //South of Village - Big Slime's Flower Circle
     {
-        return TownAccess() && Gloves();
+        return TownAccess() && Gloves() && Vision(1);
     }
     public static bool CheckAccess14() //Gym - Vitamins Table
     {
@@ -1491,7 +1492,7 @@ public class CheckIndex
     }
     public static bool CheckAccess16() //Village - Hidden Cave Chest
     {
-        return TownAccess() && Charge1() && Vision();
+        return TownAccess() && Charge1() && Vision(2);
     }
     public static bool CheckAccess17() //Village - Duplex Chest
     {
@@ -1671,7 +1672,7 @@ public class CheckIndex
     }
     public static bool CheckAccess61() //Southwest Overworld - Wind Cave Secret Room
     {
-        return WindCaveAccess() && Charge1() && Vision();
+        return WindCaveAccess() && Charge1() && Vision(2);
     }
     public static bool CheckAccess62() //Southwest Overworld - Burn Tree West of Dungeon
     {
@@ -1683,7 +1684,7 @@ public class CheckIndex
     }
     public static bool CheckAccess64() //Above Starting Cave - Sparkling Dig Spot
     {
-        return WaterWayPointAccess() && Gloves() && Balloon1() && Vision() && BigBurn();
+        return WaterWayPointAccess() && Gloves() && Balloon1() && Vision(2) && BigBurn();
     }
     public static bool CheckAccess65() //Above Starting Cave - Unmarked Dig Spot
     {
@@ -1703,11 +1704,11 @@ public class CheckIndex
     }
     public static bool CheckAccess69() //Central Overworld - Four Pillars Salvage
     {
-        return NorthOfLakeAccess() && Swim1();
+        return NorthOfLakeAccess() && Swim1() && Vision(1);
     }
     public static bool CheckAccess70() //Central Overworld - Salvage Between Waterfalls
     {
-        return NorthOfLakeAccess() && Swim1() && Vision();
+        return NorthOfLakeAccess() && Swim1() && Vision(2);
     }
     public static bool CheckAccess71() //Central Overworld - Chest Near Scuba Shop
     {
@@ -1727,7 +1728,7 @@ public class CheckIndex
     }
     public static bool CheckAccess75() //Southwest Overworld - Drake Cave Salvage
     {
-        return DrakeCaveAccess() && Swim1() && Vision();
+        return DrakeCaveAccess() && Swim1() && Vision(2);
     }
     public static bool CheckAccess76() //Southwest Overworld - Drake Cave Block Puzzle
     {
@@ -1767,7 +1768,7 @@ public class CheckIndex
     }
     public static bool CheckAccess85() //East Overworld - Reaper Flower Circle
     {
-        return TownAccess() && BushCut() && Gloves();
+        return TownAccess() && BushCut() && Gloves() && Vision(1);
     }
     public static bool CheckAccess86() //East Overworld - Across the River
     {
@@ -1835,7 +1836,7 @@ public class CheckIndex
     }
     public static bool CheckAccess102() //Dark Woods - Flower Circle
     {
-        return DeepWoodsAccess() && Gloves();
+        return DeepWoodsAccess() && Gloves() && Vision(1);
     }
     public static bool CheckAccess103() //North Overworld - Zombie Flower Circle
     {
@@ -1903,11 +1904,11 @@ public class CheckIndex
     }
     public static bool CheckAccess119() //Central Overworld - Flower Circle West of Lake
     {
-        return MountainLowerAccess() && Gloves();
+        return MountainLowerAccess() && Gloves() && Vision(1);
     }
     public static bool CheckAccess120() //Central Overworld - Flower Circle Southwest of Lake
     {
-        return TownAccess() && Gloves();
+        return TownAccess() && Gloves() && Vision(1);
     }
     public static bool CheckAccess121() //Mountain - Chest South of Smithery
     {
@@ -1915,7 +1916,7 @@ public class CheckIndex
     }
     public static bool CheckAccess122() //Mountain - Flower Circle South of Smithery
     {
-        return MountainLowerAccess() && Gloves();
+        return MountainLowerAccess() && Gloves() && Vision(1);
     }
     public static bool CheckAccess123() //Smith Shop - Left
     {
@@ -1967,7 +1968,7 @@ public class CheckIndex
     }
     public static bool CheckAccess135() //Mountain - Wall North of Waypoint
     {
-        return MountainAccess() && Balloon1() && Charge1() && Vision();
+        return MountainAccess() && Balloon1() && Charge1() && Vision(2);
     }
     public static bool CheckAccess136() //Mountain - Cliff Over Dungeon
     {
@@ -2011,7 +2012,7 @@ public class CheckIndex
     }
     public static bool CheckAccess146() //Swamp - Cavern Donut Salvage
     {
-        return SwampCaveAccess() && Swim1();
+        return SwampCaveAccess() && Swim1() && Vision(1);
     }
     public static bool CheckAccess147() //Swamp - Cavern Lens Chest
     {
@@ -2047,7 +2048,7 @@ public class CheckIndex
     }
     public static bool CheckAccess155() //Swamp - Flower Circle by Hot Spring
     {
-        return SwampBackDoorAccess() && Gloves();
+        return SwampBackDoorAccess() && Gloves() && Vision(1);
     }
     public static bool CheckAccess156() //Swamp - Two Crabs Bramble Chest
     {
@@ -2063,7 +2064,7 @@ public class CheckIndex
     }
     public static bool CheckAccess159() //Swamp - Broken Road Flower Circle
     {
-        return SwampAccess() && Gloves();
+        return SwampAccess() && Gloves() && Vision(1);
     }
     public static bool CheckAccess160() //Potion Shop - Right
     {
@@ -2095,7 +2096,7 @@ public class CheckIndex
     }
     public static bool CheckAccess167() //Far West Overworld - Fox Bushes
     {
-        return NorthOfWaterDungeonAccess() && BigBurn() && Balloon1() && Gloves();
+        return NorthOfWaterDungeonAccess() && BigBurn() && Balloon1() && Gloves() && Vision(1);
     }
     public static bool CheckAccess168() //Village - Coffee Stand
     {
@@ -2235,7 +2236,7 @@ public class CheckIndex
     }
     public static bool CheckAccess202() //Water Dungeon - Entry Salvage
     {
-        return WaterDungeonAccess() && Swim1() && Vision();
+        return WaterDungeonAccess() && Swim1() && Vision(2);
     }
     public static bool CheckAccess203() //Water Dungeon - Mushroom Chest
     {
@@ -2243,7 +2244,7 @@ public class CheckIndex
     }
     public static bool CheckAccess204() //Water Dungeon - Salvage West of Entrance
     {
-        return WaterDungeonAccess() && Swim1() && Vision();
+        return WaterDungeonAccess() && Swim1() && Vision(2);
     }
     public static bool CheckAccess205() //Water Dungeon - Map Chest
     {
@@ -2267,11 +2268,11 @@ public class CheckIndex
     }
     public static bool CheckAccess210() //Water Dungeon - Spike Room Salvage
     {
-        return WaterDungeonAccess() && ShortRange() && Swim1() && Vision();
+        return WaterDungeonAccess() && ShortRange() && Swim1() && Vision(2);
     }
     public static bool CheckAccess211() //Water Dungeon - Northeast Room Salvage
     {
-        return WaterDungeonAccess() && Swim1() && Vision();
+        return WaterDungeonAccess() && Swim1() && Vision(2);
     }
     public static bool CheckAccess212() //Water Dungeon - Challenge Grapple Island
     {
@@ -2283,19 +2284,19 @@ public class CheckIndex
     }
     public static bool CheckAccess214() //Water Dungeon - Spinning Trap Room North Salvage
     {
-        return WaterDungeonAccess() && Weapon() && Swim1() && Vision();
+        return WaterDungeonAccess() && Weapon() && Swim1() && Vision(2);
     }
     public static bool CheckAccess215() //Water Dungeon - Spinning Trap Room West Salvage
     {
-        return WaterDungeonAccess() && Weapon() && Swim1() && Vision();
+        return WaterDungeonAccess() && Weapon() && Swim1() && Vision(2);
     }
     public static bool CheckAccess216() //Water Dungeon - Spinning Trap Room South Salvage
     {
-        return WaterDungeonAccess() && Weapon() && Swim1() && Vision();
+        return WaterDungeonAccess() && Weapon() && Swim1() && Vision(2);
     }
     public static bool CheckAccess217() //Water Dungeon - Waterfall Room
     {
-        return WaterDungeonAccess() && Charge1() && EasyFlight() && ShortRange() && Vision();
+        return WaterDungeonAccess() && Charge1() && EasyFlight() && ShortRange() && Vision(2);
     }
     public static bool CheckAccess218() //Water Dungeon - Cluttered Box Room
     {
@@ -2307,7 +2308,7 @@ public class CheckIndex
     }
     public static bool CheckAccess220() //Water Dungeon - Atop Waterfall
     {
-        return WaterDungeonAccess() && Charge1() && Swim2() && ShortRange() && Vision();
+        return WaterDungeonAccess() && Charge1() && Swim2() && ShortRange() && Vision(2);
     }
     public static bool CheckAccess221() //Haunted House - Dining Room Ghost
     {
@@ -2335,7 +2336,7 @@ public class CheckIndex
     }
     public static bool CheckAccess227() //Haunted House - Basement Hidden Room
     {
-        return HauntedHouseAccess() && Charge1() && Vision();
+        return HauntedHouseAccess() && Charge1() && Vision(2);
     }
     public static bool CheckAccess228() //Haunted House - Kitchen Ghost
     {
@@ -2415,11 +2416,11 @@ public class CheckIndex
     }
     public static bool CheckAccess247() //Snowy Peaks - Buried Near Furnace
     {
-        return SnowyPeaksAccess() && Weapon() && Gloves() & GetTier("Snowy Peaks Key") > 1 && Vision() && Traction();
+        return SnowyPeaksAccess() && Weapon() && Gloves() & GetTier("Snowy Peaks Key") > 1 && Vision(2) && Traction();
     }
     public static bool CheckAccess248() //Snowy Peaks - Buried in Eastmost point
     {
-        return SnowyPeaksAccess() && GetTier("Snowy Peaks Key") > 0 && Gloves() && Vision() && Traction();
+        return SnowyPeaksAccess() && GetTier("Snowy Peaks Key") > 0 && Gloves() && Vision(2) && Traction();
     }
     public static bool CheckAccess249() //Snowy Peaks - Buried in Nine Square room
     {
@@ -2431,19 +2432,19 @@ public class CheckIndex
     }
     public static bool CheckAccess251() //Snowy Peaks - Hidden Room Lens Chest
     {
-        return SnowyPeaksAccess() && Charge1() && Lens() && (Gloves() || Balloon1()) && GetTier("Snowy Peaks Key") > 2 && Vision() && Traction();
+        return SnowyPeaksAccess() && Charge1() && Lens() && (Gloves() || Balloon1()) && GetTier("Snowy Peaks Key") > 2 && Vision(2) && Traction();
     }
     public static bool CheckAccess252() //Snowy Peaks - Ice Floe Salvage
     {
-        return SnowyPeaksAccess() && Weapon() && GetTier("Snowy Peaks Key") > 2 && Swim1() && Vision() && Traction();
+        return SnowyPeaksAccess() && Weapon() && GetTier("Snowy Peaks Key") > 2 && Swim1() && Vision(2) && Traction();
     }
     public static bool CheckAccess253() //Snowy Peaks - Buried East of White Birds
     {
-        return SnowyPeaksAccess() && Weapon() && GetTier("Snowy Peaks Key") > 2 && Gloves() && Vision() && Traction();
+        return SnowyPeaksAccess() && Weapon() && GetTier("Snowy Peaks Key") > 2 && Gloves() && Vision(2) && Traction();
     }
     public static bool CheckAccess254() //Snowy Peaks - Buried East of Ascension
     {
-        return SnowyPeaksAccess() && Weapon() && GetTier("Snowy Peaks Key") > 2 && Gloves() && Vision() && Traction();
+        return SnowyPeaksAccess() && Weapon() && GetTier("Snowy Peaks Key") > 2 && Gloves() && Vision(2) && Traction();
     }
     public static bool CheckAccess255() //Snowy Peaks - Across Ravine
     {
@@ -2519,11 +2520,11 @@ public class CheckIndex
     }
     public static bool CheckAccess273() //Factory - Northwest Knight
     {
-        return FactoryAccess() && Gloves() && Boomerang2() && Charge1() && Vision();
+        return FactoryAccess() && Gloves() && Boomerang2() && Charge1() && Vision(2);
     }
     public static bool CheckAccess274() //Factory - Northwest Chest
     {
-        return FactoryAccess() && Gloves() && Boomerang2() && Charge1() && Vision();
+        return FactoryAccess() && Gloves() && Boomerang2() && Charge1() && Vision(2);
     }
     public static bool CheckAccess275() //Factory - Southeast Chest
     {
@@ -2587,19 +2588,19 @@ public class CheckIndex
     }
     public static bool CheckAccess290() //Ziggurat - Maze Southwest Chest
     {
-        return ZigguratAccess() && EasyFlight() && Vision();
+        return ZigguratAccess() && EasyFlight() && Vision(2);
     }
     public static bool CheckAccess291() //Ziggurat - Map Chest
     {
-        return ZigguratAccess() && EasyFlight() && Vision();
+        return ZigguratAccess() && EasyFlight() && Vision(2);
     }
     public static bool CheckAccess292() //Ziggurat - Maze Hidden Room Left Chest
     {
-        return ZigguratAccess() && EasyFlight() && Charge1() && Vision();
+        return ZigguratAccess() && EasyFlight() && Charge1() && Vision(2);
     }
     public static bool CheckAccess293() //Ziggurat - Maze Hidden Room Right Chest
     {
-        return ZigguratAccess() && EasyFlight() && Charge1() && Vision();
+        return ZigguratAccess() && EasyFlight() && Charge1() && Vision(2);
     }
     public static bool CheckAccess294() //Ziggurat - Very Bottom
     {
@@ -2615,7 +2616,7 @@ public class CheckIndex
     }
     public static bool CheckAccess297() //Ziggurat - Button Code
     {
-        return ZigguratAccess() && Vision() && GetTier("Ziggurat Key") > 0;
+        return ZigguratAccess() && Vision(2) && GetTier("Ziggurat Key") > 0;
     }
     public static bool CheckAccess298() //Ziggurat - Upper Lens Chest
     {
@@ -2663,7 +2664,7 @@ public class CheckIndex
     }
     public static bool CheckAccess309() //Ruined City - Hidden East Island
     {
-        return RuinCityMidAccess() && Vision();
+        return RuinCityMidAccess() && Vision(2);
     }
     public static bool CheckAccess310() //Ruined City - Southeast Cliffside
     {
@@ -2671,7 +2672,7 @@ public class CheckIndex
     }
     public static bool CheckAccess311() //Ruined City - Hidden Southeast Island
     {
-        return RuinCityMidAccess() && Gloves() && Vision();
+        return RuinCityMidAccess() && Gloves() && Vision(2);
     }
     public static bool CheckAccess312() //Ruined City - Supermarket Block Puzzle
     {
@@ -2715,7 +2716,7 @@ public class CheckIndex
     }
     public static bool CheckAccess322() //Ruined City - Fox Island
     {
-        return RuinCityFullAccess() && Gloves() && Boomerang1();
+        return RuinCityFullAccess() && Gloves() && Boomerang1() && Vision(1);
     }
     public static bool CheckAccess323() //Ruined City - House with Lens Chest
     {
@@ -2771,7 +2772,7 @@ public class CheckIndex
     }
     public static bool CheckAccess336() //Forge - Beneath the Centurion Blueprints
     {
-        return ForgeAccess() && Charge1() && Balloon1() && Vision();
+        return ForgeAccess() && Charge1() && Balloon1() && Vision(2);
     }
     public static bool CheckAccess337() //Forge - Piston Trove Upper Chest
     {
@@ -2871,7 +2872,7 @@ public class CheckIndex
     }
     public static bool CheckAccess361() //Final Dungeon - Right Drop Down Chest
     {
-        return FinalDungeonAccess() && Balloon1() && Weapon() && (Vision() || Balloon2());
+        return FinalDungeonAccess() && Balloon1() && Weapon() && (Vision(2) || Balloon2());
     }
     public static bool CheckAccess362() //Final Dungeon - Final Boss Reward
     {
@@ -2883,19 +2884,19 @@ public class CheckIndex
     }
     public static bool CheckAccess364() //Water Dungeon - Double Salvage 1
     {
-        return WaterDungeonAccess() && Weapon() && Swim1() && Vision();
+        return WaterDungeonAccess() && Weapon() && Swim1() && Vision(2);
     }
     public static bool CheckAccess365() //Water Dungeon - Double Salvage 2
     {
-        return WaterDungeonAccess() && Weapon() && Swim1() && Vision();
+        return WaterDungeonAccess() && Weapon() && Swim1() && Vision(2);
     }
     public static bool CheckAccess366() //Sprawling Cave - Chest near Village Cave
     {
-        return SprawlingCaveAccess() || TownCaveAccess() && Charge1() && Vision();
+        return SprawlingCaveAccess() || TownCaveAccess() && Charge1() && Vision(2);
 	}
 	public static bool CheckAccess367() //Dark Woods - Grotto Salvage
 	{
-        return ForestGrottoAccess() && Swim1() && Vision();
+        return ForestGrottoAccess() && Swim1() && Vision(2);
 	}
     public static bool CheckAccess368() //Mountain - Overlooking Capybaras
     {
@@ -2903,27 +2904,27 @@ public class CheckIndex
     }
     public static bool CheckAccess369() //Path to Ruined City - Buried Under Sentinel
     {
-        return BannerHallAccess() && Vision() && Gloves();    
+        return BannerHallAccess() && Vision(2) && Gloves();    
     }
     public static bool CheckAccess370() //Snow Potion Slope - Buried Treasure 2
     {
-		return (GetTier("Snow Potion") > 0 && (!WarpShuffle() && PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets();
+		return (GetTier("Snow Potion") > 0 && (!WarpShuffle() || (PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets());
 	}
 	public static bool CheckAccess371() //Snow Potion Slope - Buried Treasure 3
 	{
-		return (GetTier("Snow Potion") > 0 && (!WarpShuffle() && PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets();
+		return (GetTier("Snow Potion") > 0 && (!WarpShuffle() || (PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets());
 	}
 	public static bool CheckAccess372() //Snow Potion Slope - Buried Treasure 4
 	{
-		return (GetTier("Snow Potion") > 0 && (!WarpShuffle() && PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets();
+		return (GetTier("Snow Potion") > 0 && (!WarpShuffle() || (PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets());
 	}
 	public static bool CheckAccess373() //Snow Potion Slope - Buried Treasure 5
 	{
-		return (GetTier("Snow Potion") > 0 && (!WarpShuffle() && PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets();
+		return (GetTier("Snow Potion") > 0 && (!WarpShuffle() || (PotionShopAccess() && SnowMushroomAccess())) && Gloves() && AllowMajorSecrets());
 	}
     public static bool CheckAccess374() //Forge - Bottom Floor Northwest
     {
-        return ForgeAccess() && Grapple1() && GetTier("ForgePass") > 9;
+        return ForgeAccess() && Grapple1() && (GetTier("Forge Pass") > 9);
     }
     public static bool CheckAccess375() //Swamp - Behind the Waterfall
     {
