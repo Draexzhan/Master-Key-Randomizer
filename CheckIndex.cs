@@ -2272,7 +2272,7 @@ public class CheckIndex
     }
     public static bool CheckAccess211() //Water Dungeon - Northeast Room Salvage
     {
-        return WaterDungeonAccess() && Swim1() && Vision(2);
+        return WaterDungeonAccess() && Swim1() && Vision(2) && GetTier("Water Dungeon Key") > 2;
     }
     public static bool CheckAccess212() //Water Dungeon - Challenge Grapple Island
     {
