@@ -45,6 +45,8 @@ public class Traps : MonoBehaviour
 		while (flag)
 		{
 			flag = false;
+			if (alreadyTargetedPos.Count >= 160)
+				alreadyTargetedPos.Clear();
 			foreach (Vector2 alreadyTargeted in alreadyTargetedPos)
 			{
 				if (alreadyTargeted == vector)
@@ -70,6 +72,8 @@ public class Traps : MonoBehaviour
 		while (flag)
 		{
 			flag = false;
+			if (alreadyTargetedPos.Count >= 160)
+				alreadyTargetedPos.Clear();
 			foreach (Vector2 alreadyTargeted in alreadyTargetedPos)
 			{
 				if (alreadyTargeted == vector)

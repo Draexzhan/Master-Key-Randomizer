@@ -59,15 +59,15 @@ public class CheckIndex
     }
     public static bool Vision(int tier)
 	{
-		return PlayerPrefs.GetInt("LensLogic") >= tier || Lens();
+		return (PlayerPrefs.GetInt("LensLogic") >= tier) || Lens();
 	}
 	public static bool AllowDark()
     {
-        return PlayerPrefs.GetInt("LanternLogic") == 1 || GetTier("Lantern") > 0;
+        return (PlayerPrefs.GetInt("LanternLogic") == 1) || GetTier("Lantern") > 0;
     }
     public static bool Traction()
     {
-        return PlayerPrefs.GetInt("BootsLogic") == 1 || GetTier("Boots") > 1;
+        return (PlayerPrefs.GetInt("BootsLogic") == 1) || GetTier("Boots") > 1;
     }
     public static bool AllowMajorSecrets()
     {
@@ -1660,7 +1660,7 @@ public class CheckIndex
     }
     public static bool CheckAccess58() //Southwest Overworld - Cave East of Dungeon East Chest
     {
-        return GrottoEastOfWaterWayPointAccess() && BushCut();
+        return GrottoEastOfWaterWayPointAccess() && BushCut() && Charge1();
     }
     public static bool CheckAccess59() //Southwest Overworld - Cave East of Dungeon Center Chest
     {

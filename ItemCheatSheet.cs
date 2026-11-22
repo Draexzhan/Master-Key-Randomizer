@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using static MasterKeyRandomizer.MKLogger;
+using static ItemCheatSheet;
 
 public class ItemCheatSheet
 {
@@ -58,6 +59,11 @@ public class ItemCheatSheet
 			get; set;
 		}
 
+		public int TrapSprite
+		{
+			get; set;
+		}
+
 		public ItemData()
 		{
 		}
@@ -67,8 +73,8 @@ public class ItemCheatSheet
 			Name = name;
 			Classification = classification;
 			ItemNameForSave = itemNameForSave;
-            AppendTier = appendTier;
-            ItemTypeName = spriteName;
+			AppendTier = appendTier;
+			ItemTypeName = spriteName;
 			SpriteName = ItemTypeName + (appendTier ? " " + Math.Min(quantityToGive, tierCap) : "") + ".png";
 			QuantityToGive = quantityToGive;
 			TierCap = tierCap;
@@ -83,7 +89,23 @@ public class ItemCheatSheet
 			else
 				SpriteName = ItemTypeName + ".png";
 		}
-	}
+		public void UpdateTrapName(int wallet, int weapon, int trapSprite)
+		{
+			if (trapSprite == 14)
+			{
+				SpriteName = "Trap " + trapSprite + "-" + Math.Min(wallet, 3) + ".png";
+			}
+			else if (trapSprite == 5)
+			{
+				SpriteName = "Trap " + trapSprite + "-" + Math.Min(weapon + 1, 6) + ".png";
+			}
+            else
+            {
+				SpriteName = "Trap " + trapSprite + ".png";
+            }
+            LogDebug(SpriteName);
+		}
+		}
 	public class ItemLookup
 	{
 		public static Dictionary<String, ItemData> TranslatedItemNames = new()
@@ -149,9 +171,9 @@ public class ItemCheatSheet
 			{ "Archipelago Junk", new ItemData("Archipelago Junk", "junk", "No Data", "Pelly", false, 1, 1, 1) },
 			{ "Archipelago Item", new ItemData("Archipelago Item", "useful", "No Data", "PellyPlus", false, 1, 1, 2) },
 			{ "Archipelago Progress", new ItemData("Archipelago Progress", "progression", "No Data", "PellyProgress", false, 1, 1, 3) },
-			{ "Damage Trap", new ItemData("Damage Trap", "trap", "No Data", "Trap", true, UnityEngine.Random.Range(1, 14), 13, 0) },
-			{ "Cannon Trap", new ItemData("Cannon Trap", "trap", "No Data", "Trap", true, UnityEngine.Random.Range(1, 14), 13, 0) },
-			{ "Spike Trap", new ItemData("Spike Trap", "trap", "No Data", "Trap", true, UnityEngine.Random.Range(1, 14), 13, 0) },
+			{ "Damage Trap", new ItemData("Damage Trap", "trap", "No Data", "Trap", false, 0, 14, 0) },
+			{ "Cannon Trap", new ItemData("Cannon Trap", "trap", "No Data", "Trap", false, 0, 14, 0) },
+			{ "Spike Trap", new ItemData("Spike Trap", "trap", "No Data", "Trap", false, 0, 14, 0) },
 			{ "Error", new ItemData("Error", "trap", "No Data", "Error", false, 0, 1, 0) }
 		};
 	}

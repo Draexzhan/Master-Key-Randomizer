@@ -854,8 +854,8 @@ public class Seed
 					//we've found a filled check that we can access with our current inventory. We can take this item and start again.
 					if (canAccess)
 					{
-						//Dungeon keys should not be moved from their current locations unless we are placing Dungeon keys.
-						if (((isGlobalPool != IsDungeonKey(check.CheckItem.Name)) || keysanity) && (!check.CheckItem.Name.Contains("Map") || PlayerPrefs.GetInt("MapSettings") != 1))
+						//Dungeon keys and warps should not be moved from their current locations unless we are placing Dungeon keys and warps, respectively.
+						if (((isGlobalPool != IsDungeonKey(check.CheckItem.Name)) || keysanity) && (!check.CheckItem.Name.Contains("Map") || PlayerPrefs.GetInt("MapSettings") != 1) && (PlayerPrefs.GetInt("WarpShuffle") == 0 || !(check.LocationID == 45 || check.LocationID == 46 || check.LocationID == 160 || check.LocationID == 161)))
 						{
 							clearedCheck.Add(check);
 						}

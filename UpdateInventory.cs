@@ -471,17 +471,31 @@ public class UpdateInventory : MonoBehaviour
 		ItemData itemData;
 		FieldInfo fieldInfo;
 		itemData = ItemCheatSheet.GetData(checkData.CheckItem.Name);
+		
 		LogDebug(itemData.Name);
 		try
 		{
 			try
 			{
-				fieldInfo = foxMove.GetType().GetField(itemData.ItemNameForSave);
+				LogError("Item name is " + itemData.ItemTypeName);
+				try { fieldInfo = foxMove.GetType().GetField(itemData.ItemNameForSave);
+					if (fieldInfo.GetValue(foxMove) != null)
+						LogDebug("Made it this far.");
+					else
+						itemData.UpdateSpriteName((int)fieldInfo.GetValue(foxMove));
+				}
+				catch {
+					if (itemData.ItemTypeName.Equals("Trap"))
+					{
+						LogDebug("PREPARING TO UPDATE TRAP NAME");
+						itemData.UpdateTrapName(PlayerPrefs.GetInt(foxMove.saveslot + "bourse"), PlayerPrefs.GetInt(foxMove.saveslot + "picLVL"), checkData.TrapSprite);
+					}
+				}
 				//LogInfo(fieldInfo.GetValue(foxMove).ToString());
-				if (fieldInfo.GetValue(foxMove) != null)
-					itemData.UpdateSpriteName((int)fieldInfo.GetValue(foxMove));
+				
+				LogInfo("Item name is " + itemData.SpriteName);
 			}
-			catch (Exception) { LogInfo("FieldData skipped. string given was " + checkIdentifier); }
+			catch (Exception e) { LogWarning("FieldData skipped. string given was " + checkIdentifier + ". Error: " + e); }
 		}
 		catch (Exception e)
 		{
@@ -518,14 +532,28 @@ public class UpdateInventory : MonoBehaviour
 			{
 				try
 				{
-					fieldInfo = foxMove.GetType().GetField(itemData.ItemNameForSave);
-					//LogInfo(fieldInfo.GetValue(foxMove).ToString());
-					itemData.UpdateSpriteName((int)fieldInfo.GetValue(foxMove));
+					try
+					{
+						fieldInfo = foxMove.GetType().GetField(itemData.ItemNameForSave);
+						if (fieldInfo.GetValue(foxMove) != null)
+							LogDebug("Made it this far.");
+						else
+							itemData.UpdateSpriteName((int)fieldInfo.GetValue(foxMove));
+					}
+					catch
+					{
+						if (itemData.ItemTypeName.Equals("Trap"))
+						{
+							LogDebug("PREPARING TO UPDATE TRAP NAME");
+							itemData.UpdateTrapName(PlayerPrefs.GetInt(foxMove.saveslot + "bourse"), PlayerPrefs.GetInt(foxMove.saveslot + "picLVL"), checkData.TrapSprite);
+						}
+					}
 				}
-				catch (Exception) { LogInfo("FieldData skipped. string given was " + checkIdentifier); }
+				catch (Exception e) { LogInfo("FieldData skipped. string given was " + checkIdentifier + ". Error: " + e); }
 				foxMove.GetType().GetField(itemData.ItemNameForSave);
 				AssetBundle Bundle = AssetBundle.LoadFromFile("BepInEx\\plugins\\MasterKeyRandomizer\\masterkeyrandoassets");
 				Sprite sprite = Bundle.LoadAsset<Sprite>(itemData.SpriteName);
+				LogInfo("Item name is " + itemData.SpriteName);
 				Bundle.Unload(false);
 				return sprite;
 			}
@@ -534,9 +562,22 @@ public class UpdateInventory : MonoBehaviour
 		{
 			try
 			{
-				fieldInfo = foxMove.GetType().GetField(itemData.ItemNameForSave);
-				//LogInfo(fieldInfo.GetValue(foxMove).ToString());
-				itemData.UpdateSpriteName((int)fieldInfo.GetValue(foxMove));
+				try
+				{
+					fieldInfo = foxMove.GetType().GetField(itemData.ItemNameForSave);
+					if (fieldInfo.GetValue(foxMove) != null)
+						LogDebug("Made it this far.");
+					else
+						itemData.UpdateSpriteName((int)fieldInfo.GetValue(foxMove));
+				}
+				catch
+				{
+					if (itemData.ItemTypeName.Equals("Trap"))
+					{
+						LogDebug("PREPARING TO UPDATE TRAP NAME");
+						itemData.UpdateTrapName(PlayerPrefs.GetInt(foxMove.saveslot + "bourse"), PlayerPrefs.GetInt(foxMove.saveslot + "picLVL"), checkData.TrapSprite);
+					}
+				}
 			}
 			catch (Exception e)
 			{

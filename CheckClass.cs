@@ -41,6 +41,8 @@ public class CheckClass
         { get; set; }
         public string Requirements
         { get; set; }
+        public int TrapSprite
+        { get; set; } = UnityEngine.Random.Range(1, 14);
         public ItemData CheckItem
         { get; set; }
 
