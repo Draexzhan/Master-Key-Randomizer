@@ -1664,7 +1664,7 @@ public class CheckIndex
     }
     public static bool CheckAccess59() //Southwest Overworld - Cave East of Dungeon Center Chest
     {
-        return GrottoEastOfWaterWayPointAccess() && BushCut() && (Balloon1() || (Grapple1() && Boomerang1()));
+        return GrottoEastOfWaterWayPointAccess() && BushCut() && (Balloon1() || (Grapple1() && (Boomerang1() || (GetTier("Weapon Upgrade") > 3 && Charge2()) || GetTier("Weapon Upgrade") > 4)));
     }
     public static bool CheckAccess60() //Southwest Overworld - Wind Cave
     {

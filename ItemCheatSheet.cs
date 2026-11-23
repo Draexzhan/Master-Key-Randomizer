@@ -91,9 +91,10 @@ public class ItemCheatSheet
 		}
 		public void UpdateTrapName(int wallet, int weapon, int trapSprite)
 		{
+			LogDebug("Updating trap name with number " + trapSprite);
 			if (trapSprite == 14)
 			{
-				SpriteName = "Trap " + trapSprite + "-" + Math.Min(wallet, 3) + ".png";
+				SpriteName = "Trap " + trapSprite + "-" + Math.Min(wallet + 1, 3) + ".png";
 			}
 			else if (trapSprite == 5)
 			{

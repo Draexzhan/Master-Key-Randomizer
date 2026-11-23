@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using static UpdateInventory;
 using static ItemCheatSheet;
 using static MasterKeyRandomizer.MKLogger;
+using static CheckClass;
 
 namespace ChestPatcher.patches;
 
@@ -29,9 +30,10 @@ class ChestPatcherPatch1
     [HarmonyPrefix]
     [HarmonyPatch(typeof(CoffreScript), nameof(CoffreScript.OnTriggerStay2D))]
     public static bool OnTriggerStay2DPatch1(CoffreScript __instance, ref Collider2D collision)
-    {
-        //MonoBehaviour.print(collision.gameObject.name);
-        if (collision.gameObject.tag == "Player" && __instance.player.GetComponent<FoxMove>().PDVActuels > 0 && __instance.coffreVide == 0 && (!__instance.coffreCaché || __instance.player.GetComponent<FoxMove>().vision > 0) && __instance.soulo == (__instance.player.GetComponent<FoxMove>().isSoulo || (__instance.player.GetComponent<FoxMove>().isSouterre && __instance.player.GetComponent<FoxMove>().souterreTimer > 0.4f)) && !__instance.player.GetComponent<FoxMove>().isFloating && !__instance.player.GetComponent<FoxMove>().invulnerable && (!__instance.key1 || __instance.player.GetComponent<FoxMove>().Fragment1 == 1) && (!__instance.key2 || __instance.player.GetComponent<FoxMove>().Fragment2 == 1) && (!__instance.key3 || __instance.player.GetComponent<FoxMove>().Fragment3 == 1) && (!__instance.key4 || __instance.player.GetComponent<FoxMove>().Fragment4 == 1))
+	{
+		FoxMove foxMove = __instance.player.GetComponent<FoxMove>();
+		//MonoBehaviour.print(collision.gameObject.name);
+		if (collision.gameObject.tag == "Player" && __instance.player.GetComponent<FoxMove>().PDVActuels > 0 && __instance.coffreVide == 0 && (!__instance.coffreCaché || __instance.player.GetComponent<FoxMove>().vision > 0) && __instance.soulo == (__instance.player.GetComponent<FoxMove>().isSoulo || (__instance.player.GetComponent<FoxMove>().isSouterre && __instance.player.GetComponent<FoxMove>().souterreTimer > 0.4f)) && !__instance.player.GetComponent<FoxMove>().isFloating && !__instance.player.GetComponent<FoxMove>().invulnerable && (!__instance.key1 || __instance.player.GetComponent<FoxMove>().Fragment1 == 1) && (!__instance.key2 || __instance.player.GetComponent<FoxMove>().Fragment2 == 1) && (!__instance.key3 || __instance.player.GetComponent<FoxMove>().Fragment3 == 1) && (!__instance.key4 || __instance.player.GetComponent<FoxMove>().Fragment4 == 1))
         {
             if (__instance.contenuPrefab.GetComponent<objetRareScript>() == null)
             {
@@ -52,7 +54,14 @@ class ChestPatcherPatch1
             UnityEngine.Object.Destroy(__instance.contentBubble);
             __instance.coffreVide = 1;
             ItemData Treasure = CheckClass.GetData(__instance.gameObject.name + __instance.transform.position.ToString()).CheckItem;
-            AddToInventory(Treasure);
+            CheckData checkData = CheckClass.GetData(__instance.gameObject.name + __instance.transform.position.ToString());
+			if (checkData.TrapSprite == 0)
+			{
+				checkData.TrapSprite = UnityEngine.Random.Range(1, 15);
+			}
+			if (Treasure.ItemTypeName.Equals("Trap"))
+				Treasure.UpdateTrapName(PlayerPrefs.GetInt(foxMove.saveslot + "bourse"), PlayerPrefs.GetInt(foxMove.saveslot + "picLVL"), checkData.TrapSprite);
+			AddToInventory(Treasure);
             Debug.Log("Benis");
             string text = __instance.player.GetComponent<FoxMove>().saveslot + __instance.gameObject.name + SceneManager.GetActiveScene().name;
             PlayerPrefs.SetInt(text, __instance.coffreVide);
@@ -84,7 +93,9 @@ class ChestPatcherPatch1
     public static bool OnCollisionStay2DPatch1(CoffreScript __instance, ref Collision2D collision)
     {
         //MonoBehaviour.print(collision.gameObject.name);
-        if (collision.gameObject.tag == "Player" && __instance.player.GetComponent<FoxMove>().PDVActuels > 0 && __instance.coffreVide == 0 && (!__instance.coffreCaché || __instance.player.GetComponent<FoxMove>().vision > 0) && __instance.soulo == (__instance.player.GetComponent<FoxMove>().isSoulo || (__instance.player.GetComponent<FoxMove>().isSouterre && __instance.player.GetComponent<FoxMove>().souterreTimer > 0.4f)) && !__instance.player.GetComponent<FoxMove>().isFloating && !__instance.player.GetComponent<FoxMove>().invulnerable && (!__instance.key1 || __instance.player.GetComponent<FoxMove>().Fragment1 >= 1) && (!__instance.key2 || __instance.player.GetComponent<FoxMove>().Fragment2 >= 1) && (!__instance.key3 || __instance.player.GetComponent<FoxMove>().Fragment3 >= 1) && (!__instance.key4 || __instance.player.GetComponent<FoxMove>().Fragment4 >= 1))
+        FoxMove foxMove = __instance.player.GetComponent<FoxMove>();
+
+		if (collision.gameObject.tag == "Player" && __instance.player.GetComponent<FoxMove>().PDVActuels > 0 && __instance.coffreVide == 0 && (!__instance.coffreCaché || __instance.player.GetComponent<FoxMove>().vision > 0) && __instance.soulo == (__instance.player.GetComponent<FoxMove>().isSoulo || (__instance.player.GetComponent<FoxMove>().isSouterre && __instance.player.GetComponent<FoxMove>().souterreTimer > 0.4f)) && !__instance.player.GetComponent<FoxMove>().isFloating && !__instance.player.GetComponent<FoxMove>().invulnerable && (!__instance.key1 || __instance.player.GetComponent<FoxMove>().Fragment1 >= 1) && (!__instance.key2 || __instance.player.GetComponent<FoxMove>().Fragment2 >= 1) && (!__instance.key3 || __instance.player.GetComponent<FoxMove>().Fragment3 >= 1) && (!__instance.key4 || __instance.player.GetComponent<FoxMove>().Fragment4 >= 1))
         {
             if (__instance.contenuPrefab.GetComponent<objetRareScript>() == null)
             {
@@ -104,7 +115,14 @@ class ChestPatcherPatch1
             }*/
             UnityEngine.Object.Destroy(__instance.contentBubble);
             __instance.coffreVide = 1;
-            ItemData Treasure = CheckClass.GetData(__instance.gameObject.name + __instance.transform.position.ToString()).CheckItem;
+			ItemData Treasure = CheckClass.GetData(__instance.gameObject.name + __instance.transform.position.ToString()).CheckItem;
+			CheckData checkData = CheckClass.GetData(__instance.gameObject.name + __instance.transform.position.ToString());
+			if (checkData.TrapSprite == 0)
+			{
+				checkData.TrapSprite = UnityEngine.Random.Range(1, 15);
+			}
+			if (Treasure.ItemTypeName.Equals("Trap"))
+				Treasure.UpdateTrapName(PlayerPrefs.GetInt(foxMove.saveslot + "bourse"), PlayerPrefs.GetInt(foxMove.saveslot + "picLVL"), checkData.TrapSprite);
 			AddToInventory(Treasure);
             Debug.Log("Crenis");
             string text = __instance.player.GetComponent<FoxMove>().saveslot + __instance.gameObject.name + SceneManager.GetActiveScene().name;

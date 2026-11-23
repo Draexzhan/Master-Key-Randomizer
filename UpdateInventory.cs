@@ -468,6 +468,10 @@ public class UpdateInventory : MonoBehaviour
 		FoxMove foxMove = FindObjectOfType<FoxMove>();
 		CheckData checkData = CheckClass.GetData(checkIdentifier);
 		LogDebug(checkData.LocationName);
+		if (checkData.TrapSprite == 0)
+		{
+			checkData.TrapSprite = UnityEngine.Random.Range(1, 15);
+		}
 		ItemData itemData;
 		FieldInfo fieldInfo;
 		itemData = ItemCheatSheet.GetData(checkData.CheckItem.Name);
@@ -523,6 +527,10 @@ public class UpdateInventory : MonoBehaviour
 		Debug.Log(checkIdentifier);
 		FoxMove foxMove = FindObjectOfType<FoxMove>();
 		CheckData checkData = CheckClass.GetData(checkIdentifier);
+		if (checkData.TrapSprite == 0)
+		{
+			checkData.TrapSprite = UnityEngine.Random.Range(1, 15);
+		}
 		ItemData itemData;
 		FieldInfo fieldInfo;
 		itemData = ItemCheatSheet.GetData(checkData.CheckItem.Name);

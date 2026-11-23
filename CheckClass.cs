@@ -42,7 +42,7 @@ public class CheckClass
         public string Requirements
         { get; set; }
         public int TrapSprite
-        { get; set; } = UnityEngine.Random.Range(1, 14);
+        { get; set; } = 0;
         public ItemData CheckItem
         { get; set; }
 
